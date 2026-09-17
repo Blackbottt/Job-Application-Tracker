@@ -18,3 +18,17 @@ def add_job_application(company, position, status, date_applied):
     else:
         print("Error! Cannot create the database connection.")
 
+def get_job_applications():
+    conn = create_connection("job_applications.db")
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""SELECT * FROM job_applications""")
+            conn.commit()
+            print("Jobs sucessfully retrieved")
+        except Exception as e:
+            print(f"An error occurred while adding the job application: {e}")
+        finally:
+            conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
