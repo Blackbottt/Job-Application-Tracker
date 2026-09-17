@@ -17,3 +17,4 @@ def add_job_application(company, position, status, date_applied):
             conn.close()
     else:
         print("Error! Cannot create the database connection.")
+
