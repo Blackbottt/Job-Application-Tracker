@@ -8,18 +8,21 @@ const notes = document.getElementById('notes');
 const addTask = document.querySelector('.submit-add-applications');
 const buttonFeatures = document.getElementById('button-features');
 const editOrDeleteId = document.createElement('input');
-const editTask = document.createElement('button');
-const deleteTask = document.createElement('button');
+const editApplication = document.createElement('button');
+const deleteApplication = document.createElement('button');
+const deleteAllApplications = document.createElement('button');
 const dashboard = document.getElementById('dashboard');
+
 editOrDeleteId.classList.add('id-edit/delete');
-editTask.classList.add('submit-edit-applications');
-deleteTask.classList.add('submit-delete-applications');
+editApplication.classList.add('submit-edit-applications');
+deleteApplication.classList.add('submit-delete-application');
+deleteAllApplications.classList.add('submit-delete-applications');
 editOrDeleteId.placeholder = 'ID: Edit/Delete'
-editTask.textContent = 'Edit Task';
-deleteTask.textContent = 'Delete Task';
+editApplication.textContent = 'Edit Application';
+deleteAllApplications.textContent = 'Delete Application';
 buttonFeatures.appendChild(editOrDeleteId);
-buttonFeatures.appendChild(editTask);
-buttonFeatures.appendChild(deleteTask);
+buttonFeatures.appendChild(editApplication);
+buttonFeatures.appendChild(deleteAllApplications);
 
 async function addApplication() {
     await fetch('/applications', {
@@ -108,13 +111,13 @@ addTask.addEventListener("click", async () => {
     await loadApplications();
 });
 
-// editTask.addEventListener("submit", async e => {
+// editApplication.addEventListener("submit", async e => {
 //     e.preventDefault();
 //     // await Application();
 //     await loadApplications();
 // });
 
-deleteTask.addEventListener("click", async () => {
+deleteAllApplications.addEventListener("click", async () => {
     await fetch('/applications/delete', {
         method: DELETE
     });
