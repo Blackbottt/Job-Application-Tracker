@@ -5,9 +5,9 @@ const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
-const addTask = document.querySelector('submit-add-applications');
-const editTask = document.querySelector('submit-edit-applications');
-const deleteTask = document.querySelector('submit-delete-applications');
+const addTask = document.querySelector('.submit-add-applications');
+const editTask = document.querySelector('.submit-edit-applications');
+const deleteTask = document.querySelector('.submit-delete-applications');
 const dashboard = document.getElementById('dashboard');
 
 async function addApplication() {
@@ -92,8 +92,7 @@ async function loadApplications() {
     console.log("App: ", applications);
 }
 
-addTask.addEventListener("click", async (e) => {
-    e.preventDefault();
+addTask.addEventListener("click", async () => {
     await addApplication();
     await loadApplications();
 });
