@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS job_applications (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     company_name VARCHAR(255) NOT NULL,
     position VARCHAR(255) NOT NULL,
     application_date DATE NOT NULL,

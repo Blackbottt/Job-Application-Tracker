@@ -29,7 +29,7 @@ def add_job_applications():
     logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
-@app.route('/applications/delete/<int:id>', methods=["DELETE"])
+@app.route('/applications/<int:id>', methods=["DELETE"])
 def delete_job_application(id):
     data = logic.delete_job_application(id)
     if not data:
