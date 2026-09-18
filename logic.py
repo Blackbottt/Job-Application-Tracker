@@ -47,7 +47,18 @@ def edit_job_application(id):
             row = cursor.fetchall()
             if row is None:
                 return print("Error! Cannot create the database connection.")
-            # cursor.execute("""UPDATE""")
+            cursor.execute(
+                """
+                UPDATE job_applications
+                SET company_name = ?,
+                position = ?,
+                status = ?,
+                application_date = ?,
+                notes = ?,
+                job_posting_url = ?
+                WHERE id = ?
+                """, (company_name, position, status, date_applied, notes, job_posting_url, id)
+            )
 
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
