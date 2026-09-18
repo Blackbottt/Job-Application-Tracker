@@ -5,6 +5,9 @@ const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
+const addTask = document.getElementsByClassName('submit-add-applications');
+const editTask = document.getElementsByClassName('submit-edit-applications');
+const deleteTask = document.getElementsByClassName('submit-delete-applications');
 const dashboard = document.getElementById('dashboard');
 
 async function addApplication() {
