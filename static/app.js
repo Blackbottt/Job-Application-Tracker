@@ -99,9 +99,21 @@ async function loadApplications() {
     console.log("App: ", applications);
 }
 
-applicationsForm.addEventListener("submit", async e => {
+addTask.addEventListener("submit", async e => {
     e.preventDefault();
     await addApplication();
+    await loadApplications();
+});
+
+// editTask.addEventListener("submit", async e => {
+//     e.preventDefault();
+//     // await Application();
+//     await loadApplications();
+// });
+
+deleteTask.addEventListener("submit", async e => {
+    e.preventDefault();
+    await deleteApplications();
     await loadApplications();
 });
 
