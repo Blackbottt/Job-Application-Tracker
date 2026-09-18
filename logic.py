@@ -51,4 +51,17 @@ def delete_job_application(id):
     else:
         print("Error! Cannot create the database connection.")
 
+def delete_job_applications():
+    conn = create_connection("job_applications.db")
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""DELETE * FROM job_applications""")
+            conn.commit()
+        except Exception as e:
+            print(f"An error occurred while adding the job application: {e}")
+        finally:
+            conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
 
