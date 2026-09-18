@@ -38,7 +38,7 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-def edit_job_application(id):
+def edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, id):
     conn = create_connection("job_applications.db")
 
     if conn is not None:
