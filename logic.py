@@ -62,7 +62,7 @@ def edit_job_application(id):
                 """, (company_name, position, status, date_applied, notes, job_posting_url, id)
             )
             conn.commit()
-            print(f"Record with ID {record_id} updated successfully.")
+            print(f"Record with ID {id} updated successfully.")
 
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
