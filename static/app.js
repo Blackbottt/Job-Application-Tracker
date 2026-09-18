@@ -82,10 +82,10 @@ async function loadApplications() {
     console.log("App: ", applications);
 }
 
-applicationsForm.addEventListener("submit", e => {
+applicationsForm.addEventListener("submit", async e => {
     e.preventDefault();
-    addApplication();
-    loadApplications();
+    await addApplication();
+    await loadApplications();
 });
 
 loadApplications();
