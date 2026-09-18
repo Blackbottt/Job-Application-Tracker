@@ -40,6 +40,7 @@ def edit_job_application(id):
     job_posting_url = data.get('job_posting_url')
     notes = data.get('notes')
     logic.edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, id)
+    return {"message": "Job application added successfully."}, 201
 
 @app.route('/applications/<int:id>', methods=["DELETE"])
 def delete_job_application(id):
