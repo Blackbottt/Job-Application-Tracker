@@ -19,10 +19,13 @@ deleteApplication.classList.add('submit-delete-application');
 deleteAllApplications.classList.add('submit-delete-applications');
 editOrDeleteId.placeholder = 'ID: Edit/Delete'
 editApplication.textContent = 'Edit Application';
-deleteAllApplications.textContent = 'Delete Application';
+deleteApplication.textContent = 'Delete Application';
+deleteAllApplications.textContent = 'Delete Applications';
 buttonFeatures.appendChild(editOrDeleteId);
 buttonFeatures.appendChild(editApplication);
+buttonFeatures.appendChild(deleteApplication);
 buttonFeatures.appendChild(deleteAllApplications);
+
 
 async function addApplication() {
     await fetch('/applications', {
