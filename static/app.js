@@ -29,7 +29,10 @@ async function loadApplications() {
     const caption = document.createElement('caption');
     const tableHeader = document.createElement('th');
     const tableRow = document.createElement('tr');
-
+    table.classList('applications-table');
+    caption.classList('applications-caption');
+    tableHeader.classList('table-header');
+    tableRow.classList('table-row');
 
     inputs.forEach(input => input.innerHTML = '');
     console.log("Apps: ", applications);
