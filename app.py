@@ -16,9 +16,11 @@ def get_job_applications():
 @app.route('/applications', methods=["POST"])
 def add_job_applications():
     data = request.json
-    params = data
-    print("Params", params)
-    logic.add_job_application(params)
+    company = data.get('company')
+    position = data.get('position')
+    status = data.get('status')
+    date_applied = data.get('date_applied')
+    logic.add_job_application(company, position, status, date_applied)
 
 if __name__ == '__main__':
     app.run(debug=True)
