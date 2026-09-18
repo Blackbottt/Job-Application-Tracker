@@ -41,5 +41,5 @@ loadApplications();
 
 applicationsForm.addEventListener("submit", e => {
     e.preventDefault();
-    await addApplication();
+    addApplication();
 })
