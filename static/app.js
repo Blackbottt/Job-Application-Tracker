@@ -4,15 +4,22 @@ const applicationId = document.getElementById('application-id');
 const company = document.getElementById('company');
 const position = document.getElementById('position');
 const applicationDate = document.getElementById('application-date');
-const status = document.getElementById('status');
+const statusOfApplication = document.getElementById('status');
 
-function addApplication() {
-    const inputs = document.querySelectorAll('input-field');
+async function addApplication() {
     
-    inputs.forEach(input => {
-        input.addEventListener('submit', e => {
-            e.preventDefault();
-        })  
-    })
+    await fetch('/applications', {
+        method: 'POST',
+        headers: {  
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ID:  applicationId,
+            Company: company,
+            Position: position,
+            Application_Date: applicationDate,
+            Status: statusOfApplication
+        })
+    });
   
 }
