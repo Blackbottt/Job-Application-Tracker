@@ -78,7 +78,8 @@ async function loadApplications() {
     table.appendChild(caption);
     table.appendChild(tableHeader);
 
-    applications.forEach(application => {
+    if (applications) {
+        applications.forEach(application => {
         const tableRow = document.createElement('tr');
         const values = [
             application.id,
@@ -97,6 +98,8 @@ async function loadApplications() {
         });
         table.appendChild(tableRow);
     });
+    }
+    
     dashboard.innerHTML = '';
     dashboard.appendChild(table);
     console.log("App: ", applications);
