@@ -24,24 +24,13 @@ async function addApplication() {
 async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
-    const inputs = document.querySelectorAll('.input-field');
     const table = document.createElement('table');
     const caption = document.createElement('caption');
-    const tableHeader = document.createElement('th');
-    const tableRow = document.createElement('tr');
+    const tableHeader = document.createElement('tr');
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
     tableHeader.classList.add('table-header');
-    tableRow.classList.add('table-row');
     dashboard.appendChild(tableRow);
-    tableRow.appendChild(tableHeader).textContent('ID');
-    tableRow.appendChild(tableHeader).textContent('Company');
-    tableRow.appendChild(tableHeader).textContent('Position');
-    tableRow.appendChild(tableHeader).textContent('Application Date');
-    tableRow.appendChild(tableHeader).textContent('Status');
-    tableRow.appendChild(tableHeader).textContent('Notes');
-    tableRow.appendChild(tableHeader).textContent('Job URL');
-    tableRow.appendChild(tableHeader).textContent('created at');
 
     inputs.forEach(input => input.innerHTML = '');
     console.log("Apps: ", applications);
