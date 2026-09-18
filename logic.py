@@ -1,12 +1,14 @@
 from database import create_connection
+import os
 
 def add_job_application(company, position, status, date_applied):
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
+            print("OS add: ", os.path.abspath("job_applications.db"))
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO job_applications (company, position, status, date_applied)
+                INSERT INTO job_applications (company_name, position, status, application_date)
                 VALUES (?, ?, ?, ?)
             """, (company, position, status, date_applied))
             conn.commit()
@@ -22,6 +24,7 @@ def get_job_applications():
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
+            print("OS add2: ", os.path.abspath("job_applications.db"))
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications""")
             print("Jobs sucessfully retrieved")
