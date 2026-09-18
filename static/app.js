@@ -27,9 +27,30 @@ async function loadApplications() {
     const table = document.createElement('table');
     const caption = document.createElement('caption');
     const tableHeader = document.createElement('tr');
+
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
-    tableHeader.classList.add('table-header');
+    tableHeader.classList.add('table-row');
+    caption.textContent = 'Job Applications';
+
+    const headers = [
+        'ID',
+        'Company',
+        'Position',
+        'Application Date',
+        'Status',
+        'Notes',
+        'Job URL',
+        'Created At'
+    ];
+
+    headers.forEach(header => {
+        const tableHeading = document.createElement('th');
+        tableHeading.textContent = header;
+        tableHeading.classList.add('table-header');
+        tableHeader.appendChild(tableHeading);
+    })
+
     dashboard.appendChild(tableRow);
 
     inputs.forEach(input => input.innerHTML = '');
