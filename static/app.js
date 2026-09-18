@@ -7,7 +7,6 @@ const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
 
 async function addApplication() {
-    
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -21,5 +20,15 @@ async function addApplication() {
             Status: statusOfApplication
         })
     });
-  
 }
+
+async function loadApplications() {
+    const response = await fetch('/tasks');
+    const applications = await response.json();
+    const inputs = document.querySelectorAll('.input-field');
+    inputs.forEach(input => {
+        input.innerHTML = '';
+    });
+}
+
+loadApplications();
