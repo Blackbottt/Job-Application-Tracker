@@ -14,7 +14,7 @@ const dashboard = document.getElementById('dashboard');
 editOrDeleteId.classList.add('id-edit/delete');
 editTask.classList.add('submit-edit-applications');
 deleteTask.classList.add('submit-delete-applications');
-editOrDeleteId.placeholder = 'Enter ID: Edit/Delete'
+editOrDeleteId.placeholder = 'ID: Edit/Delete'
 editTask.textContent = 'Edit Task';
 deleteTask.textContent = 'Delete Task';
 buttonFeatures.appendChild(editOrDeleteId);

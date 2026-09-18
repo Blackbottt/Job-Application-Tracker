@@ -16,15 +16,16 @@ def get_job_applications():
 @app.route('/applications', methods=["POST"])
 def add_job_applications():
     data = request.json
-    company = data.get('company')
+    if not data:
+        return {"error": "Title is required"}, 400
+    company = data.get('company_name')
     position = data.get('position')
     status = data.get('status')
     date_applied = data.get('date_applied')
-    job_posting_url = data.get('job_Url')
+    job_posting_url = data.get('job_posting_url')
     notes = data.get('notes')
 
-    if not data:
-        return {"error": "Title is required"}, 400
+    
     logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
