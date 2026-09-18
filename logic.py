@@ -13,6 +13,7 @@ def add_job_application(company_name, position, status, date_applied, notes, job
             """, (company_name, position, status, date_applied, notes, job_posting_url))
             conn.commit()
             print("Job application added successfully.")
+            return cursor.rowcount()
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
         finally:
@@ -63,6 +64,7 @@ def edit_job_application(id):
             )
             conn.commit()
             print(f"Record with ID {id} updated successfully.")
+            return cursor.rowcount()
 
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
@@ -78,6 +80,7 @@ def delete_job_application(id):
             cursor = conn.cursor()
             cursor.execute("""DELETE FROM job_applications WHERE id = ?""", (id,))
             conn.commit()
+            return cursor.rowcount()
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
         finally:
@@ -92,6 +95,7 @@ def delete_job_applications():
             cursor = conn.cursor()
             cursor.execute("""DELETE FROM job_applications""")
             conn.commit()
+            return cursor.rowcount()
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
         finally:
