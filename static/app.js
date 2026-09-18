@@ -33,6 +33,15 @@ async function loadApplications() {
     caption.classList('applications-caption');
     tableHeader.classList('table-header');
     tableRow.classList('table-row');
+    dashboard.appendChild(tableRow);
+    tableRow.appendChild(tableHeader).textContent('ID');
+    tableRow.appendChild(tableHeader).textContent('Company');
+    tableRow.appendChild(tableHeader).textContent('Position');
+    tableRow.appendChild(tableHeader).textContent('Application Date');
+    tableRow.appendChild(tableHeader).textContent('Status');
+    tableRow.appendChild(tableHeader).textContent('Notes');
+    tableRow.appendChild(tableHeader).textContent('Job URL');
+    tableRow.appendChild(tableHeader).textContent('created at');
 
     inputs.forEach(input => input.innerHTML = '');
     console.log("Apps: ", applications);
