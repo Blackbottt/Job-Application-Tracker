@@ -8,9 +8,9 @@ def add_job_application(company, position, status, date_applied):
             print("OS add: ", os.path.abspath("job_applications.db"))
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO job_applications (company_name, position, status, application_date)
+                INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?)
-            """, (company, position, status, date_applied))
+            """, (company, position, status, date_applied, notes, job_posting_url))
             conn.commit()
             print("Job application added successfully.")
         except Exception as e:
