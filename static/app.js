@@ -7,36 +7,6 @@ const jobUrl = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const dashboard = document.getElementById('dashboard');
 
-const table = document.createElement('table');
-const caption = document.createElement('caption');
-const tableHeader = document.createElement('tr');
-
-table.classList.add('applications-table');
-caption.classList.add('applications-caption');
-tableHeader.classList.add('table-row');
-caption.textContent = 'Job Applications';
-
-const headers = [
-    'ID',
-    'Company',
-    'Position',
-    'Application Date',
-    'Status',
-    'Notes',
-    'Job URL',
-    'Created At'
-];
-
-headers.forEach(header => {
-    const tableHeading = document.createElement('th');
-    tableHeading.textContent = header;
-    tableHeading.classList.add('table-header');
-    tableHeader.appendChild(tableHeading);
-});
-
-table.appendChild(caption);
-table.appendChild(tableHeader);
-
 async function addApplication() {
     await fetch('/applications', {
         method: 'POST',
@@ -58,6 +28,36 @@ async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
 
+    const table = document.createElement('table');
+    const caption = document.createElement('caption');
+    const tableHeader = document.createElement('tr');
+
+    table.classList.add('applications-table');
+    caption.classList.add('applications-caption');
+    tableHeader.classList.add('table-row');
+    caption.textContent = 'Job Applications';
+
+    const headers = [
+        'ID',
+        'Company',
+        'Position',
+        'Application Date',
+        'Status',
+        'Notes',
+        'Job URL',
+        'Created At'
+    ];
+
+    headers.forEach(header => {
+        const tableHeading = document.createElement('th');
+        tableHeading.textContent = header;
+        tableHeading.classList.add('table-header');
+        tableHeader.appendChild(tableHeading);
+    });
+
+    table.appendChild(caption);
+    table.appendChild(tableHeader);
+
     applications.forEach(application => {
         const tableRow = document.createElement('tr');
         const values = [
@@ -77,6 +77,7 @@ async function loadApplications() {
         });
         table.appendChild(tableRow);
     });
+    dashboard.innerHTML = '';
     dashboard.appendChild(table);
     console.log("App: ", applications);
 }
