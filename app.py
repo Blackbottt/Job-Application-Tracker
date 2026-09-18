@@ -10,7 +10,7 @@ def home():
 @app.route('/applications')
 def get_job_applications():
     applications = logic.get_job_applications()
-    print(applications)
+    print("A: ", applications)
     return jsonify(applications)
 
 @app.route('/applications', methods=["POST"])
@@ -20,6 +20,8 @@ def add_job_applications():
     position = data.get('position')
     status = data.get('status')
     date_applied = data.get('date_applied')
+    if not data:
+        return {"error": "Title is required"}, 400
     logic.add_job_application(company, position, status, date_applied)
     return {"message": "Job application added successfully."}, 201
 
