@@ -13,22 +13,26 @@ async function addApplication() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            ID:  applicationId,
-            Company: company,
-            Position: position,
-            Application_Date: applicationDate,
-            Status: statusOfApplication
+            ID:  applicationId.value,
+            Company: company.value,
+            Position: position.value,
+            Application_Date: applicationDate.value,
+            Status: statusOfApplication.value
         })
     });
 }
 
 async function loadApplications() {
-    const response = await fetch('/tasks');
+    const response = await fetch('/applications');
     const applications = await response.json();
     const inputs = document.querySelectorAll('.input-field');
     inputs.forEach(input => {
         input.innerHTML = '';
     });
+    console.log("Apps: ", applications);
+    // applications.forEach(application => {
+
+    // })
 }
 
 loadApplications();
