@@ -37,6 +37,25 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
+def edit_job_application(id):
+    conn = create_connection("job_applications.db")
+
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""SELECT * FROM job_applications WHERE id = ?""")
+            row = cursor.fetchall()
+            if row is None:
+                return print("Error! Cannot create the database connection.")
+            # cursor.execute("""UPDATE""")
+
+        except Exception as e:
+            print(f"An error occurred while adding the job application: {e}")
+        finally:
+            conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
+
 def delete_job_application(id):
     conn = create_connection("job_applications.db")
     if conn is not None:
@@ -56,7 +75,7 @@ def delete_job_applications():
     if conn is not None:
         try:
             cursor = conn.cursor()
-            cursor.execute("""DELETE * FROM job_applications""")
+            cursor.execute("""DELETE FROM job_applications""")
             conn.commit()
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
