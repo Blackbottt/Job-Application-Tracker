@@ -54,11 +54,19 @@ async function loadApplications() {
     table.appendChild(caption);
     table.appendChild(tableHeader);
 
-
-    inputs.forEach(input => input.innerHTML = '');
-    console.log("Apps: ", applications);
     applications.forEach(application => {
-
+        const tr = document.createElement('tr');
+        const values = [
+            application.id,
+            application.company,
+            application.position,
+            application.application_date,
+            application.status,
+            application.notes,
+            application.job_url,
+            application.created_at
+        ];
+        
     })
 }
 
