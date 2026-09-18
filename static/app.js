@@ -1,6 +1,5 @@
 const table = document.getElementById('applications-table');
 const applicationsForm = document.getElementById('applications-form');
-const applicationId = document.getElementById('application-id');
 const company = document.getElementById('company');
 const position = document.getElementById('position');
 const applicationDate = document.getElementById('application-date');
@@ -13,11 +12,10 @@ async function addApplication() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            ID:  applicationId.value,
-            Company: company.value,
-            Position: position.value,
-            Application_Date: applicationDate.value,
-            Status: statusOfApplication.value
+            company: company.value,
+            position: position.value,
+            status: statusOfApplication.value,
+            date_applied: applicationDate.value
         })
     });
 }
