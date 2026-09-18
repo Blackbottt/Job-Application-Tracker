@@ -77,9 +77,9 @@ async function loadApplications() {
             tableRow.appendChild(tableRowCell);
         });
         table.appendChild(tableRow);
-        dashboard.appendChild(table);
-        console.log("App: ", applications)
     });
+    dashboard.appendChild(table);
+    console.log("App: ", applications)
 }
 
 applicationsForm.addEventListener("submit", e => {
