@@ -20,12 +20,12 @@ def add_job_applications():
     position = data.get('position')
     status = data.get('status')
     date_applied = data.get('date_applied')
-    job_Url = data.get('job_Url')
+    job_posting_url = data.get('job_Url')
     notes = data.get('notes')
 
     if not data:
         return {"error": "Title is required"}, 400
-    logic.add_job_application(company, position, status, date_applied, job_Url, notes)
+    logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
 if __name__ == '__main__':
