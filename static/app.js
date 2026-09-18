@@ -51,7 +51,9 @@ async function loadApplications() {
         tableHeader.appendChild(tableHeading);
     })
 
-    dashboard.appendChild(tableRow);
+    dashboard.appendChild(caption);
+    dashboard.appendChild(tableHeader);
+
 
     inputs.forEach(input => input.innerHTML = '');
     console.log("Apps: ", applications);
