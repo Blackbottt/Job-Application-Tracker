@@ -27,7 +27,7 @@ buttonFeatures.appendChild(deleteApplication);
 buttonFeatures.appendChild(deleteAllApplications);
 
 
-async function addApplication() {
+async function addJobApplication() {
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -110,7 +110,7 @@ async function loadApplications() {
 }
 
 addApplication.addEventListener("click", async () => {
-    await addApplication();
+    await addJobApplication();
     await loadApplications();
 });
 
