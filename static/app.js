@@ -115,7 +115,7 @@ addApplication.addEventListener("click", async () => {
 });
 
 editApplication.addEventListener("submit", async e => {
-    const applicationId = editOrDeleteId.value
+    const applicationId = editOrDeleteId.value;
     await fetch(`/application/${applicationId}`, {
         method: PUT,
         headers: {
@@ -132,6 +132,14 @@ editApplication.addEventListener("submit", async e => {
     });
     await loadApplications();
 });
+
+deleteApplication.addEventListener("click", async () => {
+    const applicationId = editOrDeleteId.value;
+    await fetch(`/applications/${applicationId}`, {
+        method: DELETE
+    });
+    await loadApplications();
+})
 
 deleteAllApplications.addEventListener("click", async () => {
     await fetch('/applications/delete', {
