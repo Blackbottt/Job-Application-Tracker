@@ -13,12 +13,12 @@ def get_job_applications():
     print(applications)
     return jsonify(applications)
 
-@app.route('/applications', method=["POST"])
+@app.route('/applications', methods=["POST"])
 def add_job_applications():
-    data = request.json()
+    data = request.json
     params = data
     print("Params", params)
-    logic.add_job_application()
+    logic.add_job_application(params)
 
 if __name__ == '__main__':
     app.run(debug=True)
