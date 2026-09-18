@@ -4,6 +4,9 @@ const company = document.getElementById('company');
 const position = document.getElementById('position');
 const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
+const jobUrl = document.getElementById('job-url');
+const notes = document.getElementById('notes');
+
 const dashboard = document.getElementById('dashboard')
 
 async function addApplication() {
@@ -16,7 +19,9 @@ async function addApplication() {
             company: company.value,
             position: position.value,
             status: statusOfApplication.value,
-            date_applied: applicationDate.value
+            date_applied: applicationDate.value,
+            job_Url: jobUrl.value,
+            notes: notes.value
         })
     });
 }
@@ -81,6 +86,6 @@ applicationsForm.addEventListener("submit", e => {
     e.preventDefault();
     addApplication();
     loadApplications();
-})
+});
 
 loadApplications();
