@@ -55,7 +55,7 @@ async function loadApplications() {
     table.appendChild(tableHeader);
 
     applications.forEach(application => {
-        const tr = document.createElement('tr');
+        const tableRow = document.createElement('tr');
         const values = [
             application.id,
             application.company,
@@ -66,8 +66,15 @@ async function loadApplications() {
             application.job_url,
             application.created_at
         ];
-        
-    })
+        values.forEach(value => {
+            const tableRowCell = document.createElement('td');
+            tableRowCell.textContent = value;
+            tableRow.appendChild(tableRowCell);
+        });
+        table.appendChild(tableRow);
+        dashboard.appendChild(table);
+        console.log("App: ", applications)
+    });
 }
 
 
