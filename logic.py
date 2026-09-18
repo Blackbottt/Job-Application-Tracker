@@ -1,7 +1,7 @@
 from database import create_connection
 # import os
 
-def add_job_application(company, position, status, date_applied, notes, job_posting_url):
+def add_job_application(company_name, position, status, date_applied, notes, job_posting_url):
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
@@ -10,7 +10,7 @@ def add_job_application(company, position, status, date_applied, notes, job_post
             cursor.execute("""
                 INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (company, position, status, date_applied, notes, job_posting_url))
+            """, (company_name, position, status, date_applied, notes, job_posting_url))
             conn.commit()
             print("Job application added successfully.")
         except Exception as e:
