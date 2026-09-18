@@ -1,15 +1,15 @@
 from database import create_connection
-import os
+# import os
 
-def add_job_application(company, position, status, date_applied):
+def add_job_application(company, position, status, date_applied, notes, job_posting_url):
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
-            print("OS add: ", os.path.abspath("job_applications.db"))
+            # print("OS add: ", os.path.abspath("job_applications.db"))
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
-                VALUES (?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?)
             """, (company, position, status, date_applied, notes, job_posting_url))
             conn.commit()
             print("Job application added successfully.")
@@ -24,7 +24,7 @@ def get_job_applications():
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
-            print("OS add2: ", os.path.abspath("job_applications.db"))
+            # print("OS add2: ", os.path.abspath("job_applications.db"))
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications""")
             print("Jobs sucessfully retrieved")
@@ -37,4 +37,5 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
+# def delete_job_application():
 
