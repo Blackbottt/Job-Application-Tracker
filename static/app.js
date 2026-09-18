@@ -83,3 +83,5 @@ applicationsForm.addEventListener("submit", e => {
     addApplication();
     loadApplications();
 })
+
+loadApplications();
