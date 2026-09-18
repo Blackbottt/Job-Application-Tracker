@@ -114,11 +114,23 @@ addApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-// editApplication.addEventListener("submit", async e => {
-//     e.preventDefault();
-//     // await Application();
-//     await loadApplications();
-// });
+editApplication.addEventListener("submit", async e => {
+    await fetch('/application/id', {
+        method: PUT,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            company_name: company_name.value,
+            position: position.value,
+            status: statusOfApplication.value,
+            date_applied: applicationDate.value,
+            job_posting_url: job_posting_url.value,
+            notes: notes.value
+        })
+    });
+    await loadApplications();
+});
 
 deleteAllApplications.addEventListener("click", async () => {
     await fetch('/applications/delete', {
