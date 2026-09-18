@@ -7,7 +7,12 @@ const applicationDate = document.getElementById('application-date');
 const status = document.getElementById('status');
 
 function addApplication() {
-    applicationsForm.addEventListener('submit', e => {
-        e.preventDefault();
-    })    
+    const inputs = document.querySelectorAll('input-field');
+    
+    inputs.forEach(input => {
+        input.addEventListener('submit', e => {
+            e.preventDefault();
+        })  
+    })
+  
 }
