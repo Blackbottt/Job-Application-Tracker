@@ -9,7 +9,7 @@ def home():
 
 @app.route('/applications')
 def get_job_applications():
-    applications = get_job_applications()
+    applications = logic.get_job_applications()
     return jsonify(applications)
 
 if __name__ == '__main__':
