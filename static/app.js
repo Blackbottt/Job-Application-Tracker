@@ -44,13 +44,6 @@ async function addJobApplication() {
     });
 }
 
-async function deleteJobApplication(id) {
-    await fetch(f`/applications/delete/${id}`, {
-        method: DELETE
-    });
-    await loadApplications();
-}
-
 async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
