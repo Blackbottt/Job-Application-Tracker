@@ -21,6 +21,7 @@ def add_job_applications():
     status = data.get('status')
     date_applied = data.get('date_applied')
     logic.add_job_application(company, position, status, date_applied)
+    return {"message": "Job application added successfully."}, 201
 
 if __name__ == '__main__':
     app.run(debug=True)
