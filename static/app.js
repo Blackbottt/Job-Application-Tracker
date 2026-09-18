@@ -24,6 +24,12 @@ async function addApplication() {
     });
 }
 
+async function deleteApplication(id) {
+    await fetch(f`/applications/delete/${id}`, {
+        method: DELETE
+    })
+}
+
 async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
