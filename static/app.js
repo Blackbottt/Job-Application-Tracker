@@ -1,9 +1,9 @@
 const applicationsForm = document.getElementById('applications-form');
-const company = document.getElementById('company');
+const company_name = document.getElementById('company');
 const position = document.getElementById('position');
 const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
-const jobUrl = document.getElementById('job-url');
+const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const dashboard = document.getElementById('dashboard');
 
@@ -14,11 +14,11 @@ async function addApplication() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            company: company.value,
+            company_name: company_name.value,
             position: position.value,
             status: statusOfApplication.value,
             date_applied: applicationDate.value,
-            job_Url: jobUrl.value,
+            job_posting_url: job_posting_url.value,
             notes: notes.value
         })
     });
@@ -62,12 +62,12 @@ async function loadApplications() {
         const tableRow = document.createElement('tr');
         const values = [
             application.id,
-            application.company,
+            application.company_name,
             application.position,
             application.application_date,
             application.status,
             application.notes,
-            application.job_url,
+            application.job_posting_url,
             application.created_at
         ];
         values.forEach(value => {
