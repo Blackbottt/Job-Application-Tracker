@@ -5,7 +5,7 @@ const applicationDate = document.getElementById('application-date');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
-const addTask = document.querySelector('.submit-add-applications');
+const addApplication = document.querySelector('.submit-add-applications');
 const buttonFeatures = document.getElementById('button-features');
 const editOrDeleteId = document.createElement('input');
 const editApplication = document.createElement('button');
@@ -109,7 +109,7 @@ async function loadApplications() {
     console.log("App: ", applications);
 }
 
-addTask.addEventListener("click", async () => {
+addApplication.addEventListener("click", async () => {
     await addApplication();
     await loadApplications();
 });
