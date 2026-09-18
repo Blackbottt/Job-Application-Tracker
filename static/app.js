@@ -34,13 +34,6 @@ async function deleteApplication(id) {
     await loadApplications();
 }
 
-async function deleteApplications() {
-    await fetch('/applications/delete', {
-        method: DELETE
-    });
-    await loadApplications();
-}
-
 async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
@@ -99,7 +92,7 @@ async function loadApplications() {
     console.log("App: ", applications);
 }
 
-addTask.addEventListener("submit", async e => {
+addTask.addEventListener("click", async (e) => {
     e.preventDefault();
     await addApplication();
     await loadApplications();
@@ -111,9 +104,10 @@ addTask.addEventListener("submit", async e => {
 //     await loadApplications();
 // });
 
-deleteTask.addEventListener("submit", async e => {
-    e.preventDefault();
-    await deleteApplications();
+deleteTask.addEventListener("click", async () => {
+    await fetch('/applications/delete', {
+        method: DELETE
+    });
     await loadApplications();
 });
 
