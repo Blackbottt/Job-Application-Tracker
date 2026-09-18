@@ -22,6 +22,8 @@ async function addApplication() {
     });
 }
 
+
+
 async function loadApplications() {
     const response = await fetch('/applications');
     const applications = await response.json();
@@ -36,3 +38,8 @@ async function loadApplications() {
 }
 
 loadApplications();
+
+applicationsForm.addEventListener("submit", e => {
+    e.preventDefault();
+    await addApplication();
+})
