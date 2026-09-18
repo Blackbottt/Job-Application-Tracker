@@ -6,9 +6,20 @@ const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const addTask = document.querySelector('.submit-add-applications');
-const editTask = document.querySelector('.submit-edit-applications');
-const deleteTask = document.querySelector('.submit-delete-applications');
+const buttonFeatures = document.getElementById('button-features');
+const editOrDeleteId = document.createElement('input');
+const editTask = document.createElement('button');
+const deleteTask = document.createElement('button');
 const dashboard = document.getElementById('dashboard');
+editOrDeleteId.classList.add('id-edit/delete');
+editTask.classList.add('submit-edit-applications');
+deleteTask.classList.add('submit-delete-applications');
+editOrDeleteId.placeholder = 'Enter ID: Edit/Delete'
+editTask.textContent = 'Edit Task';
+deleteTask.textContent = 'Delete Task';
+buttonFeatures.appendChild(editOrDeleteId);
+buttonFeatures.appendChild(editTask);
+buttonFeatures.appendChild(deleteTask);
 
 async function addApplication() {
     await fetch('/applications', {
