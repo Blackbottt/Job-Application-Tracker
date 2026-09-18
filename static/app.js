@@ -29,10 +29,10 @@ async function loadApplications() {
     const caption = document.createElement('caption');
     const tableHeader = document.createElement('th');
     const tableRow = document.createElement('tr');
-    table.classList('applications-table');
-    caption.classList('applications-caption');
-    tableHeader.classList('table-header');
-    tableRow.classList('table-row');
+    table.classList.add('applications-table');
+    caption.classList.add('applications-caption');
+    tableHeader.classList.add('table-header');
+    tableRow.classList.add('table-row');
     dashboard.appendChild(tableRow);
     tableRow.appendChild(tableHeader).textContent('ID');
     tableRow.appendChild(tableHeader).textContent('Company');
