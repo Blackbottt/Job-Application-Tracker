@@ -28,5 +28,21 @@ def add_job_applications():
     logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
+@app.route('/applications/delete/<int:id>', methods=["DELETE"])
+def delete_job_application():
+    data = logic.delete_job_application()
+    if not data:
+        return {"error": "Title is required"}, 400
+    return {"message": "Job application added successfully."}, 201
+
+@app.route('/applications/delete', methods=["DELETE"])
+def delete_job_applications():
+    data = logic.delete_job_applications()
+    if not data:
+        return {"error": "Title is required"}, 400
+    return {"message": "Job application added successfully."}, 201
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
