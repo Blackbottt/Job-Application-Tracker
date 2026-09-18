@@ -45,8 +45,10 @@ def edit_job_application(id):
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications WHERE id = ?""")
             row = cursor.fetchall()
+
             if row is None:
                 return print("Error! Cannot create the database connection.")
+            
             cursor.execute(
                 """
                 UPDATE job_applications
@@ -59,6 +61,8 @@ def edit_job_application(id):
                 WHERE id = ?
                 """, (company_name, position, status, date_applied, notes, job_posting_url, id)
             )
+            conn.commit()
+            print(f"Record with ID {record_id} updated successfully.")
 
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
