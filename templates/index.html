@@ -8,67 +8,70 @@
     <script src="/static/app.js" defer></script>
 </head>
 <body>
-    <main class="app-shell">
-        <div class="applications">
-            <form id="applications-form">
-                <label for="application-id">ID:</label>
-                <input 
-                    type="text" 
-                    name="id" 
-                    id="application-id" 
-                    placeholder="ID" 
-                    required
-                >
-                <label for="company">Company:</label>
-                <input 
-                    type="text" 
-                    name="Company-name" 
-                    id="company" 
-                    placeholder="COMPANY" 
-                    required
-                >
-                <label for="position">Position:</label>
-                <input 
-                    type="text" 
-                    name="position-name" 
-                    id="position" 
-                    placeholder="POSITION" 
-                    required
-                >
-                <label for="application-date">Application Date:</label>
-                <input 
-                    type="date" 
-                    name="application-date" 
-                    id="application-date" 
-                    placeholder="APPLICATION DATE" 
-                    required
-                >
-                <label for="status">STATUS:</label>
-                <input 
-                    type="text" 
-                    name="status-type" 
-                    id="status" 
-                    placeholder="STATUS" 
-                    required
-                >
-                <button type="submit" class="submit-applications">Add Task</button>
-            </form>
-            <section id="dashboard" class="dashboard">
-                <table class="applications-table" id="applications-table">
-                <caption>Job Applications</caption>
-                <tr>
-                    <th>ID</th>
-                    <th>Company</th>
-                    <th>Position</th>
-                    <th>Application Date</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th>Job URL</th>
-                    <th>created at</th>
-                </tr>
-            </table>
-            </section>
-        </div>
+    <main class="applications">
+        <form id="applications-form">
+            <label for="application-id">ID:</label>
+            <input 
+                class="input-field"
+                type="text" 
+                name="id" 
+                id="application-id" 
+                placeholder="ID" 
+                required
+            >
+            <label for="company">Company:</label>
+            <input 
+                class="input-field"
+                type="text" 
+                name="Company-name" 
+                id="company" 
+                placeholder="COMPANY" 
+                required
+            >
+            <label for="position">Position:</label>
+            <input
+                class="input-field" 
+                type="text" 
+                name="position-name" 
+                id="position" 
+                placeholder="POSITION" 
+                required
+            >
+            <label for="application-date">Application Date:</label>
+            <input 
+                class="input-field"
+                type="date" 
+                name="application-date" 
+                id="application-date" 
+                placeholder="APPLICATION DATE" 
+                required
+            >
+            <label for="status">STATUS:</label>
+            <input 
+                class="input-field"
+                type="text" 
+                name="status-type" 
+                id="status" 
+                placeholder="STATUS" 
+                required
+            >
+            <button type="submit" class="submit-applications">Add Task</button>
+        </form>
+        <section id="dashboard" class="dashboard">
+            <table class="applications-table" id="applications-table">
+            <caption>Job Applications</caption>
+            <tr>
+                <th>ID</th>
+                <th>Company</th>
+                <th>Position</th>
+                <th>Application Date</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th>Job URL</th>
+                <th>created at</th>
+            </tr>
+        </table>
+        </section>
     </main>
 </body>
 </html>
