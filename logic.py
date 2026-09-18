@@ -36,3 +36,5 @@ def get_job_applications():
             conn.close()
     else:
         print("Error! Cannot create the database connection.")
+
+

@@ -77,7 +77,6 @@ async function loadApplications() {
     });
 }
 
-
 applicationsForm.addEventListener("submit", e => {
     e.preventDefault();
     addApplication();
