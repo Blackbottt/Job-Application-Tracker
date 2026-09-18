@@ -24,8 +24,8 @@ def get_job_applications():
         try:
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications""")
-            conn.commit()
             print("Jobs sucessfully retrieved")
+            return cursor.fetchall()
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
         finally:
