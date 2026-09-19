@@ -7,10 +7,30 @@ body {
     font-weight: 700;
     min-height: 100vh;
     margin: 0;
-    color: #f5f7ff;
+    color: #17232B;
     /* background: */
         /* radial-gradient(circle at top left, #6847c7, transparent 38%), */
         /* radial-gradient(circle at bottom right, #1b8da5, transparent 42%), */
         /* #101323; */
         
+}
+
+.hero {
+    min-height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(23, 35, 43, 0.55),
+            rgba(23, 35, 43, 0.55)
+        ),
+        url("/static/images/Wasserfall.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #F4F7F8;
 }
