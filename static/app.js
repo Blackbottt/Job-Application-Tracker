@@ -142,6 +142,9 @@ deleteApplication.addEventListener("click", async () => {
     const response = await fetch(`/applications/${applicationId}`, {
         method: 'DELETE'
     });
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
     const result = await response.json();
 
     console.log("status:", response.status);
@@ -154,6 +157,9 @@ deleteAllApplications.addEventListener("click", async () => {
     const response = await fetch('/applications/delete', {
         method: 'DELETE'
     });
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
     const result = await response.json();
 
     console.log("status:", response.status);
