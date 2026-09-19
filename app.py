@@ -36,23 +36,9 @@ def edit_job_application(id):
 
     if not data:
         return {"error": "Title is required"}, 400
-    
-    company_name = data.get('company_name')
-    position = data.get('position')
-    status = data.get('status')
-    date_applied = data.get('date_applied')
-    job_posting_url = data.get('job_posting_url')
-    notes = data.get('notes')
 
-    updated = logic.edit_job_application(
-        company_name,
-        position,
-        status,
-        date_applied,
-        notes, 
-        job_posting_url, 
-        id
-    )
+    updated = logic.edit_job_application(id, data)
+    
     if updated == 0:
         return {"error": "Application not found"}, 404
     return {"message": "Job application added successfully."}, 200
