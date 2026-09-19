@@ -137,7 +137,6 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    border: 1px solid var(--border);
     width: 100%;
 }
 
@@ -199,4 +198,9 @@ button {
     height: 50vh;
     overflow-y: auto;
     margin-top: 10px;
+}
+
+.table-row-header {
+    position: sticky;
+    top: 0;
 }
