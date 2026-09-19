@@ -45,11 +45,6 @@ def edit_job_application(company_name, position, status, date_applied, notes, jo
     if conn is not None:
         try:
             cursor = conn.cursor()
-            cursor.execute("""SELECT * FROM job_applications WHERE id = ?""", (edit_id,))
-            row = cursor.fetchall()
-
-            if row is None:
-                return print("Error! Cannot create the database connection.")
             
             cursor.execute(
                 """
