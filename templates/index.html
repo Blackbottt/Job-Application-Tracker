@@ -16,66 +16,68 @@
             </div>
             <div class="hero-content-foot">
                 <!-- <button>View Applications</button> -->
-                <a href="#applications">View Applications</a>
+                <a href="#applications-form">View Applications</a>
             </div>
         </section>
-        <form id="applications-form">
-            <label for="company">Company:</label>
-            <input 
-                class="input-field"
-                type="text" 
-                name="Company-name" 
-                id="company" 
-                placeholder="COMPANY" 
-                required
-            >
-            <label for="position">Position:</label>
-            <input
-                class="input-field" 
-                type="text" 
-                name="position-name" 
-                id="position" 
-                placeholder="POSITION" 
-                required
-            >
-            <label for="application-date">Application Date:</label>
-            <input 
-                class="input-field"
-                type="date" 
-                name="application-date-name" 
-                id="application-date" 
-                placeholder="APPLICATION DATE" 
-                required
-            >
-            <label for="status">Status:</label>
-            <select name="status-type" id="status" class="input-field" placeholder="STATUS" required>
-                <option value="Wishlist">Wishlist</option>
-                <option value="Applied">Applied</option>
-                <option value="Interview">Interview</option>
-                <option value="Offer">Offer</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Withdrawn">Withdrawn</option>
-            </select>
-            <label for="notes">Notes:</label>
-            <input 
-                class="input-field"
-                type="text" 
-                name="notes-name" 
-                id="notes" 
-                placeholder="NOTES" 
-            ><label for="job-url">Job Url:</label>
-            <input 
-                class="input-field"
-                type="text" 
-                name="job-url-name" 
-                id="job-url" 
-                placeholder="JOB URL" 
-            >
-            <button type="submit" class="submit-add-applications">Add Task</button>
-        </form>
-        <div id="button-features"></div>
-        <section id="dashboard" class="dashboard">
+        <section class="application-shell">
+            <form id="applications-form">
+                <label for="company">Company:</label>
+                <input 
+                    class="input-field"
+                    type="text" 
+                    name="Company-name" 
+                    id="company" 
+                    placeholder="COMPANY" 
+                    required
+                >
+                <label for="position">Position:</label>
+                <input
+                    class="input-field" 
+                    type="text" 
+                    name="position-name" 
+                    id="position" 
+                    placeholder="POSITION" 
+                    required
+                >
+                <label for="application-date">Application Date:</label>
+                <input 
+                    class="input-field"
+                    type="date" 
+                    name="application-date-name" 
+                    id="application-date" 
+                    placeholder="APPLICATION DATE" 
+                    required
+                >
+                <label for="status">Status:</label>
+                <select name="status-type" id="status" class="input-field" placeholder="STATUS" required>
+                    <option value="Wishlist">Wishlist</option>
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Withdrawn">Withdrawn</option>
+                </select>
+                <label for="notes">Notes:</label>
+                <input 
+                    class="input-field"
+                    type="text" 
+                    name="notes-name" 
+                    id="notes" 
+                    placeholder="NOTES" 
+                ><label for="job-url">Job Url:</label>
+                <input 
+                    class="input-field"
+                    type="text" 
+                    name="job-url-name" 
+                    id="job-url" 
+                    placeholder="JOB URL" 
+                >
+                <button type="submit" class="submit-add-applications">Add Task</button>
+            </form>
+            <div id="button-features"></div>
+            <section id="dashboard" class="dashboard">
+            </section>
         </section>
     </main>
 </body>
