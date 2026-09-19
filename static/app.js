@@ -54,7 +54,7 @@ async function loadApplications() {
 
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
-    tableHeader.classList.add('table-row');
+    tableHeader.classList.add('table-row-header');
     caption.textContent = 'Job Applications';
 
     const headers = [
