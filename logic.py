@@ -39,12 +39,29 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-def edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, edit_id):
+def edit_job_application(edit_id, data):
     conn = create_connection("job_applications.db")
 
     if conn is not None:
         try:
             cursor = conn.cursor()
+            fields = []
+            values = []
+            allowed_fields = [
+                "company_name",
+                "position",
+                "status",
+                "date_applied",
+                "notes",
+                "job_posting_url"
+            ]
+
+            for field in allowed_fields:
+                if field in data:
+                    fields.append(field)
+                    values.append(field.value)
+            
+
             
             cursor.execute(
                 """
@@ -56,7 +73,7 @@ def edit_job_application(company_name, position, status, date_applied, notes, jo
                 notes = ?,
                 job_posting_url = ?
                 WHERE id = ?
-                """, (company_name, position, status, date_applied, notes, job_posting_url, edit_id)
+                """, ()
             )
             conn.commit()
             print(f"Record with ID {edit_id} updated successfully.")
