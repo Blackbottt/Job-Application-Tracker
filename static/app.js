@@ -13,7 +13,7 @@ const deleteApplication = document.createElement('button');
 const deleteAllApplications = document.createElement('button');
 const dashboard = document.getElementById('dashboard');
 
-editOrDeleteId.classList.add('id-edit/delete');
+editOrDeleteId.classList.add('id-edit-delete');
 editApplication.classList.add('submit-edit-applications');
 deleteApplication.classList.add('submit-delete-application');
 deleteAllApplications.classList.add('submit-delete-applications');
