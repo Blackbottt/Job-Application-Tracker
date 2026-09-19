@@ -110,7 +110,7 @@ addApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-editApplication.addEventListener("submit", async e => {
+editApplication.addEventListener("click", async e => {
     const applicationId = editOrDeleteId.value;
     await fetch(`/application/${applicationId}`, {
         method: 'PUT',
