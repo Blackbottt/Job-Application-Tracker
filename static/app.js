@@ -50,10 +50,14 @@ async function loadApplications() {
 
     const table = document.createElement('table');
     const caption = document.createElement('caption');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
     const tableHeader = document.createElement('tr');
 
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
+    thead.classList.add('applications-thead');
+    tbody.classList.add('applications-tbody');
     tableHeader.classList.add('table-row-header');
     caption.textContent = 'Job Applications';
 
