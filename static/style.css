@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    min-height: 100vh;
+    margin: 0;
+    color: #f5f7ff;
+    /* background: */
+        /* radial-gradient(circle at top left, #6847c7, transparent 38%), */
+        /* radial-gradient(circle at bottom right, #1b8da5, transparent 42%), */
+        /* #101323; */
+        
+}
