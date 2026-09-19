@@ -70,7 +70,7 @@ def edit_job_application(edit_id, data):
                 WHERE id = ?
             """ 
             
-            cursor.execute(query, ())
+            cursor.execute(query, values)
             conn.commit()
             print(f"Record with ID {edit_id} updated successfully.")
             return cursor.rowcount
