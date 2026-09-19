@@ -95,6 +95,10 @@ def delete_job_applications():
         try:
             cursor = conn.cursor()
             cursor.execute("""DELETE FROM job_applications""")
+            cursor.execute("""
+                DELETE FROM sqlite_sequence
+                WHERE name = 'job_applications'
+            """)
             conn.commit()
             return cursor.rowcount
         except Exception as e:
