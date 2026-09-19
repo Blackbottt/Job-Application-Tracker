@@ -79,7 +79,7 @@ def delete_job_application(application_id):
     if conn is not None:
         try:
             cursor = conn.cursor()
-            cursor.execute("""DELETE FROM job_applications WHERE id = ?""", (id,))
+            cursor.execute("""DELETE FROM job_applications WHERE id = ?""", (application_id,))
             conn.commit()
             return cursor.rowcount
         except Exception as e:
