@@ -31,7 +31,11 @@ def add_job_applications():
         "Applied",
         "Interview",
         "Accepted",
-        "Rejected"
+        "Rejected",
+        "Wishlist",
+        "Offer",
+        "Rejected",
+        "Withdrawn"
     }
     if status not in ALLOWED_STATUSES:
         return {"error": "Invalid status"}, 400
