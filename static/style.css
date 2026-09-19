@@ -23,7 +23,7 @@ body {
             rgba(23, 35, 43, 0.55),
             rgba(23, 35, 43, 0.55)
         ),
-        url("/static/images/Wasserfall.jpg");
+        url("/static/images/road_searching.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
