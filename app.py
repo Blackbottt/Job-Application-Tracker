@@ -26,7 +26,15 @@ def add_job_applications():
     date_applied = data.get('date_applied')
     job_posting_url = data.get('job_posting_url')
     notes = data.get('notes')
-    
+
+    ALLOWED_STATUSES = {
+        "Applied",
+        "Interview",
+        "Accepted",
+        "Rejected"
+    }
+    if status not in ALLOWED_STATUSES:
+        return {"error": "Invalid status"}, 400
     logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
