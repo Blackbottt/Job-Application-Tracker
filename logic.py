@@ -26,6 +26,7 @@ def get_job_applications():
     if conn is not None:
         try:
             # print("OS add2: ", os.path.abspath("job_applications.db"))
+            print("Job conn is ON!")
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications""")
             print("Jobs sucessfully retrieved")

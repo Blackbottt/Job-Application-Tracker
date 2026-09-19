@@ -20,7 +20,7 @@ deleteAllApplications.classList.add('submit-delete-applications');
 editOrDeleteId.placeholder = 'ID: Edit/Delete'
 editApplication.textContent = 'Edit Application';
 deleteApplication.textContent = 'Delete Application';
-deleteAllApplications.textContent = 'Delete Applications';
+deleteAllApplications.textContent = 'Delete All Applications';
 buttonFeatures.appendChild(editOrDeleteId);
 buttonFeatures.appendChild(editApplication);
 buttonFeatures.appendChild(deleteApplication);
@@ -131,10 +131,12 @@ editApplication.addEventListener("submit", async e => {
 
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
-    await fetch(`/applications/${applicationId}`, {
+    console.log("delete id: ", applicationId);
+    const response = await fetch(`/applications/${applicationId}`, {
         method: DELETE
     });
-    await loadApplications();
+    // await loadApplications();
+    return response;
 })
 
 deleteAllApplications.addEventListener("click", async () => {

@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 import logic
+import init_db
+init_db.init_db()
 
 app = Flask(__name__)
 
