@@ -30,7 +30,7 @@ def add_job_applications():
     logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
     return {"message": "Job application added successfully."}, 201
 
-@app.route('/applications/<int:id>', methods=["PUT"])
+@app.route('/applications/<int:id>', methods=["PATCH"])
 def edit_job_application(id):
     data = request.json
 
