@@ -38,10 +38,10 @@ def edit_job_application(id):
         return {"error": "Title is required"}, 400
 
     updated = logic.edit_job_application(id, data)
-    
+
     if updated == 0:
         return {"error": "Application not found"}, 404
-    return {"message": "Job application added successfully."}, 200
+    return {"message": "Job application updated successfully."}, 200
 
 @app.route('/applications/<int:application_id>', methods=["DELETE"])
 def delete_job_application(application_id):
