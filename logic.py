@@ -33,7 +33,7 @@ def get_job_applications():
             applications = cursor.fetchall()
             return [dict(row) for row in applications]
         except Exception as e:
-            print(f"An error occurred while adding the job application: {e}")
+            print(f"An error occurred while retrieving the job application: {e}")
         finally:
             conn.close()
     else:
@@ -68,7 +68,7 @@ def edit_job_application(company_name, position, status, date_applied, notes, jo
             return cursor.rowcount
 
         except Exception as e:
-            print(f"An error occurred while adding the job application: {e}")
+            print(f"An error occurred while editing the job application: {e}")
         finally:
             conn.close()
     else:
@@ -83,7 +83,7 @@ def delete_job_application(id):
             conn.commit()
             return cursor.rowcount
         except Exception as e:
-            print(f"An error occurred while adding the job application: {e}")
+            print(f"An error occurred while deleting the job application: {e}")
         finally:
             conn.close()
     else:
@@ -98,7 +98,7 @@ def delete_job_applications():
             conn.commit()
             return cursor.rowcount
         except Exception as e:
-            print(f"An error occurred while adding the job application: {e}")
+            print(f"An error occurred while deleting the job application: {e}")
         finally:
             conn.close()
     else:
