@@ -74,7 +74,7 @@ def edit_job_application(company_name, position, status, date_applied, notes, jo
     else:
         print("Error! Cannot create the database connection.")
 
-def delete_job_application(id):
+def delete_job_application(application_id):
     conn = create_connection("job_applications.db")
     if conn is not None:
         try:
