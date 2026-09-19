@@ -38,14 +38,15 @@
                 required
             >
             <label for="status">Status:</label>
-            <input 
-                class="input-field"
-                type="text" 
-                name="status-type" 
-                id="status" 
-                placeholder="STATUS" 
-                required
-            >
+            <select name="status-type" id="status" class="input-field" placeholder="STATUS" required>
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Withdrawn">Withdrawn</option>
+            </select>
             <label for="notes">Notes:</label>
             <input 
                 class="input-field"
