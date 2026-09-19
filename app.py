@@ -33,16 +33,29 @@ def add_job_applications():
 @app.route('/applications/<int:id>', methods=["PUT"])
 def edit_job_application(id):
     data = request.json
+
     if not data:
         return {"error": "Title is required"}, 400
+    
     company_name = data.get('company_name')
     position = data.get('position')
     status = data.get('status')
     date_applied = data.get('date_applied')
     job_posting_url = data.get('job_posting_url')
     notes = data.get('notes')
-    logic.edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, id)
-    return {"message": "Job application added successfully."}, 201
+
+    updated = logic.edit_job_application(
+        company_name,
+        position,
+        status,
+        date_applied,
+        notes, 
+        job_posting_url, 
+        id
+    )
+    if updated == 0:
+        return {"error": "Application not found"}, 404
+    return {"message": "Job application added successfully."}, 200
 
 @app.route('/applications/<int:application_id>', methods=["DELETE"])
 def delete_job_application(application_id):
