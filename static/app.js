@@ -112,10 +112,11 @@ addApplication.addEventListener("click", async () => {
 
 editApplication.addEventListener("click", async e => {
     const applicationId = editOrDeleteId.value;
-    await fetch(`/application/${applicationId}`, {
+    const response = await fetch(`/application/${applicationId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
         body: JSON.stringify({
             company_name: company_name.value,
@@ -126,6 +127,12 @@ editApplication.addEventListener("click", async e => {
             notes: notes.value
         })
     });
+
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
+    const result = await response.json();
+
     await loadApplications();
 });
 
