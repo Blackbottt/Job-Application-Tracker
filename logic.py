@@ -39,13 +39,13 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-def edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, id):
+def edit_job_application(company_name, position, status, date_applied, notes, job_posting_url, edit_id):
     conn = create_connection("job_applications.db")
 
     if conn is not None:
         try:
             cursor = conn.cursor()
-            cursor.execute("""SELECT * FROM job_applications WHERE id = ?""")
+            cursor.execute("""SELECT * FROM job_applications WHERE id = ?""", (edit_id,))
             row = cursor.fetchall()
 
             if row is None:
@@ -61,10 +61,10 @@ def edit_job_application(company_name, position, status, date_applied, notes, jo
                 notes = ?,
                 job_posting_url = ?
                 WHERE id = ?
-                """, (company_name, position, status, date_applied, notes, job_posting_url, id)
+                """, (company_name, position, status, date_applied, notes, job_posting_url, edit_id)
             )
             conn.commit()
-            print(f"Record with ID {id} updated successfully.")
+            print(f"Record with ID {edit_id} updated successfully.")
             return cursor.rowcount
 
         except Exception as e:
