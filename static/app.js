@@ -113,7 +113,7 @@ addApplication.addEventListener("click", async () => {
 editApplication.addEventListener("submit", async e => {
     const applicationId = editOrDeleteId.value;
     await fetch(`/application/${applicationId}`, {
-        method: PUT,
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -133,15 +133,15 @@ deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
     console.log("delete id: ", applicationId);
     const response = await fetch(`/applications/${applicationId}`, {
-        method: DELETE
+        method: 'DELETE'
     });
     // await loadApplications();
     return response;
-})
+});
 
 deleteAllApplications.addEventListener("click", async () => {
     await fetch('/applications/delete', {
-        method: DELETE
+        method: 'DELETE'
     });
     await loadApplications();
 });
