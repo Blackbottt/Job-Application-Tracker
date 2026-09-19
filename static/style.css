@@ -89,6 +89,17 @@ body {
     grid-column: 1/-1;
 }
 
+.input-section div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    border: 1px solid #17232B;
+}
+
+.id-edit-delete {
+    grid-column: 1/-1;
+}
+
 .dashboard {
     max-height: 500px;
     overflow-y: auto;
