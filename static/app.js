@@ -79,8 +79,9 @@ async function loadApplications() {
         tableHeader.appendChild(tableHeading);
     });
 
+    thead.appendChild(tableHeader);
     table.appendChild(caption);
-    table.appendChild(tableHeader);
+    table.appendChild(thead);
 
     if (applications) {
         applications.forEach(application => {
