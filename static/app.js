@@ -58,7 +58,6 @@ async function loadApplications() {
     caption.classList.add('applications-caption');
     thead.classList.add('applications-thead');
     tbody.classList.add('applications-tbody');
-    tableHeader.classList.add('table-row-header');
     caption.textContent = 'Job Applications';
 
     const headers = [
@@ -85,27 +84,26 @@ async function loadApplications() {
 
     if (applications) {
         applications.forEach(application => {
-        const tableRow = document.createElement('tr');
-        const values = [
-            application.id,
-            application.company_name,
-            application.position,
-            application.application_date,
-            application.status,
-            application.notes,
-            application.job_posting_url,
-            application.created_at
-        ];
-        values.forEach(value => {
-            const tableRowCell = document.createElement('td');
-            tableRowCell.textContent = value;
-            tableRow.appendChild(tableRowCell);
+            const tableRow = document.createElement('tr');
+            const values = [
+                application.id,
+                application.company_name,
+                application.position,
+                application.application_date,
+                application.status,
+                application.notes,
+                application.job_posting_url,
+                application.created_at
+            ];
+            values.forEach(value => {
+                const tableRowCell = document.createElement('td');
+                tableRowCell.textContent = value;
+                tableRow.appendChild(tableRowCell);
+            });
+            tbody.appendChild(tableRow);
         });
-        tbody.appendChild(tableRow);
-        table.appendChild(tbody);
-    });
     }
-    
+    table.appendChild(tbody);
     dashboard.innerHTML = '';
     dashboard.appendChild(table);
     console.log("App: ", applications);
