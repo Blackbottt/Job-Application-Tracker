@@ -101,7 +101,8 @@ async function loadApplications() {
             tableRowCell.textContent = value;
             tableRow.appendChild(tableRowCell);
         });
-        table.appendChild(tableRow);
+        tbody.appendChild(tableRow);
+        table.appendChild(tbody);
     });
     }
     
