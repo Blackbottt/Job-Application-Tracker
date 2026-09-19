@@ -1,3 +1,21 @@
+:root {
+    --bg-main: #17232B;
+    --bg-secondary: #22313A;
+    --bg-card: #2C3E48;
+
+    --border: #43545E;
+
+    --text-primary: #E8EEF1;
+    --text-secondary: #A9B8C0;
+
+    --accent: #6E9AAF;
+    --accent-hover: #8FB3C3;
+
+    --success: #6FA89B;
+    --warning: #C2A36B;
+    --danger: #B97878;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -7,7 +25,7 @@ body {
     font-weight: 700;
     min-height: 100vh;
     margin: 0;
-    color: #17232B;
+    color: #A9B8C0;
     scroll-behavior: smooth;
     /* background: */
         /* radial-gradient(circle at top left, #6847c7, transparent 38%), */
@@ -31,7 +49,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10vh;
-    color: #F4F7F8;
+    color: #E8EEF1;
 }
 
 .hero-content-head h1 {
@@ -44,15 +62,15 @@ body {
 .hero-content-head p {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
-    color: #D9E5E8;
+    color: #A9B8C0;
 }
 
 .hero-content-foot a {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
-    color: #D9E5E8;
-    background: #4FA3B8;
+    color: #A9B8C0;
+    background: #6E9AAF;
     padding: 14px 28px;
     border: 2px solid #FFFFFF;
     border-radius: 8px;
@@ -66,27 +84,45 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10vh;
-    /* color: #F4F7F8; */
+    background-color: #17232B;
+    color: #A9B8C0;
 }
 
 .input-section {
+    min-height: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #17232B;
-    min-height: 20vh;
+    padding: 10px;
 }
 
 .input-section form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    border: 1px solid #17232B;
+    gap: 10px;
+    width: 100%;
+    height: auto;
 }
 
 .submit-add-applications {
     grid-column: 1/-1;
+    margin-bottom: 10px;
+}
+
+.application-field {
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid #17232B;
+    width: 100%;
+}
+
+.application-field * {
+    grid-column: 1/-1;
+    width: 100%;
 }
 
 .input-section div {
@@ -94,6 +130,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     border: 1px solid #17232B;
+    width: 100%;
 }
 
 .id-edit-delete {
@@ -101,6 +138,7 @@ body {
 }
 
 .dashboard {
+    border: 1px solid #17232B;
     max-height: 500px;
     overflow-y: auto;
 }
