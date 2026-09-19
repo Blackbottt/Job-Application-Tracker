@@ -45,8 +45,8 @@ def edit_job_application(id):
     return {"message": "Job application added successfully."}, 201
 
 @app.route('/applications/<int:id>', methods=["DELETE"])
-def delete_job_application(id):
-    deleted = logic.delete_job_application(id)
+def delete_job_application(application_id):
+    deleted = logic.delete_job_application(application_id)
     if deleted == 0:
         return {"error": "Application not found"}, 400
     return {"message": "Job application deleted successfully."}, 200
