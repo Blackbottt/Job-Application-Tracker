@@ -136,7 +136,7 @@ deleteApplication.addEventListener("click", async () => {
         method: 'DELETE'
     });
     const result = await response.json();
-    
+
     console.log("status:", response.status);
     console.log("server response:", result);
 
@@ -144,9 +144,13 @@ deleteApplication.addEventListener("click", async () => {
 });
 
 deleteAllApplications.addEventListener("click", async () => {
-    await fetch('/applications/delete', {
+    const response = await fetch('/applications/delete', {
         method: 'DELETE'
     });
+    const result = await response.json();
+
+    console.log("status:", response.status);
+    console.log("server response:", result);    
     await loadApplications();
 });
 
