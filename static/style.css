@@ -74,6 +74,15 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid #17232B;
+    min-height: 20vh;
+}
+
+.input-section form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    border: 1px solid #17232B;
 }
 
 .dashboard {
