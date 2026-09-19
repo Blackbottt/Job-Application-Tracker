@@ -112,7 +112,7 @@ addApplication.addEventListener("click", async () => {
 
 editApplication.addEventListener("click", async e => {
     const applicationId = editOrDeleteId.value;
-    const response = await fetch(`/application/${applicationId}`, {
+    const response = await fetch(`/applications/${applicationId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
