@@ -58,23 +58,19 @@ def edit_job_application(edit_id, data):
 
             for field in allowed_fields:
                 if field in data:
-                    fields.append(field)
-                    values.append(field.value)
-            
+                    fields.append(f"{field} = ?")
+                    values.append(data[field])
 
-            
-            cursor.execute(
-                """
+            if not fields:
+                return 0
+            values.append(edit_id)
+            query = f"""
                 UPDATE job_applications
-                SET company_name = ?,
-                position = ?,
-                status = ?,
-                application_date = ?,
-                notes = ?,
-                job_posting_url = ?
+                SET {", ".join(fields)}
                 WHERE id = ?
-                """, ()
-            )
+            """ 
+            
+            cursor.execute(query, ())
             conn.commit()
             print(f"Record with ID {edit_id} updated successfully.")
             return cursor.rowcount
