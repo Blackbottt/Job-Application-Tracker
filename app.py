@@ -46,10 +46,10 @@ def edit_job_application(id):
 
 @app.route('/applications/<int:id>', methods=["DELETE"])
 def delete_job_application(id):
-    data = logic.delete_job_application(id)
-    if not data:
-        return {"error": "Title is required"}, 400
-    return {"message": "Job application added successfully."}, 201
+    deleted = logic.delete_job_application(id)
+    if deleted == 0:
+        return {"error": "Application not found"}, 400
+    return {"message": "Job application deleted successfully."}, 200
 
 @app.route('/applications/delete', methods=["DELETE"])
 def delete_job_applications():
