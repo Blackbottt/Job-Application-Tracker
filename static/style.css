@@ -77,13 +77,18 @@ body {
     cursor: pointer;
 }
 
+.hero-content-foot a:hover {
+    background: #8FB3C3;
+    color: #E8EEF1;
+}
+
 .application-shell {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 10vh;
+    padding: 5vh;
     background-color: #17232B;
     color: #A9B8C0;
 }
@@ -94,8 +99,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #17232B;
+    border: 3px solid #43545E;
+    border-radius: 6px;
     padding: 10px;
+    margin-bottom: 10px;
+    background: #22313A;
 }
 
 .input-section form {
@@ -113,19 +121,19 @@ body {
 
 .application-field {
     display: grid;
-    grid-template-columns: 1;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
     gap: 0;
-    border: 1px solid #17232B;
     width: 100%;
 }
 
-.application-field * {
+.application-field > * {
     grid-column: 1/-1;
     width: 100%;
 }
 
-.input-section div {
+.button-features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -137,8 +145,58 @@ body {
     grid-column: 1/-1;
 }
 
+button {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 0.5rem;
+    border: 2px solid #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;  
+}
+
+.submit-add-applications {
+    color: #A9B8C0;
+    background: #6FA89B;
+}
+.submit-edit-applications {
+    color: #A9B8C0;
+    background: #6E9AAF;
+}
+.submit-delete-application {
+    color: #A9B8C0;
+    background: #C2A36B;
+}
+.submit-delete-applications {
+    color: #A9B8C0;
+    background: #B97878;
+}
+
+.submit-add-applications:hover {
+    color: #A9B8C0;
+    background: #6E9AAF;
+}
+
+.submit-edit-applications:hover {
+    color: #A9B8C0;
+    background: #6E9AAF;
+}
+
+.submit-delete-application:hover {
+    color: #A9B8C0;
+    background: #6E9AAF;
+}
+
+.submit-delete-applications:hover {
+    color: #A9B8C0;
+    background: #6E9AAF;
+}
+
 .dashboard {
-    border: 1px solid #17232B;
-    max-height: 500px;
+    border: 3px solid #43545E;
+    border-radius: 6px;
+    background: #2C3E48;
+    height: 50vh;
     overflow-y: auto;
+    margin-top: 10px;
 }
