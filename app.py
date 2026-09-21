@@ -23,28 +23,9 @@ def add_job_applications_route():
     if not data:
         return {"error": "Title is required"}, 400
 
-    company = data.get('company_name')
-    position = data.get('position')
-    status = data.get('status')
-    date_applied = data.get('date_applied')
-    job_posting_url = data.get('job_posting_url')
-    notes = data.get('notes')
-
-    ALLOWED_STATUSES = {
-        "Applied",
-        "Interview",
-        "Accepted",
-        "Rejected",
-        "Wishlist",
-        "Offer",
-        "Rejected",
-        "Withdrawn"
-    }
-
-    if status not in ALLOWED_STATUSES:
-        return {"error": "Invalid status"}, 400
-
-    logic.add_job_application(company, position, status, date_applied, notes, job_posting_url)
+    valid_data = logic.param_validation_function(data)
+    logic.add_job_application(valid_data)
+    
     return {"message": "Job application added successfully."}, 201
 
 @app.route('/applications/<int:id>', methods=["PATCH"])
