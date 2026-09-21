@@ -127,7 +127,7 @@ def application_deletion(application_id=None):
         print("Error! Cannot delete the database connection.")
 
 def param_validation_function(params):
-    if params is not None {
+    if params is not None:
         try:
             company = params.get('company_name')
             position = params.get('position')
@@ -142,19 +142,24 @@ def param_validation_function(params):
                 "Rejected",
                 "Wishlist",
                 "Offer",
-                "Rejected",
                 "Withdrawn"
             }
-            if status not in ALLOWED_STATUSES:
-            return {"error": "Invalid status"}, 400
+
+            for status in ALLOWED_STATUSES:
+                if status not in ALLOWED_STATUSES:
+                    return {"error": "Invalid status"}, 400
 
             if params.values() == "":
-            return {"error": "Invalid"}, 400
-            
+                return {"error": "Invalid"}, 400
+
             return valid_input, {}
 
         except Exception as e:
             return "{e} is unacceptable input, please enter valid inputs"
-    } else {
+    else:
         return {"Error": "Bad Inputs Used!"}, 400
-    }
+
+def string_validation(str):
+    valid_str = str.strip()
+    if valid_str is not None:
+        return str
