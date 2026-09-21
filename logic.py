@@ -91,40 +91,6 @@ def edit_job_application(edit_id, data):
     else:
         print("Error! Cannot create the database connection.")
 
-def delete_job_application(application_id):
-    conn = create_connection("job_applications.db")
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute("""DELETE FROM job_applications WHERE id = ?""", (application_id,))
-            conn.commit()
-            return cursor.rowcount
-        except Exception as e:
-            print(f"An error occurred while deleting the job application: {e}")
-        finally:
-            conn.close()
-    else:
-        print("Error! Cannot create the database connection.")
-
-def delete_job_applications():
-    conn = create_connection("job_applications.db")
-    if conn is not None:
-        try:
-            cursor = conn.cursor()
-            cursor.execute("""DELETE FROM job_applications""")
-            cursor.execute("""
-                DELETE FROM sqlite_sequence
-                WHERE name = 'job_applications'
-            """)
-            conn.commit()
-            return cursor.rowcount
-        except Exception as e:
-            print(f"An error occurred while deleting the job application: {e}")
-        finally:
-            conn.close()
-    else:
-        print("Error! Cannot create the database connection.")
-
 def application_deletion(application_id=None):
     """function that takes a db and adds data to it
     :optional params: application_id=None
@@ -157,4 +123,4 @@ def application_deletion(application_id=None):
             conn.close()
     
     else:
-        print("Error! Cannot create the database connection.")
+        print("Error! Cannot delete the database connection.")
