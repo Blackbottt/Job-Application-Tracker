@@ -31,6 +31,7 @@ def add_job_application(company_name, position, status, date_applied, notes, job
     if conn is not None:
         try:
             cursor = conn.cursor()
+            param_validation_function()
             cursor.execute("""
                 INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
@@ -144,7 +145,8 @@ def param_validation_function(params):
                 "Rejected",
                 "Withdrawn"
             }
-            
+            params.values()
+            return valid_input, {}
 
         except Exception as e:
             return "{e} is unacceptable input, please enter valid inputs"
