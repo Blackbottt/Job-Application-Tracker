@@ -1,4 +1,6 @@
 from database import create_connection
+from urllib.parse import urlparse
+
 
 def get_job_applications():
     """function that takes the db and retrieves all applications
@@ -159,7 +161,6 @@ def string_validation(value):
     return value
 
 def status_validation(params):
-    status = params.get('status')
     ALLOWED_STATUSES = {
         "Applied",
         "Interview",
@@ -170,7 +171,24 @@ def status_validation(params):
         "Withdrawn"
     }
 
-    if status not in ALLOWED_STATUSES:
+    if params not in ALLOWED_STATUSES:
         return {"error": "Invalid status"}, 400
 
-    return status
+    return params
+
+
+def url_validation(url):
+    if url is None or url == "":
+        return None
+
+    if not isinstance(url, str):
+        return {"error": "URL must be a string"}, 400
+
+    url = url.strip()
+
+    parsed_url = urlparse(url)
+
+    if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
+        return {"error": "Invalid URL"}, 400
+
+    return url
