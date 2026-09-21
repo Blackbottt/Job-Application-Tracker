@@ -148,7 +148,7 @@ def param_validation_function(params):
         "notes": notes
     }
 
-def string_validation(value):
+def string_validation(value, edit="OFF"):
     if value is None:
         return {"Error": "Input is not a String"}, 400
 
@@ -157,6 +157,9 @@ def string_validation(value):
         
     valid_str = value.strip()
 
+    if edit == "ON":
+        return valid_str
+        
     if not valid_str:
         return {"Error": "Input is not a String"}, 400
 
@@ -178,7 +181,7 @@ def status_validation(params):
 
     return params
 
-def url_validation(url):
+def url_validation(url, edit="OFF"):
     if url is None or url == "":
         return None
 
