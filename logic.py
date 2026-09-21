@@ -131,28 +131,12 @@ def param_validation_function(params):
         try:
             company = params.get('company_name')
             position = params.get('position')
-            status = params.get('status')
             date_applied = params.get('date_applied')
             job_posting_url = params.get('job_posting_url')
             notes = params.get('notes')
-            ALLOWED_STATUSES = {
-                "Applied",
-                "Interview",
-                "Accepted",
-                "Rejected",
-                "Wishlist",
-                "Offer",
-                "Withdrawn"
-            }
-
-            for status in ALLOWED_STATUSES:
-                if status not in ALLOWED_STATUSES:
-                    return {"error": "Invalid status"}, 400
 
             if params.values() == "":
                 return {"error": "Invalid"}, 400
-
-            return valid_input, {}
 
         except Exception as e:
             return "{e} is unacceptable input, please enter valid inputs"
@@ -163,3 +147,20 @@ def string_validation(str):
     valid_str = str.strip()
     if valid_str is not None:
         return str
+
+def status_validation(params):
+    status = params.get('status')
+    ALLOWED_STATUSES = {
+        "Applied",
+        "Interview",
+        "Accepted",
+        "Rejected",
+        "Wishlist",
+        "Offer",
+        "Withdrawn"
+    }
+
+    if status not in ALLOWED_STATUSES:
+        return {"error": "Invalid status"}, 400
+
+    return status
