@@ -145,7 +145,12 @@ def param_validation_function(params):
                 "Rejected",
                 "Withdrawn"
             }
-            params.values()
+            if status not in ALLOWED_STATUSES:
+            return {"error": "Invalid status"}, 400
+
+            if params.values() == "":
+            return {"error": "Invalid"}, 400
+            
             return valid_input, {}
 
         except Exception as e:
