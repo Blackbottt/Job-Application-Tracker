@@ -128,16 +128,19 @@ def application_deletion(application_id=None):
     else:
         print("Error! Cannot delete the database connection.")
 
-def param_validation_function(params):
+def param_validation_function(id, params):
+    edit = "OFF"
     if params is None:
         return {"Error":"Input is invalid"}, 400
-    
-    company = string_validation(params.get('company_name'))
-    position = string_validation(params.get('position'))
-    date_applied = string_validation(params.get('date_applied'))
-    job_posting_url = url_validation(params.get('job_posting_url'))
-    notes = string_validation(params.get('notes'))
-    status = status_validation(params.get('status'))
+
+    if id:
+        edit = "ON"
+    company = string_validation(params.get('company_name'), edit=edit)
+    position = string_validation(params.get('position'), edit=edit)
+    date_applied = string_validation(params.get('date_applied'), edit=edit)
+    job_posting_url = url_validation(params.get('job_posting_url'), edit=edit)
+    notes = string_validation(params.get('notes'), edit=edit)
+    status = status_validation(params.get('status'), edit=edit)
         
     return {
         "company_name": company,
