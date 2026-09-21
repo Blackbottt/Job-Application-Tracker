@@ -182,6 +182,10 @@ def status_validation(params):
     return params
 
 def url_validation(url, edit="OFF"):
+    if edit == "ON":
+        if url is None or url == "":
+            return url 
+             
     if url is None or url == "":
         return None
 
