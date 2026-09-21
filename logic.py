@@ -135,6 +135,7 @@ def param_validation_function(id, params):
 
     if id:
         edit = "ON"
+        
     company = string_validation(params.get('company_name'), edit=edit)
     position = string_validation(params.get('position'), edit=edit)
     date_applied = string_validation(params.get('date_applied'), edit=edit)
