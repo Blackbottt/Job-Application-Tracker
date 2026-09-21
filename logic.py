@@ -137,8 +137,16 @@ def param_validation_function(params):
     date_applied = string_validation(params.get('date_applied'))
     job_posting_url = url_validation(params.get('job_posting_url'))
     notes = string_validation(params.get('notes'))
+    status = status_validation(params.get('status'))
         
-    return {company, position, date_applied, job_posting_url, notes}
+    return {
+        "company_name": company,
+        "position": position,
+        "date_applied": date_applied,
+        "status": status,
+        "job_posting_url": job_posting_url,
+        "notes": notes
+    }
 
 def string_validation(value):
     if value is None:
