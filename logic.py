@@ -129,13 +129,16 @@ def application_deletion(application_id=None):
         print("Error! Cannot delete the database connection.")
 
 def param_validation_function(params):
-    if params is not None:
-        company = string_validation(params.get('company_name'))
-        position = string_validation(params.get('position'))
-        date_applied = string_validation(params.get('date_applied'))
-        job_posting_url = url_validation(params.get('job_posting_url'))
-        notes = string_validation(params.get('notes'))
-    return params
+    if params is None:
+        return {"Error":"Input is invalid"}, 400
+    
+    company = string_validation(params.get('company_name'))
+    position = string_validation(params.get('position'))
+    date_applied = string_validation(params.get('date_applied'))
+    job_posting_url = url_validation(params.get('job_posting_url'))
+    notes = string_validation(params.get('notes'))
+        
+    return {company, position, date_applied, job_posting_url, notes}
 
 def string_validation(value):
     if value is None:
@@ -149,7 +152,7 @@ def string_validation(value):
     if not valid_str:
         return {"Error": "Input is not a String"}, 400
 
-    return value
+    return valid_str
 
 def status_validation(params):
     ALLOWED_STATUSES = {
