@@ -1,5 +1,26 @@
 from database import create_connection
 
+def get_job_applications():
+    """function that takes the db and retrieves all applications
+    :returns: an object with every row
+    """
+    conn = create_connection("job_applications.db")
+
+    if conn is not None:
+        try:
+            print("Job conn is ON!")
+            cursor = conn.cursor()
+            cursor.execute("""SELECT * FROM job_applications""")
+            print("Jobs sucessfully retrieved")
+            applications = cursor.fetchall()
+            return [dict(row) for row in applications]
+        except Exception as e:
+            print(f"An error occurred while retrieving the job application: {e}")
+        finally:
+            conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
+        
 def add_job_application(company_name, position, status, date_applied, notes, job_posting_url):
     """function that takes the db and adds data to it
     :params: company_name, position, status, date_applied, notes, job_posting_url
@@ -24,26 +45,6 @@ def add_job_application(company_name, position, status, date_applied, notes, job
     else:
         print("Error! Cannot create the database connection.")
 
-def get_job_applications():
-    """function that takes the db and retrieves all applications
-    :returns: an object with every row
-    """
-    conn = create_connection("job_applications.db")
-
-    if conn is not None:
-        try:
-            print("Job conn is ON!")
-            cursor = conn.cursor()
-            cursor.execute("""SELECT * FROM job_applications""")
-            print("Jobs sucessfully retrieved")
-            applications = cursor.fetchall()
-            return [dict(row) for row in applications]
-        except Exception as e:
-            print(f"An error occurred while retrieving the job application: {e}")
-        finally:
-            conn.close()
-    else:
-        print("Error! Cannot create the database connection.")
 
 def edit_job_application(edit_id, data):
     """function that takes a db and adds data to it
