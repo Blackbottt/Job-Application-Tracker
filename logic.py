@@ -135,6 +135,7 @@ def param_validation_function(params):
             job_posting_url = params.get('job_posting_url')
             notes = params.get('notes')
 
+
             if params.values() == "":
                 return {"error": "Invalid"}, 400
 
@@ -143,10 +144,19 @@ def param_validation_function(params):
     else:
         return {"Error": "Bad Inputs Used!"}, 400
 
-def string_validation(str):
-    valid_str = str.strip()
-    if valid_str is not None:
-        return str
+def string_validation(value):
+    if value is None:
+        return {"Error": "Input is not a String"}, 400
+
+    if value is not isinstance(value, str):
+        return {"Error": "Input is not a String"}, 400
+        
+    valid_str = value.strip()
+
+    if not valid_str:
+        return {"Error": "Input is not a String"}, 400
+
+    return value
 
 def status_validation(params):
     status = params.get('status')
