@@ -20,7 +20,7 @@ def get_job_applications():
             conn.close()
     else:
         print("Error! Cannot create the database connection.")
-        
+
 def add_job_application(company_name, position, status, date_applied, notes, job_posting_url):
     """function that takes the db and adds data to it
     :params: company_name, position, status, date_applied, notes, job_posting_url
@@ -44,7 +44,6 @@ def add_job_application(company_name, position, status, date_applied, notes, job
             conn.close()
     else:
         print("Error! Cannot create the database connection.")
-
 
 def edit_job_application(edit_id, data):
     """function that takes a db and adds data to it
@@ -125,3 +124,30 @@ def application_deletion(application_id=None):
     
     else:
         print("Error! Cannot delete the database connection.")
+
+def param_validation_function(params):
+    if params is not None {
+        try:
+            company = params.get('company_name')
+            position = params.get('position')
+            status = params.get('status')
+            date_applied = params.get('date_applied')
+            job_posting_url = params.get('job_posting_url')
+            notes = params.get('notes')
+            ALLOWED_STATUSES = {
+                "Applied",
+                "Interview",
+                "Accepted",
+                "Rejected",
+                "Wishlist",
+                "Offer",
+                "Rejected",
+                "Withdrawn"
+            }
+            
+
+        except Exception as e:
+            return "{e} is unacceptable input, please enter valid inputs"
+    } else {
+        return {"Error": "Bad Inputs Used!"}, 400
+    }
