@@ -27,11 +27,6 @@ body {
     margin: 0;
     color: var(--text-secondary);
     scroll-behavior: smooth;
-    /* background: */
-        /* radial-gradient(circle at top left, #6847c7, transparent 38%), */
-        /* radial-gradient(circle at bottom right, #1b8da5, transparent 42%), */
-        /* #101323; */
-        
 }
 
 .hero {
