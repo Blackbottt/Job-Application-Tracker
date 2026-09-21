@@ -21,11 +21,11 @@ editOrDeleteId.placeholder = 'ID: Edit/Delete'
 editApplication.textContent = 'Edit Application';
 deleteApplication.textContent = 'Delete Application';
 deleteAllApplications.textContent = 'Delete All Applications';
+
 buttonFeatures.appendChild(editOrDeleteId);
 buttonFeatures.appendChild(editApplication);
 buttonFeatures.appendChild(deleteApplication);
 buttonFeatures.appendChild(deleteAllApplications);
-
 
 async function addJobApplication() {
     await fetch('/applications', {
@@ -103,10 +103,10 @@ async function loadApplications() {
             tbody.appendChild(tableRow);
         });
     }
+
     table.appendChild(tbody);
     dashboard.innerHTML = '';
     dashboard.appendChild(table);
-    console.log("App: ", applications);
 }
 
 addApplication.addEventListener("click", async () => {
@@ -117,24 +117,14 @@ addApplication.addEventListener("click", async () => {
 editApplication.addEventListener("click", async e => {
     const applicationId = editOrDeleteId.value;
     const data = {};
-    if (company_name.value.trim() !== "") {
-        data.company_name = company_name.value
-    } 
-    if (position.value.trim() !== "") {
-        data.position = position.value
-    }
-    if (statusOfApplication.value.trim() !== "") {
-        data.status = statusOfApplication.value
-    }
-    if (applicationDate.value.trim() !== "") {
-        data.date_applied = applicationDate.value
-    }
-    if (job_posting_url.value.trim() !== "") {
-        data.job_posting_url = job_posting_url.value
-    }
-    if (notes.value.trim() !== "") {
-        data.notes = notes.value
-    }
+    
+    if (company_name.value.trim() !== "") data.company_name = company_name.value;
+    if (position.value.trim() !== "") data.position = position.value;
+    if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
+    if (applicationDate.value.trim() !== "") data.date_applied = applicationDate.value;
+    if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
+    if (notes.value.trim() !== "") data.notes = notes.value;
+
     const response = await fetch(`/applications/${applicationId}`, {
         method: 'PATCH',
         headers: {
@@ -147,6 +137,7 @@ editApplication.addEventListener("click", async e => {
     if (!response.ok) {
         throw new Error(`Server responded with ${response.status} ${response.statusText}`);
     }
+
     const result = await response.json();
 
     await loadApplications();
@@ -154,17 +145,15 @@ editApplication.addEventListener("click", async e => {
 
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
-    console.log("delete id: ", applicationId);
     const response = await fetch(`/applications/${applicationId}`, {
         method: 'DELETE'
     });
+
     if (!response.ok) {
         throw new Error(`Server responded with ${response.status} ${response.statusText}`);
     }
+    
     const result = await response.json();
-
-    console.log("status:", response.status);
-    console.log("server response:", result);
 
     await loadApplications();
 });
@@ -173,13 +162,13 @@ deleteAllApplications.addEventListener("click", async () => {
     const response = await fetch('/applications/delete', {
         method: 'DELETE'
     });
+
     if (!response.ok) {
         throw new Error(`Server responded with ${response.status} ${response.statusText}`);
     }
+
     const result = await response.json();
 
-    console.log("status:", response.status);
-    console.log("server response:", result);    
     await loadApplications();
 });
 
