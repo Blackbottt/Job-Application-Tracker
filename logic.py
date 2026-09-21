@@ -141,7 +141,7 @@ def string_validation(value):
     if value is None:
         return {"Error": "Input is not a String"}, 400
 
-    if value is not isinstance(value, str):
+    if not isinstance(value, str):
         return {"Error": "Input is not a String"}, 400
         
     valid_str = value.strip()
