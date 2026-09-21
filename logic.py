@@ -130,21 +130,12 @@ def application_deletion(application_id=None):
 
 def param_validation_function(params):
     if params is not None:
-        try:
-            company = params.get('company_name')
-            position = params.get('position')
-            date_applied = params.get('date_applied')
-            job_posting_url = params.get('job_posting_url')
-            notes = params.get('notes')
-
-
-            if params.values() == "":
-                return {"error": "Invalid"}, 400
-
-        except Exception as e:
-            return "{e} is unacceptable input, please enter valid inputs"
-    else:
-        return {"Error": "Bad Inputs Used!"}, 400
+        company = string_validation(params.get('company_name'))
+        position = string_validation(params.get('position'))
+        date_applied = string_validation(params.get('date_applied'))
+        job_posting_url = url_validation(params.get('job_posting_url'))
+        notes = string_validation(params.get('notes'))
+    return params
 
 def string_validation(value):
     if value is None:
@@ -175,7 +166,6 @@ def status_validation(params):
         return {"error": "Invalid status"}, 400
 
     return params
-
 
 def url_validation(url):
     if url is None or url == "":
