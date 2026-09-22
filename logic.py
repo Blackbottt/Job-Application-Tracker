@@ -136,12 +136,29 @@ def param_validation_function(id, params):
     if id:
         edit = "ON"
         
-    company = string_validation(params.get('company_name'), edit=edit)
-    position = string_validation(params.get('position'), edit=edit)
-    date_applied = string_validation(params.get('date_applied'), edit=edit)
-    job_posting_url = url_validation(params.get('job_posting_url'), edit=edit)
-    notes = string_validation(params.get('notes'), edit=edit)
-    status = status_validation(params.get('status'), edit=edit)
+    company = string_validation(params.get("company_name"), edit=edit)
+    if isinstance(company, tuple):
+        return company
+
+    position = string_validation(params.get("position"), edit=edit)
+    if isinstance(position, tuple):
+        return position
+
+    date_applied = string_validation(params.get("date_applied"), edit=edit)
+    if isinstance(date_applied, tuple):
+        return date_applied
+
+    job_posting_url = url_validation(params.get("job_posting_url"), edit=edit)
+    if isinstance(job_posting_url, tuple):
+        return job_posting_url
+
+    notes = string_validation(params.get("notes"), edit=edit)
+    if isinstance(notes, tuple):
+        return notes
+
+    status = status_validation(params.get("status"))
+    if isinstance(status, tuple):
+        return status
         
     return {
         "company_name": company,
