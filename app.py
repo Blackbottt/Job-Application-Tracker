@@ -23,7 +23,11 @@ def add_job_applications_route():
     if not data:
         return {"error": "Title is required"}, 400
 
-    valid_data = logic.param_validation_function(data)
+    # try:
+    #     valid_data = logic.param_validation_function(data)
+    # except Exception as e:
+    #     print("Input {e} is invalid")
+
     logic.add_job_application(valid_data)
     
     return {"message": "Job application added successfully."}, 201
@@ -63,6 +67,14 @@ def delete_job_applications_route():
     if deleted == 0:
         return {"error": "Applications not found"}, 400
     return {"message": "Job application deleted successfully."}, 200
+
+@app.errorhandler(404)
+def not_found(error):
+    return {"error": "Resource not found"}, 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return {"error": "Internal server error"}, 500
 
 if __name__ == '__main__':
     app.run(debug=True)
