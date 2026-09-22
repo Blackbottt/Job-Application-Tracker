@@ -128,13 +128,12 @@ def application_deletion(application_id=None):
     else:
         print("Error! Cannot delete the database connection.")
 
-def param_validation_function(id, params):
-    edit = "OFF"
+def param_validation_function(params, edit=False):
     if params is None:
         return {"Error":"Input is invalid"}, 400
 
     if id:
-        edit = "ON"
+        edit = True
         
     company = string_validation(params.get("company_name"), edit=edit)
     if isinstance(company, tuple):
@@ -181,7 +180,7 @@ def id_validation(id):
 
     return id
 
-def string_validation(value, edit="OFF"):
+def string_validation(value, edit=False):
     if value is None:
         return {"Error": "Input is not a String"}, 400
 
@@ -190,7 +189,7 @@ def string_validation(value, edit="OFF"):
         
     valid_str = value.strip()
 
-    if edit == "ON":
+    if edit == True:
         return valid_str
         
     if not valid_str:
@@ -214,8 +213,8 @@ def status_validation(params):
 
     return params
 
-def url_validation(url, edit="OFF"):
-    if edit == "ON":
+def url_validation(url, edit=False):
+    if edit == True:
         if url is None or url == "":
             return url 
              
