@@ -23,10 +23,9 @@ def add_job_applications_route():
     if not data:
         return {"error": "Title is required"}, 400
 
-    try:
-        valid_data = logic.param_validation_function(data)
-    except Exception as e:
-        print("Input {e} is invalid")
+    valid_data = logic.param_validation_function(data)
+    if isinstance(valid_data, tuple):
+        return valid_data
 
     logic.add_job_application(valid_data)
     
@@ -40,11 +39,15 @@ def edit_job_application_route(id):
     if not data:
         return {"error": "Title is required"}, 400
     
-    try:
-        valid_id = logic.id_validation(id)
-        valid_data = logic.param_validation_function(data)
-    except Exception as e:
-        print("Input {e} is invalid")
+    valid_id = logic.id_validation(id)
+
+    if isinstance(valid_id, tuple):
+        return valid_id
+
+    valid_data = logic.param_validation_function(data)
+
+    if isinstance(valid_data, tuple):
+            return valid_data
 
     updated = logic.edit_job_application(valid_id, valid_data)
 
@@ -57,10 +60,10 @@ def delete_job_application_route(application_id):
     # calls a deleting function with handling for non-existent application
     # deleted = logic.delete_job_application(application_id)
     valid_id = logic.id_validation(application_id)
-    try:
-        valid_id = logic.id_validation(id)
-    except Exception as e:
-        print("Input {e} is invalid")
+
+    if isinstance(valid_id, tuple):
+        return valid_id
+
     deleted = logic.application_deletion(valid_id)
 
     if deleted == 0:
