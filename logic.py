@@ -132,9 +132,6 @@ def param_validation_function(params, edit=False):
     if params is None:
         return {"Error":"Input is invalid"}, 400
 
-    if id:
-        edit = True
-        
     company = string_validation(params.get("company_name"), edit=edit)
     if isinstance(company, tuple):
         return company
