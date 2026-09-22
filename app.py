@@ -35,8 +35,9 @@ def edit_job_application_route(id):
 
     if not data:
         return {"error": "Title is required"}, 400
-
-    updated = logic.edit_job_application(id, data)
+    
+    valid_id = logic.id_validation(id)
+    updated = logic.edit_job_application(valid_id, data)
 
     if updated == 0:
         return {"error": "Application not found"}, 404
@@ -46,7 +47,8 @@ def edit_job_application_route(id):
 def delete_job_application_route(application_id):
     # calls a deleting function with handling for non-existent application
     # deleted = logic.delete_job_application(application_id)
-    deleted = logic.application_deletion(application_id)
+    valid_id = logic.id_validation(application_id)
+    deleted = logic.application_deletion(valid_id)
 
     if deleted == 0:
         return {"error": "Application not found"}, 400
