@@ -23,7 +23,7 @@ def add_job_applications_route():
     if not data:
         return {"error": "Title is required"}, 400
 
-    valid_data = logic.param_validation_function(data)
+    valid_data = logic.param_validation_function(data, edit=False)
     if isinstance(valid_data, tuple):
         return valid_data
 
@@ -44,7 +44,7 @@ def edit_job_application_route(id):
     if isinstance(valid_id, tuple):
         return valid_id
 
-    valid_data = logic.param_validation_function(data)
+    valid_data = logic.param_validation_function(data, edit=True)
 
     if isinstance(valid_data, tuple):
             return valid_data
