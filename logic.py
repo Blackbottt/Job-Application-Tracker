@@ -129,9 +129,22 @@ def application_deletion(application_id=None):
     else:
         print("Error! Cannot delete the database connection.")
 
-def param_validation_function(params):
+def param_validation_function(params, edit=False):
     if params is None:
         return {"Error":"Input is invalid"}, 400
+
+# POST: required fields
+    if not edit:
+        required_fields = [
+            "company_name",
+            "position",
+            "date_applied",
+            "status"
+        ]
+
+        for field in required_fields:
+            if field not in params:
+                return {"error": f"{field} is required"}, 400
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
