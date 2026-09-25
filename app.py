@@ -28,6 +28,7 @@ def add_job_applications_route():
     if isinstance(valid_data, tuple):
         return valid_data
 
+    print("adding a job application....bloop")
     added = logic.add_job_application(
         valid_data["company_name"],
         valid_data["position"],
@@ -50,8 +51,8 @@ def edit_job_application_route(id):
     valid_id = logic.id_validation(id)
 
     if isinstance(valid_id, tuple):
-        return {"error": "Application not found"}, 404
-        # return valid_id
+        # return {"error": "Application not found"}, 404
+        return valid_id
 
     valid_data = logic.param_validation_function(data, edit=True)
 
