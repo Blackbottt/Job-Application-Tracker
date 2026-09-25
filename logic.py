@@ -214,7 +214,7 @@ def id_validation(id):
 
     return id
 
-def string_validation(value, edit=False):
+def string_validation(value):
     if value is None:
         return {"Error": "Input is not a String"}, 400
 
@@ -244,7 +244,7 @@ def status_validation(params):
 
     return params
 
-def url_validation(url, edit=False):
+def url_validation(url):
              
     if url is None or url == "":
         return None
