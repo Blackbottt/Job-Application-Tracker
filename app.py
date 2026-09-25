@@ -25,7 +25,10 @@ def add_job_applications_route():
 
     valid_data = logic.param_validation_function(data, edit=False)
 
-    logic.add_job_application(
+    if isinstance(valid_data, tuple):
+        return valid_data
+
+    added = logic.add_job_application(
         valid_data["company_name"],
         valid_data["position"],
         valid_data["status"],
