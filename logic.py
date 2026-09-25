@@ -33,7 +33,8 @@ def add_job_application(company_name, position, status, date_applied, notes, job
     if conn is not None:
         try:
             cursor = conn.cursor()
-            param_validation_function()
+            # param_validation_function()
+            print("adding an application...99999999999**********")
             cursor.execute("""
                 INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
@@ -128,27 +129,27 @@ def application_deletion(application_id=None):
     else:
         print("Error! Cannot delete the database connection.")
 
-def param_validation_function(params, edit=False):
+def param_validation_function(params):
     if params is None:
         return {"Error":"Input is invalid"}, 400
 
-    company = string_validation(params.get("company_name"), edit=edit)
+    company = string_validation(params.get("company_name"))
     if isinstance(company, tuple):
         return company
 
-    position = string_validation(params.get("position"), edit=edit)
+    position = string_validation(params.get("position"))
     if isinstance(position, tuple):
         return position
 
-    date_applied = string_validation(params.get("date_applied"), edit=edit)
+    date_applied = string_validation(params.get("date_applied"))
     if isinstance(date_applied, tuple):
         return date_applied
 
-    job_posting_url = url_validation(params.get("job_posting_url"), edit=edit)
+    job_posting_url = url_validation(params.get("job_posting_url"))
     if isinstance(job_posting_url, tuple):
         return job_posting_url
 
-    notes = string_validation(params.get("notes"), edit=edit)
+    notes = string_validation(params.get("notes"))
     if isinstance(notes, tuple):
         return notes
 
@@ -185,9 +186,6 @@ def string_validation(value, edit=False):
         return {"Error": "Input is not a String"}, 400
         
     valid_str = value.strip()
-
-    if edit == True:
-        return valid_str
         
     if not valid_str:
         return {"Error": "Input is not a String"}, 400
@@ -211,9 +209,6 @@ def status_validation(params):
     return params
 
 def url_validation(url, edit=False):
-    if edit == True:
-        if url is None or url == "":
-            return url 
              
     if url is None or url == "":
         return None
