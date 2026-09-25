@@ -202,7 +202,6 @@ def param_validation_function(params, edit=False):
     else:
         notes = None
 
-
     return valid_data
 
 def id_validation(id):
