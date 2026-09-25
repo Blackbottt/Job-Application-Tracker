@@ -133,30 +133,53 @@ def param_validation_function(params):
     if params is None:
         return {"Error":"Input is invalid"}, 400
 
-    company = string_validation(params.get("company_name"))
-    if isinstance(company, tuple):
-        return company
+    if "company_name" in params:
+        company = string_validation(params["company_name"])
 
-    position = string_validation(params.get("position"))
-    if isinstance(position, tuple):
-        return position
+        if isinstance(company, tuple):
+            return company
+    else:
+        company = None
 
-    date_applied = string_validation(params.get("date_applied"))
-    if isinstance(date_applied, tuple):
-        return date_applied
+    if "position" in params:
+        position = string_validation(params["position"])
 
-    job_posting_url = url_validation(params.get("job_posting_url"))
-    if isinstance(job_posting_url, tuple):
-        return job_posting_url
+        if isinstance(position, tuple):
+            return position
+    else:
+        position = None
 
-    notes = string_validation(params.get("notes"))
-    if isinstance(notes, tuple):
-        return notes
+    if "date_applied" in params:
+        date_applied = string_validation(params["date_applied"])
 
-    status = status_validation(params.get("status"))
-    if isinstance(status, tuple):
-        return status
-        
+        if isinstance(date_applied, tuple):
+            return date_applied
+    else:
+        date_applied = None
+
+    if "status" in params:
+        status = status_validation(params["status"])
+
+        if isinstance(status, tuple):
+            return status
+    else:
+        status = None
+
+    if "job_posting_url" in params:
+        job_posting_url = url_validation(params["job_posting_url"])
+
+        if isinstance(job_posting_url, tuple):
+            return job_posting_url
+    else:
+        job_posting_url = None
+
+    if "notes" in params:
+        notes = string_validation(params["notes"])
+
+        if isinstance(notes, tuple):
+            return notes
+    else:
+        notes = None
     return {
         "company_name": company,
         "position": position,
