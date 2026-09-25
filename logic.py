@@ -146,11 +146,14 @@ def param_validation_function(params, edit=False):
             if field not in params:
                 return {"error": f"{field} is required"}, 400
 
+    valid_data = {}
+
     if "company_name" in params:
         company = string_validation(params["company_name"])
 
         if isinstance(company, tuple):
             return company
+        valid_data["company"] = company
     else:
         company = None
 
@@ -159,6 +162,7 @@ def param_validation_function(params, edit=False):
 
         if isinstance(position, tuple):
             return position
+        valid_data["position"] = position
     else:
         position = None
 
@@ -167,6 +171,7 @@ def param_validation_function(params, edit=False):
 
         if isinstance(date_applied, tuple):
             return date_applied
+        valid_data["date_applied"] = date_applied
     else:
         date_applied = None
 
@@ -175,6 +180,7 @@ def param_validation_function(params, edit=False):
 
         if isinstance(status, tuple):
             return status
+        valid_data["status"] = status
     else:
         status = None
 
@@ -183,6 +189,7 @@ def param_validation_function(params, edit=False):
 
         if isinstance(job_posting_url, tuple):
             return job_posting_url
+        valid_data["job_posting_url"] = job_posting_url
     else:
         job_posting_url = None
 
@@ -191,16 +198,12 @@ def param_validation_function(params, edit=False):
 
         if isinstance(notes, tuple):
             return notes
+        valid_data["notes"] = notes
     else:
         notes = None
-    return {
-        "company_name": company,
-        "position": position,
-        "date_applied": date_applied,
-        "status": status,
-        "job_posting_url": job_posting_url,
-        "notes": notes
-    }
+
+
+    return valid_data
 
 def id_validation(id):
     if id is None:
