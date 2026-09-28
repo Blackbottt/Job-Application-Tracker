@@ -258,7 +258,7 @@ def status_validation(params):
     }
 
     if params not in ALLOWED_STATUSES:
-        return {"error": "Invalid status"}, 400
+        return "Invalid status"
 
     return params
 
