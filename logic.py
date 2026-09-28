@@ -153,7 +153,7 @@ def param_validation_function(params, edit=False):
 
         if isinstance(company, tuple):
             return company
-        valid_data["company"] = company
+        valid_data["company_name"] = company
     else:
         company = None
 

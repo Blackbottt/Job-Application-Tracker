@@ -107,6 +107,14 @@ async function loadApplications() {
     table.appendChild(tbody);
     dashboard.innerHTML = '';
     dashboard.appendChild(table);
+    company_name.value = "";
+    position.value = "";
+    applicationDate.value = "";
+    statusOfApplication.value = "";
+    job_posting_url.value = "";
+    notes.value = "";
+    editOrDeleteId.value = "";
+
 }
 
 addApplication.addEventListener("click", async () => {
@@ -117,14 +125,12 @@ addApplication.addEventListener("click", async () => {
 editApplication.addEventListener("click", async e => {
     const applicationId = editOrDeleteId.value;
     const data = {};
-    
     if (company_name.value.trim() !== "") data.company_name = company_name.value;
     if (position.value.trim() !== "") data.position = position.value;
     if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
     if (applicationDate.value.trim() !== "") data.date_applied = applicationDate.value;
     if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
     if (notes.value.trim() !== "") data.notes = notes.value;
-
     const response = await fetch(`/applications/${applicationId}`, {
         method: 'PATCH',
         headers: {
