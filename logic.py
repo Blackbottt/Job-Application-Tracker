@@ -251,13 +251,13 @@ def url_validation(url):
         return None
 
     if not isinstance(url, str):
-        return {"error": "URL must be a string"}, 400
+        return "URL must be a string", False
 
     url = url.strip()
 
     parsed_url = urlparse(url)
 
     if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
-        return {"error": "Invalid URL"}, 400
+        return "Invalid URL", False
 
-    return url
+    return url, True
