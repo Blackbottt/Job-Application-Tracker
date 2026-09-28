@@ -151,70 +151,61 @@ def param_validation_function(params, edit=False):
     valid_data = {}
     error_obj = {
         "error": "Invalid input",
-        "fields": {
-            "company_name": "Must be a string",
-            "position": "Required",
-            "status": "Invalid status"
-        }
+        "fields": {}
     }
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
-
         if isinstance(company, tuple):
-            error_obj["Field"]["company name"] = company
-        valid_data["company_name"] = company
+            error_obj["fields"]["company name"] = company
     else:
         company = None
 
     if "position" in params:
         position = string_validation(params["position"])
-
         if isinstance(position, tuple):
-            error_obj["Field"]["position"] = position
-        valid_data["position"] = position
+            error_obj["fields"]["position"] = position
     else:
         position = None
 
     if "date_applied" in params:
         date_applied = string_validation(params["date_applied"])
-
         if isinstance(date_applied, tuple):
-            error_obj["Field"]["date_applied"] = date_applied + "give a valid date"
-        valid_data["date_applied"] = date_applied
+            error_obj["fields"]["date_applied"] = date_applied + "give a valid date"
     else:
         date_applied = None
 
     if "status" in params:
         status = status_validation(params["status"])
-
         if isinstance(status, tuple):
-            error_obj["Field"]["status"] = status
-        valid_data["status"] = status
+            error_obj["fields"]["status"] = status
     else:
         status = None
 
     if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
-
         if isinstance(job_posting_url, tuple):
-            error_obj["Field"]["job_posting_url"] = job_posting_url
-        valid_data["job_posting_url"] = job_posting_url
+            error_obj["fields"]["job_posting_url"] = job_posting_url
     else:
         job_posting_url = None
 
     if "notes" in params:
         notes = string_validation(params["notes"])
-
         if isinstance(notes, tuple):
-            error_obj["Field"]["notes"] = notes
-        valid_data["notes"] = notes
+            error_obj["fields"]["notes"] = notes
     else:
         notes = None
 
     if len(error_obj["fields"]) > 0:
         error_obj["fields"] = {}
         return error_obj 
+
+    valid_data["company_name"] = company
+    valid_data["position"] = position
+    valid_data["date_applied"] = date_applied
+    valid_data["status"] = status
+    valid_data["job_posting_url"] = job_posting_url
+    valid_data["notes"] = notes
 
     return valid_data
 
@@ -229,14 +220,14 @@ def id_validation(id):
 
 def string_validation(value):
     if value is None or not isinstance(value, str):
-        return "Input is not a String"
+        return "Input is not a String", False
 
     valid_str = value.strip()
         
     if not valid_str:
-        return "Input is not a String"
+        return "Input is not a String", False
 
-    return valid_str
+    return valid_str, True
 
 def status_validation(params):
     ALLOWED_STATUSES = {
@@ -250,9 +241,9 @@ def status_validation(params):
     }
 
     if params not in ALLOWED_STATUSES:
-        return "Invalid status"
+        return "Invalid status", False
 
-    return params
+    return params, True
 
 def url_validation(url):
              
