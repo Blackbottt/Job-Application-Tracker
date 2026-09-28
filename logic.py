@@ -156,42 +156,42 @@ def param_validation_function(params, edit=False):
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
-        if company[-1] == True:
+        if company[-1] == False:
             error_obj["fields"]["company name"] = company
     else:
         company = None
 
-    if position[-1] == True:
+    if "position" in params:
         position = string_validation(params["position"])
-        if isinstance(position, tuple):
+        if position[-1] == False:
             error_obj["fields"]["position"] = position
     else:
         position = None
 
-    if date_applied[-1] == True:
+    if "date_applied" in params:
         date_applied = string_validation(params["date_applied"])
-        if isinstance(date_applied, tuple):
+        if date_applied[-1] == False:
             error_obj["fields"]["date_applied"] = date_applied + "give a valid date"
     else:
         date_applied = None
 
-    if status[-1] == True:
+    if "status" in params:
         status = status_validation(params["status"])
-        if isinstance(status, tuple):
+        if status[-1] == False:
             error_obj["fields"]["status"] = status
     else:
         status = None
 
-    if job_posting_url[-1] == True:
+    if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
-        if isinstance(job_posting_url, tuple):
+        if job_posting_url[-1] == False:
             error_obj["fields"]["job_posting_url"] = job_posting_url
     else:
         job_posting_url = None
 
-    if notes[-1] == True:
+    if "notes" in params:
         notes = string_validation(params["notes"])
-        if isinstance(notes, tuple):
+        if notes[-1] == False:
             error_obj["fields"]["notes"] = notes
     else:
         notes = None
