@@ -21,17 +21,20 @@ def add_job_applications_route():
     data = request.json
 
     if not data:
-        return {"error": "Title is required"}, 400
+        return {"error": "Request Body is required"}, 400
+    print("adding a job application....bloop: ", data)
 
     valid_data = logic.param_validation_function(data, edit=False)
+
+    print("adding a job application....bloop: ", valid_data)
+    print("adding a job application....bloop: ", isinstance(valid_data, tuple))
 
     if isinstance(valid_data, tuple):
         return valid_data
 
-    print("adding a job application....bloop: ", valid_data)
     print("66666666....bloop: ", valid_data.get("company_name"))
 
-    added = logic.add_job_application(
+    logic.add_job_application(
         valid_data["company_name"],
         valid_data["position"],
         valid_data["status"],
