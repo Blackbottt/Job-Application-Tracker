@@ -29,8 +29,8 @@ def add_job_applications_route():
     print("adding a job application....bloop: ", valid_data)
     print("adding a job application....bloop: ", isinstance(valid_data, tuple))
 
-    if isinstance(valid_data, tuple):
-        return valid_data
+    if valid_data[0] == "error":
+        return valid_data, 400
 
     print("66666666....bloop: ", valid_data.get("company_name"))
 
