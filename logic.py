@@ -217,11 +217,8 @@ def param_validation_function(params, edit=False):
     return valid_data
 
 def id_validation(id):
-    if id is None:
-        return {"error": "ID is required"}, 400
-
-    if not isinstance(id, int):
-        return {"error": "ID must be an integer"}, 400
+    # if id is None:
+    #     return {"error": "ID is required"}, 400
 
     if id <= 0:
         return {"error": "ID must be greater than 0"}, 400
