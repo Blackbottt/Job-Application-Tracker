@@ -157,42 +157,42 @@ def param_validation_function(params, edit=False):
     if "company_name" in params:
         company = string_validation(params["company_name"])
         if company[-1] == False:
-            error_obj["fields"]["company name"] = company
+            error_obj["fields"]["company name"] = company[0]
     else:
         company = None
 
     if "position" in params:
         position = string_validation(params["position"])
         if position[-1] == False:
-            error_obj["fields"]["position"] = position
+            error_obj["fields"]["position"] = position[0]
     else:
         position = None
 
     if "date_applied" in params:
         date_applied = string_validation(params["date_applied"])
         if date_applied[-1] == False:
-            error_obj["fields"]["date_applied"] = date_applied + "give a valid date"
+            error_obj["fields"]["date_applied"] = date_applied[0]
     else:
         date_applied = None
 
     if "status" in params:
         status = status_validation(params["status"])
         if status[-1] == False:
-            error_obj["fields"]["status"] = status
+            error_obj["fields"]["status"] = status[0]
     else:
         status = None
 
     if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
         if job_posting_url[-1] == False:
-            error_obj["fields"]["job_posting_url"] = job_posting_url
+            error_obj["fields"]["job_posting_url"] = job_posting_url[0]
     else:
         job_posting_url = None
 
     if "notes" in params:
         notes = string_validation(params["notes"])
         if notes[-1] == False:
-            error_obj["fields"]["notes"] = notes
+            error_obj["fields"]["notes"] = notes[0]
     else:
         notes = None
 
