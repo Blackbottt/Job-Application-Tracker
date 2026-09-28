@@ -197,7 +197,6 @@ def param_validation_function(params, edit=False):
         notes = None
 
     if len(error_obj["fields"]) > 0:
-        error_obj["fields"] = {}
         return error_obj 
 
     valid_data["company_name"] = company
@@ -244,19 +243,14 @@ def status_validation(params):
 
     return params, True
 
-def url_validation(url):
-             
-    if url is None or url == "":
-        return None
-
-    if not isinstance(url, str):
+def url_validation(url: str, scheme: str = "http"):
+    if not isinstance(url, str) or not url.strip():
         return "URL must be a string", False
-
-    url = url.strip()
 
     parsed_url = urlparse(url)
 
     if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
-        return "Invalid URL", False
-
+        url = f"{scheme}://{parsed_url}"
+        return url, True
     return url, True
+    
