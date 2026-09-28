@@ -165,7 +165,10 @@ def param_validation_function(params, edit=False):
         position = string_validation(params["position"])
 
         if isinstance(position, tuple):
-            return position
+            error_obj["Error"] = ({"error": position}, 400)
+            error_obj["Field"] = "position"
+            error_obj["Message"] = f"Please {position} for {error_obj["Field"]}"
+            return error_obj
         valid_data["position"] = position
     else:
         position = None
@@ -174,7 +177,10 @@ def param_validation_function(params, edit=False):
         date_applied = string_validation(params["date_applied"])
 
         if isinstance(date_applied, tuple):
-            return date_applied
+            error_obj["Error"] = ({"error": date_applied}, 400)
+            error_obj["Field"] = "date_applied"
+            error_obj["Message"] = f"Please {date_applied} for {error_obj["Field"]}"
+            return error_obj
         valid_data["date_applied"] = date_applied
     else:
         date_applied = None
@@ -183,7 +189,10 @@ def param_validation_function(params, edit=False):
         status = status_validation(params["status"])
 
         if isinstance(status, tuple):
-            return status
+            error_obj["Error"] = ({"error": status}, 400)
+            error_obj["Field"] = "status"
+            error_obj["Message"] = f"Please {status} for {error_obj["Field"]}"
+            return error_obj
         valid_data["status"] = status
     else:
         status = None
@@ -192,7 +201,10 @@ def param_validation_function(params, edit=False):
         job_posting_url = url_validation(params["job_posting_url"])
 
         if isinstance(job_posting_url, tuple):
-            return job_posting_url
+            error_obj["Error"] = ({"error": job_posting_url}, 400)
+            error_obj["Field"] = "job_posting_url"
+            error_obj["Message"] = f"Please {job_posting_url} for {error_obj["Field"]}"
+            return error_obj
         valid_data["job_posting_url"] = job_posting_url
     else:
         job_posting_url = None
@@ -201,7 +213,10 @@ def param_validation_function(params, edit=False):
         notes = string_validation(params["notes"])
 
         if isinstance(notes, tuple):
-            return notes
+            error_obj["Error"] = ({"error": notes}, 400)
+            error_obj["Field"] = "notes"
+            error_obj["Message"] = f"Please {notes} for {error_obj["Field"]}"
+            return error_obj
         valid_data["notes"] = notes
     else:
         notes = None
