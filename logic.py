@@ -111,6 +111,8 @@ def application_deletion(application_id=None):
                 return cursor.rowcount
             except Exception as e:
                         print(f"An error occurred while deleting the job application: {e}")
+            finally:
+                conn.close()
         else:
             try:
                 cursor = conn.cursor()
@@ -123,8 +125,8 @@ def application_deletion(application_id=None):
                 return cursor.rowcount
             except Exception as e:
                 print(f"An error occurred while deleting the job application: {e}")
-        finally:
-            conn.close()
+            finally:
+                conn.close()
     
     else:
         print("Error! Cannot delete the database connection.")
