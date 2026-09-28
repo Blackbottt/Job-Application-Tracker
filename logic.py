@@ -147,12 +147,16 @@ def param_validation_function(params, edit=False):
                 return {"error": f"{field} is required"}, 400
 
     valid_data = {}
+    error_obj = {}
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
 
         if isinstance(company, tuple):
-            return company
+            error_obj["Error"] = ({"error": company}, 400)
+            error_obj["Field"] = "company name"
+            error_obj["Message"] = f"Please {company} for {error_obj["Field"]}"
+            return error_obj
         valid_data["company_name"] = company
     else:
         company = None
