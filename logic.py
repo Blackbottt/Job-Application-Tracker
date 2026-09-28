@@ -147,16 +147,20 @@ def param_validation_function(params, edit=False):
                 return {"error": f"{field} is required"}, 400
 
     valid_data = {}
-    error_obj = {}
+    error_obj = {
+        "error": "Invalid input",
+        "fields": {
+            "company_name": "Must be a string",
+            "position": "Required",
+            "status": "Invalid status"
+        }
+    }
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
 
         if isinstance(company, tuple):
-            error_obj["Error"] = ({"error": company}, 400)
-            error_obj["Field"] = "company name"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["company name"] = company
         valid_data["company_name"] = company
     else:
         company = None
@@ -165,10 +169,7 @@ def param_validation_function(params, edit=False):
         position = string_validation(params["position"])
 
         if isinstance(position, tuple):
-            error_obj["Error"] = ({"error": position}, 400)
-            error_obj["Field"] = "position"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["position"] = position
         valid_data["position"] = position
     else:
         position = None
@@ -177,10 +178,7 @@ def param_validation_function(params, edit=False):
         date_applied = string_validation(params["date_applied"])
 
         if isinstance(date_applied, tuple):
-            error_obj["Error"] = ({"error": date_applied}, 400)
-            error_obj["Field"] = "date_applied"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["date_applied"] = date_applied + "give a valid date"
         valid_data["date_applied"] = date_applied
     else:
         date_applied = None
@@ -189,10 +187,7 @@ def param_validation_function(params, edit=False):
         status = status_validation(params["status"])
 
         if isinstance(status, tuple):
-            error_obj["Error"] = ({"error": status}, 400)
-            error_obj["Field"] = "status"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["status"] = status
         valid_data["status"] = status
     else:
         status = None
@@ -201,10 +196,7 @@ def param_validation_function(params, edit=False):
         job_posting_url = url_validation(params["job_posting_url"])
 
         if isinstance(job_posting_url, tuple):
-            error_obj["Error"] = ({"error": job_posting_url}, 400)
-            error_obj["Field"] = "job_posting_url"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["job_posting_url"] = job_posting_url
         valid_data["job_posting_url"] = job_posting_url
     else:
         job_posting_url = None
@@ -213,13 +205,14 @@ def param_validation_function(params, edit=False):
         notes = string_validation(params["notes"])
 
         if isinstance(notes, tuple):
-            error_obj["Error"] = ({"error": notes}, 400)
-            error_obj["Field"] = "notes"
-            error_obj["Message"] = f"Please give valid value for {error_obj["Field"]}"
-            return error_obj
+            error_obj["Field"]["notes"] = notes
         valid_data["notes"] = notes
     else:
         notes = None
+
+    if len(error_obj["fields"]) > 0:
+        error_obj["fields"] = {}
+        return error_obj 
 
     return valid_data
 
