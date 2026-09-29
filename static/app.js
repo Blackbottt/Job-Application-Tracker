@@ -42,6 +42,7 @@ async function addJobApplication() {
             notes: notes.value
         })
     });
+    console.log("RAN add func");
 }
 
 async function loadApplications() {
@@ -118,6 +119,7 @@ async function loadApplications() {
 }
 
 addApplication.addEventListener("click", async () => {
+    console.log("Calling add func");
     await addJobApplication();
     await loadApplications();
 });
