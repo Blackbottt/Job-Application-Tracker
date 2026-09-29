@@ -156,6 +156,7 @@ def param_validation_function(params, edit=False):
 
     if "company_name" in params:
         company = string_validation(params["company_name"])
+        valid_data["company_name"] = company[0]
         if company[-1] == False:
             error_obj["fields"]["company name"] = company[0]
     else:
@@ -163,6 +164,7 @@ def param_validation_function(params, edit=False):
 
     if "position" in params:
         position = string_validation(params["position"])
+        valid_data["position"] = position[0]
         if position[-1] == False:
             error_obj["fields"]["position"] = position[0]
     else:
@@ -170,6 +172,7 @@ def param_validation_function(params, edit=False):
 
     if "date_applied" in params:
         date_applied = string_validation(params["date_applied"])
+        valid_data["date_applied"] = date_applied[0]
         if date_applied[-1] == False:
             error_obj["fields"]["date_applied"] = date_applied[0]
     else:
@@ -177,6 +180,7 @@ def param_validation_function(params, edit=False):
 
     if "status" in params:
         status = status_validation(params["status"])
+        valid_data["status"] = status[0]
         if status[-1] == False:
             error_obj["fields"]["status"] = status[0]
     else:
@@ -184,6 +188,7 @@ def param_validation_function(params, edit=False):
 
     if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
+        valid_data["job_posting_url"] = job_posting_url[0]
         print("ARBEIT NACHWEISE", job_posting_url)
         if job_posting_url[-1] == False:
             error_obj["fields"]["job_posting_url"] = job_posting_url[0]
@@ -192,6 +197,7 @@ def param_validation_function(params, edit=False):
 
     if "notes" in params:
         notes = string_validation(params["notes"])
+        valid_data["notes"] = notes[0]
         if notes[-1] == False:
             error_obj["fields"]["notes"] = notes[0]
     else:
@@ -202,12 +208,7 @@ def param_validation_function(params, edit=False):
 
     print("CUCKOO:")
     print(company, position, date_applied, status, job_posting_url, notes)
-    valid_data["company_name"] = company[0]
-    valid_data["position"] = position[0]
-    valid_data["date_applied"] = date_applied[0]
-    valid_data["status"] = status[0]
-    valid_data["job_posting_url"] = job_posting_url[0]
-    valid_data["notes"] = notes[0]
+    # if not edit:
 
     return valid_data, 200
 
