@@ -1,6 +1,6 @@
 from database import create_connection
 from urllib.parse import urlparse
-
+import re
 
 def get_job_applications():
     """function that takes the db and retrieves all applications
@@ -243,14 +243,27 @@ def status_validation(params):
 
     return params, True
 
-def url_validation(url: str, scheme: str = "http"):
+def url_validation(url: str, default_scheme: str = "http") -> str:
     if not isinstance(url, str) or not url.strip():
         return "URL must be a string", False
 
     parsed_url = urlparse(url)
+    # If scheme is missing, prepend the default
+    if not parsed_url.scheme:
+        url = f"{default_scheme}://{url}"
+        parsed = urlparse(url)
 
-    if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
-        url = f"{scheme}://{parsed_url}"
-        return url, True
-    return url, True
-    
+    # Basic URL validation regex (RFC 3986 simplified)
+    url_regex = re.compile(
+        r'^(?:http|https|ftp)://'  # Allowed schemes
+        r'(?:\S+(?::\S*)?@)?'      # Optional user:pass@
+        r'(?:[A-Za-z0-9.-]+|\[[A-Fa-f0-9:]+\])'  # Host or IPv6
+        r'(?::\d{2,5})?'           # Optional port
+        r'(?:[/?#][^\s]*)?$',      # Path/query/fragment
+        re.IGNORECASE
+    )
+
+    if not url_regex.match(url):
+        return f"Invalid URL format: {url}", False
+
+    return url
