@@ -59,12 +59,12 @@ def edit_job_application_route(id):
         # return {"error": "Application not found"}, 404
         return valid_id
 
-    valid_data = logic.param_validation_function(data, edit=True)
+    data, status_code = logic.param_validation_function(data, edit=True)
 
-    if isinstance(valid_data, tuple):
-        return valid_data
+    if status_code != 200:
+        return data, status_code
 
-    updated = logic.edit_job_application(valid_id, valid_data)
+    updated = logic.edit_job_application(valid_id, data)
 
     if updated == 0:
         return {"error": "Application not found"}, 404
