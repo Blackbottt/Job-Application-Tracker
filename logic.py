@@ -132,8 +132,8 @@ def application_deletion(application_id=None):
         print("Error! Cannot delete the database connection.")
 
 def param_validation_function(params, edit=False):
-    if params is None:
-        return {"Error":"Input is invalid"}, 400
+    if not isinstance(params, dict):
+        return {"error": "Input must be a dictionary"}, 400
 
 # POST: required fields
     if not edit:
@@ -197,7 +197,7 @@ def param_validation_function(params, edit=False):
         notes = None
 
     if len(error_obj["fields"]) > 0:
-        return error_obj 
+        return error_obj, 400
 
     valid_data["company_name"] = company[0]
     valid_data["position"] = position[0]
@@ -206,7 +206,7 @@ def param_validation_function(params, edit=False):
     valid_data["job_posting_url"] = job_posting_url[0]
     valid_data["notes"] = notes[0]
 
-    return valid_data
+    return valid_data, 200
 
 def id_validation(id):
     # if id is None:
