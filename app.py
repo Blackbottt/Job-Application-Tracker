@@ -24,13 +24,13 @@ def add_job_applications_route():
         return {"error": "Request Body is required"}, 400
     print("adding a job application....bloop: ", data)
 
-    valid_data = logic.param_validation_function(data, edit=False)
+    data, status_code = logic.param_validation_function(data, edit=False)
 
     print("adding a job application....bloop2: ", valid_data)
     print("adding a job application....bloop3: ", isinstance(valid_data, tuple))
 
-    if valid_data[0] == "Invalid input":
-        return valid_data, 400
+    if status_code != 200:
+        return data, status_code
 
     print("66666666....bloop: ", valid_data.get("company_name"))
 
