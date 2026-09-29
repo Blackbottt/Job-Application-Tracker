@@ -184,6 +184,7 @@ def param_validation_function(params, edit=False):
 
     if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
+        print("ARBEIT NACHWEISE", job_posting_url)
         if job_posting_url[-1] == False:
             error_obj["fields"]["job_posting_url"] = job_posting_url[0]
     else:
@@ -199,6 +200,8 @@ def param_validation_function(params, edit=False):
     if len(error_obj["fields"]) > 0:
         return error_obj, 400
 
+    print("CUCKOO:")
+    print(company, position, date_applied, status, job_posting_url, notes)
     valid_data["company_name"] = company[0]
     valid_data["position"] = position[0]
     valid_data["date_applied"] = date_applied[0]
@@ -266,4 +269,4 @@ def url_validation(url: str, default_scheme: str = "http") -> str:
     if not url_regex.match(url):
         return f"Invalid URL format: {url}", False
 
-    return url
+    return url, True
