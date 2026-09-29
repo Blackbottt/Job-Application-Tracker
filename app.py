@@ -22,17 +22,11 @@ def add_job_applications_route():
 
     if not data:
         return {"error": "Request Body is required"}, 400
-    print("adding a job application....bloop: ", data)
 
     data, status_code = logic.param_validation_function(data, edit=False)
 
-    print("adding a job application....bloop2: ", data)
-    print("adding a job application....bloop3: ", isinstance(data, tuple))
-
     if status_code != 200:
         return data, status_code
-
-    print("66666666....bloop: ", data.get("company_name"))
 
     logic.add_job_application(
         data["company_name"],
@@ -56,7 +50,6 @@ def edit_job_application_route(id):
     valid_id = logic.id_validation(id)
 
     if isinstance(valid_id, tuple):
-        # return {"error": "Application not found"}, 404
         return valid_id
 
     data, status_code = logic.param_validation_function(data, edit=True)
@@ -72,8 +65,7 @@ def edit_job_application_route(id):
 
 @app.route('/applications/<int:application_id>', methods=["DELETE"])
 def delete_job_application_route(application_id):
-    # calls a deleting function with handling for non-existent application
-    # deleted = logic.delete_job_application(application_id)
+    # calls a deleting function with handling for non-existent application    
     valid_id = logic.id_validation(application_id)
 
     if isinstance(valid_id, tuple):
@@ -88,7 +80,6 @@ def delete_job_application_route(application_id):
 @app.route('/applications/delete', methods=["DELETE"])
 def delete_job_applications_route():
     # calls a deleting function for all applications with handling for non-existent application
-    # deleted = logic.delete_job_applications()
     deleted = logic.application_deletion()
 
     if deleted == 0:
