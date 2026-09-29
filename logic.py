@@ -10,10 +10,8 @@ def get_job_applications():
 
     if conn is not None:
         try:
-            print("Job conn is ON!")
             cursor = conn.cursor()
             cursor.execute("""SELECT * FROM job_applications""")
-            print("Jobs sucessfully retrieved")
             applications = cursor.fetchall()
             return [dict(row) for row in applications]
         except Exception as e:
@@ -33,14 +31,11 @@ def add_job_application(company_name, position, status, date_applied, notes, job
     if conn is not None:
         try:
             cursor = conn.cursor()
-            # param_validation_function()
-            print("adding an application...99999999999**********")
             cursor.execute("""
                 INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
             """, (company_name, position, status, date_applied, notes, job_posting_url))
             conn.commit()
-            print("Job application added successfully.")
             return cursor.rowcount
         except Exception as e:
             print(f"An error occurred while adding the job application: {e}")
@@ -132,6 +127,10 @@ def application_deletion(application_id=None):
         print("Error! Cannot delete the database connection.")
 
 def param_validation_function(params, edit=False):
+    """This function validates dict values, calling valid type checking functions
+        :params: dict and edit option
+        :returns: tuple with error/success code
+    """
     if not isinstance(params, dict):
         return {"error": "Input must be a dictionary"}, 400
 
@@ -213,14 +212,14 @@ def param_validation_function(params, edit=False):
     return valid_data, 200
 
 def id_validation(id):
-    # if id is None:
-    #     return {"error": "ID is required"}, 400
+    """Checks id value size"""
     if id <= 0:
         return {"error": "ID must be greater than 0"}, 400
-
+    
     return id
 
 def string_validation(value):
+    """Checks for str Type"""
     if value is None or not isinstance(value, str):
         return "Input is not a String", False
 
@@ -232,6 +231,7 @@ def string_validation(value):
     return valid_str, True
 
 def status_validation(params):
+    """Checks if given parameter is within Set of allowed statuses"""
     ALLOWED_STATUSES = {
         "Applied",
         "Interview",
@@ -247,7 +247,11 @@ def status_validation(params):
 
     return params, True
 
-def url_validation(url: str, default_scheme: str = "http") -> str:
+def url_validation(url: str, default_scheme: str = "http"):
+    """Url checking function for scheme, adds scheme if none and validates Url
+    :params: url, scheme
+    :returns: str
+    """
     if not isinstance(url, str) or not url.strip():
         return "URL must be a string", False
 
