@@ -199,12 +199,12 @@ def param_validation_function(params, edit=False):
     if len(error_obj["fields"]) > 0:
         return error_obj 
 
-    valid_data["company_name"] = company
-    valid_data["position"] = position
-    valid_data["date_applied"] = date_applied
-    valid_data["status"] = status
-    valid_data["job_posting_url"] = job_posting_url
-    valid_data["notes"] = notes
+    valid_data["company_name"] = company[0]
+    valid_data["position"] = position[0]
+    valid_data["date_applied"] = date_applied[0]
+    valid_data["status"] = status[0]
+    valid_data["job_posting_url"] = job_posting_url[0]
+    valid_data["notes"] = notes[0]
 
     return valid_data
 
