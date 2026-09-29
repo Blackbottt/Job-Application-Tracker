@@ -45,7 +45,7 @@ def add_job_application(company_name, position, status, date_applied, notes, job
         print("Error! Cannot create the database connection.")
 
 def edit_job_application(edit_id, data):
-    """function that takes a db and adds data to it
+    """Updates an existing job application.
     :params: edit_id, data
     :returns: a count of all existing rows in the db
     """
@@ -81,7 +81,6 @@ def edit_job_application(edit_id, data):
             
             cursor.execute(query, values)
             conn.commit()
-            print(f"Record with ID {edit_id} updated successfully.")
             return cursor.rowcount
         except Exception as e:
             print(f"An error occurred while editing the job application: {e}")
@@ -91,7 +90,7 @@ def edit_job_application(edit_id, data):
         print("Error! Cannot create the database connection.")
 
 def application_deletion(application_id=None):
-    """function that takes a db and adds data to it
+    """Deletes one application or all applications.
     :optional params: application_id=None
     :returns: a count of all existing rows in the db
     """
@@ -105,7 +104,7 @@ def application_deletion(application_id=None):
                 conn.commit()
                 return cursor.rowcount
             except Exception as e:
-                        print(f"An error occurred while deleting the job application: {e}")
+                print(f"An error occurred while deleting the job application: {e}")
             finally:
                 conn.close()
         else:
@@ -204,10 +203,6 @@ def param_validation_function(params, edit=False):
 
     if len(error_obj["fields"]) > 0:
         return error_obj, 400
-
-    print("CUCKOO:")
-    print(company, position, date_applied, status, job_posting_url, notes)
-    # if not edit:
 
     return valid_data, 200
 

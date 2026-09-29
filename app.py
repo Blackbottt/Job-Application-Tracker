@@ -17,7 +17,7 @@ def get_job_applications_route():
 
 @app.route('/applications', methods=["POST"])
 def add_job_applications_route():
-    # retrieves data, validates status and calls a function that adds applications
+    # Retrieves and validates request data, then adds the application.
     data = request.json
 
     if not data:
@@ -45,7 +45,7 @@ def edit_job_application_route(id):
     data = request.json
 
     if not data:
-        return {"error": "Title is required"}, 400
+        return {"error": "Request Body is required"}, 400
     
     valid_id = logic.id_validation(id)
 
@@ -84,7 +84,7 @@ def delete_job_applications_route():
 
     if deleted == 0:
         return {"error": "Applications not found"}, 404
-    return {"message": "Job application deleted successfully."}, 200
+    return {"message": "Job applications deleted successfully."}, 200
 
 @app.errorhandler(404)
 def not_found(error):
