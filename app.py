@@ -26,10 +26,10 @@ def add_job_applications_route():
 
     valid_data = logic.param_validation_function(data, edit=False)
 
-    print("adding a job application....bloop: ", valid_data)
-    print("adding a job application....bloop: ", isinstance(valid_data, tuple))
+    print("adding a job application....bloop2: ", valid_data)
+    print("adding a job application....bloop3: ", isinstance(valid_data, tuple))
 
-    if valid_data[0] == "error":
+    if valid_data[0] == "Invalid input":
         return valid_data, 400
 
     print("66666666....bloop: ", valid_data.get("company_name"))
