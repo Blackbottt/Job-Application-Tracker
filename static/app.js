@@ -7,18 +7,22 @@ const jobStartingDate = document.getElementById('job-start-date');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
+const dashboard = document.getElementById('dashboard');
+
 const addApplication = document.querySelector('.submit-add-applications');
 const buttonFeatures = document.getElementById('button-features');
 const editOrDeleteId = document.createElement('input');
 const editApplication = document.createElement('button');
 const deleteApplication = document.createElement('button');
 const deleteAllApplications = document.createElement('button');
-const dashboard = document.getElementById('dashboard');
+const statistics = document.createElement('div');
 
 editOrDeleteId.classList.add('id-edit-delete');
 editApplication.classList.add('submit-edit-applications');
 deleteApplication.classList.add('submit-delete-application');
 deleteAllApplications.classList.add('submit-delete-applications');
+statistics.classList.add('statistics');
+
 editOrDeleteId.placeholder = 'ID: Edit/Delete'
 editApplication.textContent = 'Edit Application';
 deleteApplication.textContent = 'Delete Application';
@@ -28,8 +32,10 @@ buttonFeatures.appendChild(editOrDeleteId);
 buttonFeatures.appendChild(editApplication);
 buttonFeatures.appendChild(deleteApplication);
 buttonFeatures.appendChild(deleteAllApplications);
+dashboard.appendChild(statistics);
 
 async function addJobApplication() {
+    console.log("5 for start add");
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -46,6 +52,7 @@ async function addJobApplication() {
             notes: notes.value
         })
     });
+    console.log("55 for end add");
 }
 
 async function loadApplications() {
@@ -123,11 +130,11 @@ async function loadApplications() {
     job_posting_url.value = "";
     notes.value = "";
     editOrDeleteId.value = "";
-
 }
 
 addApplication.addEventListener("click", async () => {
     await addJobApplication();
+    console.log("HINZUFUGENDE: ")
     await loadApplications();
 });
 

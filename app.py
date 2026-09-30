@@ -19,14 +19,19 @@ def get_job_applications_route():
 def add_job_applications_route():
     # Retrieves and validates request data, then adds the application.
     data = request.json
+    print("dateDATA", data)
 
     if not data:
         return {"error": "Request Body is required"}, 400
 
     data, status_code = logic.param_validation_function(data, edit=False)
+    print("dateDATA2", data)
 
     if status_code != 200:
         return data, status_code
+
+    print("dateA", data["job_application_date"])
+    print("dateB", data["job_starting_date"])
 
     logic.add_job_application(
         data["job_application_date"],

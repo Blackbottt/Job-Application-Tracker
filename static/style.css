@@ -78,24 +78,28 @@ body {
 }
 
 .application-shell {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5vh 10vw;
     background-color: var(--bg-main);
     color: var(--text-secondary);
 }
 
 .sidebar {
   height: 100%;
-  width: 200px;
+  width: 20vw;
+  /* width: 200px; */
   position: fixed;
   top: 0;
   left: 0;
   background-color: #111;
   padding-top: 20px;
+}
+
+.application-shell-right {
+    width: 80vw;
+    border: 3px solid var(--border);
 }
 
 .input-section {
@@ -124,6 +128,24 @@ body {
     display: none;
 }
 
+
+.statistics-section {
+    border: 3px solid var(--border);
+    width: 80vw;
+    height: auto;
+}
+
+.taskbar {
+    width: 100%;
+    border: 3px solid var(--border);  
+}
+
+.greet-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: 3px solid var(--border);  
+}
 .submit-add-applications {
     grid-column: 1/-1;
     margin-bottom: 10px;
