@@ -12,15 +12,11 @@ const buttonFeatures = document.getElementById('button-features');
 const dashboard = document.getElementById('dashboard');
 
 const addApplication = document.querySelector('.submit-add-applications');
-const editOrDeleteId = document.createElement('input');
-const editApplication = document.createElement('button');
-const deleteApplication = document.createElement('button');
-const deleteAllApplications = document.createElement('button');
-const statistics = document.createElement('div');
+const editApplication = document.querySelector('.submit-edit-applications');
+const deleteAllApplications = document.querySelector('.submit-delete-applications');
 
-
-
-dashboard.appendChild(statistics);
+const cancelForm = document.createElement('button');
+const clearForm = document.createElement('button');
 
 async function addJobApplication() {
     console.log("5 for start add");
@@ -124,7 +120,9 @@ async function loadApplications() {
 function addOrEditForm(formType) {
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
-
+// const editOrDeleteId = document.createElement('input');
+// const deleteApplication = document.createElement('button');
+// const statistics = document.createElement('div');
     // editOrDeleteId.placeholder = 'ID: Edit/Delete'
     // editApplication.textContent = 'Edit Application';
     // deleteApplication.textContent = 'Delete Application';
@@ -138,9 +136,16 @@ function addOrEditForm(formType) {
     // buttonFeatures.appendChild(editApplication);
     // buttonFeatures.appendChild(deleteApplication);
     // buttonFeatures.appendChild(deleteAllApplications);
-
     if (formType == 'add') {
-
+        const saveApplication = document.createElement('button');
+        buttonFeatures.appendChild(clearForm);
+        buttonFeatures.appendChild(cancelForm);
+        buttonFeatures.appendChild(saveApplication);
+    } else {
+        const updateApplication = document.createElement('button');
+        buttonFeatures.appendChild(clearForm);
+        buttonFeatures.appendChild(cancelForm);
+        buttonFeatures.appendChild(updateApplication);
     }
 }
 
