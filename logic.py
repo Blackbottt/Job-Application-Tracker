@@ -30,11 +30,29 @@ def add_job_application(job_application_date, company_name, position, status, pl
 
     if conn is not None:
         try:
+            print("ADDING CODED -->>")
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO job_applications (job_application_date, company_name, position, status, application_platform, job_starting_date, notes, job_posting_url)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url))
+                INSERT INTO job_applications (
+                job_application_date, 
+                company_name, 
+                position, 
+                status, 
+                application_platform, 
+                job_starting_date, 
+                notes, 
+                job_posting_url)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                job_application_date,
+                company_name,
+                position, 
+                status, 
+                platform_applied, 
+                job_starting_date, 
+                notes, 
+                job_posting_url
+                ))
             conn.commit()
             return cursor.rowcount
         except Exception as e:
@@ -138,11 +156,11 @@ def param_validation_function(params, edit=False):
 # POST: required fields
     if not edit:
         required_fields = [
-            "job_application_date"
+            "job_application_date",
             "company_name",
             "position",
             "platform_applied",
-            "job_starting_date"
+            "job_starting_date",
             "status"
         ]
 
@@ -155,6 +173,7 @@ def param_validation_function(params, edit=False):
         "error": "Invalid input",
         "fields": {}
     }
+
     if "job_application_date" in params:
         job_application_date = string_validation(params["job_application_date"])
         valid_data["job_application_date"] = job_application_date[0]
@@ -206,7 +225,6 @@ def param_validation_function(params, edit=False):
     if "job_posting_url" in params:
         job_posting_url = url_validation(params["job_posting_url"])
         valid_data["job_posting_url"] = job_posting_url[0]
-        print("ARBEIT NACHWEISE", job_posting_url)
         if job_posting_url[-1] == False:
             error_obj["fields"]["job_posting_url"] = job_posting_url[0]
     else:
@@ -216,7 +234,10 @@ def param_validation_function(params, edit=False):
         notes = string_validation(params["notes"])
         valid_data["notes"] = notes[0]
         if notes[-1] == False:
-            error_obj["fields"]["notes"] = notes[0]
+            if edit:
+                error_obj["fields"]["notes"] = notes[0]
+            else:
+                pass
     else:
         notes = None
 
