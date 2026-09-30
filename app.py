@@ -29,10 +29,12 @@ def add_job_applications_route():
         return data, status_code
 
     logic.add_job_application(
+        data["job_application_date"],
         data["company_name"],
         data["position"],
         data["status"],
         data["platform_applied"],
+        data["job_starting_date"],
         data["notes"],
         data["job_posting_url"],
     )
