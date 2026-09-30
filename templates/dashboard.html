@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
+</head>
+<body>
+    <section class="application-shell">
+            <aside class="sidebar">
+                <div>Job Track</div>
+                <div>Menu Item 2</div>
+                <div>Menu Item 3</div>
+            </aside>
+            <div class="application-shell-right">
+                <section class="input-section-off add">
+                    <form id="applications-form">
+                        <div class="application-field">
+                            <label for="date-applied">Date Applied:</label>
+                            <input 
+                            class="input-field"
+                            type="date" 
+                            name="date-applied-name" 
+                            id="date-applied" 
+                            placeholder="DATE APPLIED" 
+                            required
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="company">Company:</label>
+                            <input 
+                            class="input-field"
+                            type="text" 
+                            name="Company-name" 
+                            id="company" 
+                            placeholder="COMPANY" 
+                            required
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="position">Position:</label>
+                            <input
+                                class="input-field" 
+                                type="text" 
+                                name="position-name" 
+                                id="position" 
+                                placeholder="POSITION" 
+                                required
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="application-platform">Application Platform:</label>
+                            <input 
+                                class="input-field"
+                                type="text" 
+                                name="application-platform-name" 
+                                id="application-platform" 
+                                placeholder="APPLICATION PLATFORM" 
+                                required
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="job-start-date">Job Starting Date:</label>
+                            <input 
+                            class="input-field"
+                            type="date" 
+                            name="job-start-date-name" 
+                            id="job-start-date" 
+                            placeholder="JOB START DATE" 
+                            required
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="status">Status:</label>
+                            <select name="status-type" id="status" class="input-field" placeholder="STATUS" required>
+                                <option value="Wishlist">Wishlist</option>
+                                <option value="Applied">Applied</option>
+                                <option value="Interview">Interview</option>
+                                <option value="Offer">Offer</option>
+                                <option value="Accepted">Accepted</option>
+                                <option value="Rejected">Rejected</option>
+                                <option value="Withdrawn">Withdrawn</option>
+                            </select>
+                        </div>
+                        <div class="application-field">
+                            <label for="notes">Notes:</label>
+                            <input 
+                                class="input-field"
+                                type="text" 
+                                name="notes-name" 
+                                id="notes" 
+                                placeholder="NOTES" 
+                            >
+                        </div>
+                        <div class="application-field">
+                            <label for="job-url">Job Url:</label>
+                            <input 
+                                class="input-field"
+                                type="text" 
+                                name="job-url-name" 
+                                id="job-url" 
+                                placeholder="JOB URL" 
+                            >
+                        </div>
+                    </form>
+                    <div id="button-features" class="button-features"></div>
+                </section>
+                <section class="statistics-section">
+                    <div class="taskbar"></div>
+                    <div class="greet-actions">
+                        <div>
+                            <h3>Good Afternoon, Vhusa</h3>
+                            <p>Here is an overview of your job applications. Keep going!</p>
+                        </div>
+                        <div>
+                            <button type="submit" class="submit-add-applications">+ Add Application</button>
+                        </div>
+                    </div>
+                    <div class="display-statistics">
+                        <div class="total-applications">
+                        </div>
+                        <div class="applied-applications">
+                        </div>
+                        <div class="interviewed-applications">
+                        </div>
+                        <div class="Offers-applications">
+                        </div>
+                    </div>
+                </section>
+                <section id="dashboard" class="dashboard">
+                </section>
+            </div>
+        </section>
+</body>
+</html>
