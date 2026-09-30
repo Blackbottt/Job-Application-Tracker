@@ -1,3 +1,4 @@
+const inputSection = document.getElementById('input-section');
 const applicationsForm = document.getElementById('applications-form');
 const jobApplicationDate = document.getElementById('date-applied');
 const company_name = document.getElementById('company');
@@ -7,31 +8,18 @@ const jobStartingDate = document.getElementById('job-start-date');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
+const buttonFeatures = document.getElementById('button-features');
 const dashboard = document.getElementById('dashboard');
 
 const addApplication = document.querySelector('.submit-add-applications');
-const buttonFeatures = document.getElementById('button-features');
 const editOrDeleteId = document.createElement('input');
 const editApplication = document.createElement('button');
 const deleteApplication = document.createElement('button');
 const deleteAllApplications = document.createElement('button');
 const statistics = document.createElement('div');
 
-editOrDeleteId.classList.add('id-edit-delete');
-editApplication.classList.add('submit-edit-applications');
-deleteApplication.classList.add('submit-delete-application');
-deleteAllApplications.classList.add('submit-delete-applications');
-statistics.classList.add('statistics');
 
-editOrDeleteId.placeholder = 'ID: Edit/Delete'
-editApplication.textContent = 'Edit Application';
-deleteApplication.textContent = 'Delete Application';
-deleteAllApplications.textContent = 'Delete All Applications';
 
-buttonFeatures.appendChild(editOrDeleteId);
-buttonFeatures.appendChild(editApplication);
-buttonFeatures.appendChild(deleteApplication);
-buttonFeatures.appendChild(deleteAllApplications);
 dashboard.appendChild(statistics);
 
 async function addJobApplication() {
@@ -134,8 +122,25 @@ async function loadApplications() {
 }
 
 function addOrEditForm(formType) {
+    inputSection.classList.remove('input-section-off');
+    inputSection.classList.add('input-section-on');
+
+    // editOrDeleteId.placeholder = 'ID: Edit/Delete'
+    // editApplication.textContent = 'Edit Application';
+    // deleteApplication.textContent = 'Delete Application';
+    // deleteAllApplications.textContent = 'Delete All Applications';
+// editOrDeleteId.classList.add('id-edit-delete');
+// editApplication.classList.add('submit-edit-applications');
+// deleteApplication.classList.add('submit-delete-application');
+// deleteAllApplications.classList.add('submit-delete-applications');
+// statistics.classList.add('statistics');
+    // buttonFeatures.appendChild(editOrDeleteId);
+    // buttonFeatures.appendChild(editApplication);
+    // buttonFeatures.appendChild(deleteApplication);
+    // buttonFeatures.appendChild(deleteAllApplications);
+
     if (formType == 'add') {
-        
+
     }
 }
 
