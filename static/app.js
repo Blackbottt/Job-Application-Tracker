@@ -36,6 +36,7 @@ dashboard.appendChild(statistics);
 
 async function addJobApplication() {
     console.log("5 for start add");
+    addApplication.classList.add('input-section-on');
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -132,10 +133,16 @@ async function loadApplications() {
     editOrDeleteId.value = "";
 }
 
+function addOrEditForm(formType) {
+    if (formType == 'add') {
+        
+    }
+}
+
 addApplication.addEventListener("click", async () => {
-    addApplication.classList.add('input-section-on');
+    addOrEditForm('add');
     await addJobApplication();
-    console.log("HINZUFUGENDE: ")
+    console.log("HINZUFUGENDE: ");
     await loadApplications();
 });
 
