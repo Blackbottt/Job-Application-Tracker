@@ -237,7 +237,7 @@ def param_validation_function(params, edit=False):
             if edit:
                 error_obj["fields"]["notes"] = notes[0]
             else:
-                pass
+                valid_data["notes"] = ""
     else:
         notes = None
 
