@@ -32,7 +32,7 @@ def add_job_applications_route():
         data["company_name"],
         data["position"],
         data["status"],
-        data["date_applied"],
+        data["platform_applied"],
         data["notes"],
         data["job_posting_url"],
     )
