@@ -21,9 +21,9 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-def add_job_application(company_name, position, status, platform_applied, notes, job_posting_url):
+def add_job_application(job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url):
     """function that takes the db and adds data to it
-    :params: company_name, position, status, platform_applied, notes, job_posting_url
+    :params: job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url
     :returns: a count of all existing rows in the db
     """
     conn = create_connection("job_applications.db")
@@ -32,9 +32,9 @@ def add_job_application(company_name, position, status, platform_applied, notes,
         try:
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO job_applications (company_name, position, status, application_platform, notes, job_posting_url)
+                INSERT INTO job_applications (job_application_date, company_name, position, status, application_platform, job_starting_date, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (company_name, position, status, platform_applied, notes, job_posting_url))
+            """, (job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url))
             conn.commit()
             return cursor.rowcount
         except Exception as e:
@@ -57,10 +57,12 @@ def edit_job_application(edit_id, data):
             fields = []
             values = []
             allowed_fields = [
+                "job_application_date",
                 "company_name",
                 "position",
                 "status",
                 "platform_applied",
+                "job_starting_date",
                 "notes",
                 "job_posting_url"
             ]
@@ -136,9 +138,11 @@ def param_validation_function(params, edit=False):
 # POST: required fields
     if not edit:
         required_fields = [
+            "job_application_date"
             "company_name",
             "position",
             "platform_applied",
+            "job_starting_date"
             "status"
         ]
 
@@ -151,7 +155,14 @@ def param_validation_function(params, edit=False):
         "error": "Invalid input",
         "fields": {}
     }
-
+    if "job_application_date" in params:
+        job_application_date = string_validation(params["job_application_date"])
+        valid_data["job_application_date"] = job_application_date[0]
+        if job_application_date[-1] == False:
+            error_obj["fields"]["job_application_date"] = job_application_date[0]
+    else:
+        job_application_date = None
+    
     if "company_name" in params:
         company = string_validation(params["company_name"])
         valid_data["company_name"] = company[0]
@@ -175,6 +186,14 @@ def param_validation_function(params, edit=False):
             error_obj["fields"]["platform_applied"] = platform_applied[0]
     else:
         platform_applied = None
+
+    if "job_starting_date" in params:
+        job_starting_date = string_validation(params["job_starting_date"])
+        valid_data["job_starting_date"] = job_starting_date[0]
+        if job_starting_date[-1] == False:
+            error_obj["fields"]["job_starting_date"] = job_starting_date[0]
+    else:
+        job_starting_date = None
 
     if "status" in params:
         status = status_validation(params["status"])
