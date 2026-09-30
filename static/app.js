@@ -133,6 +133,7 @@ async function loadApplications() {
 }
 
 addApplication.addEventListener("click", async () => {
+    addApplication.classList.add('input-section-on');
     await addJobApplication();
     console.log("HINZUFUGENDE: ")
     await loadApplications();
