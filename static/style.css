@@ -107,6 +107,11 @@ body {
     gap: 10px;
     width: 100%;
     height: auto;
+    border: 3px solid var(--border);
+}
+
+.input-section-off {
+    display: none;
 }
 
 .submit-add-applications {
@@ -133,6 +138,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
+    border: 3px solid var(--border);
 }
 
 .id-edit-delete {
