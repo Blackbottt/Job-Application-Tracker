@@ -9,6 +9,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route('/dashboard')
+def dashboard ():
+    return render_template("dashboard.html")
+
 @app.route('/applications')
 def get_job_applications_route():
     # Calls function that retrieves all applications in db
