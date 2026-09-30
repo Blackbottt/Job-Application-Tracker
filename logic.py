@@ -21,9 +21,9 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-def add_job_application(company_name, position, status, date_applied, notes, job_posting_url):
+def add_job_application(company_name, position, status, platform_applied, notes, job_posting_url):
     """function that takes the db and adds data to it
-    :params: company_name, position, status, date_applied, notes, job_posting_url
+    :params: company_name, position, status, platform_applied, notes, job_posting_url
     :returns: a count of all existing rows in the db
     """
     conn = create_connection("job_applications.db")
@@ -32,9 +32,9 @@ def add_job_application(company_name, position, status, date_applied, notes, job
         try:
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT INTO job_applications (company_name, position, status, application_date, notes, job_posting_url)
+                INSERT INTO job_applications (company_name, position, status, application_platform, notes, job_posting_url)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (company_name, position, status, date_applied, notes, job_posting_url))
+            """, (company_name, position, status, platform_applied, notes, job_posting_url))
             conn.commit()
             return cursor.rowcount
         except Exception as e:
@@ -60,7 +60,7 @@ def edit_job_application(edit_id, data):
                 "company_name",
                 "position",
                 "status",
-                "date_applied",
+                "platform_applied",
                 "notes",
                 "job_posting_url"
             ]
@@ -138,7 +138,7 @@ def param_validation_function(params, edit=False):
         required_fields = [
             "company_name",
             "position",
-            "date_applied",
+            "platform_applied",
             "status"
         ]
 
@@ -168,13 +168,13 @@ def param_validation_function(params, edit=False):
     else:
         position = None
 
-    if "date_applied" in params:
-        date_applied = string_validation(params["date_applied"])
-        valid_data["date_applied"] = date_applied[0]
+    if "platform_applied" in params:
+        platform_applied = string_validation(params["platform_applied"])
+        valid_data["platform_applied"] = platform_applied[0]
         if date_applied[-1] == False:
-            error_obj["fields"]["date_applied"] = date_applied[0]
+            error_obj["fields"]["platform_applied"] = platform_applied[0]
     else:
-        date_applied = None
+        platform_applied = None
 
     if "status" in params:
         status = status_validation(params["status"])
