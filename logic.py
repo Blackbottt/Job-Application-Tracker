@@ -171,7 +171,7 @@ def param_validation_function(params, edit=False):
     if "platform_applied" in params:
         platform_applied = string_validation(params["platform_applied"])
         valid_data["platform_applied"] = platform_applied[0]
-        if date_applied[-1] == False:
+        if platform_applied[-1] == False:
             error_obj["fields"]["platform_applied"] = platform_applied[0]
     else:
         platform_applied = None
