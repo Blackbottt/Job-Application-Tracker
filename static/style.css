@@ -60,7 +60,7 @@ body {
     color: var(--text-secondary);
 }
 
-.hero-content-foot a {
+.hero-content-foot button {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
@@ -72,7 +72,7 @@ body {
     cursor: pointer;
 }
 
-.hero-content-foot a:hover {
+.hero-content-foot button:hover {
     background: var(--accent-hover);
     color: var(--text-primary);
 }
