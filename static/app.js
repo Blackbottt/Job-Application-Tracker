@@ -120,16 +120,8 @@ async function loadApplications() {
 function addOrEditForm(formType) {
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
-// const editOrDeleteId = document.createElement('input');
-// const deleteApplication = document.createElement('button');
 // const statistics = document.createElement('div');
-    // editOrDeleteId.placeholder = 'ID: Edit/Delete'
-    // editApplication.textContent = 'Edit Application';
-    // deleteApplication.textContent = 'Delete Application';
     // deleteAllApplications.textContent = 'Delete All Applications';
-// editOrDeleteId.classList.add('id-edit-delete');
-// editApplication.classList.add('submit-edit-applications');
-// deleteApplication.classList.add('submit-delete-application');
 // deleteAllApplications.classList.add('submit-delete-applications');
 // statistics.classList.add('statistics');
     // buttonFeatures.appendChild(editOrDeleteId);
@@ -143,7 +135,18 @@ function addOrEditForm(formType) {
         buttonFeatures.appendChild(saveApplication);
     } else {
         const updateApplication = document.createElement('button');
-        buttonFeatures.appendChild(clearForm);
+        const editOrDeleteId = document.createElement('input');
+        const deleteApplication = document.createElement('button');
+
+        editOrDeleteId.placeholder = 'ID: Edit/Delete'
+        editApplication.textContent = 'Edit Application';
+        deleteApplication.textContent = 'Delete Application';
+
+        editOrDeleteId.classList.add('id-edit-delete');
+        editApplication.classList.add('submit-edit-applications');
+        deleteApplication.classList.add('submit-delete-application');
+
+        buttonFeatures.appendChild(deleteApplication);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(updateApplication);
     }
