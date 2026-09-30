@@ -1,7 +1,7 @@
 const applicationsForm = document.getElementById('applications-form');
 const company_name = document.getElementById('company');
 const position = document.getElementById('position');
-const applicationDate = document.getElementById('application-date');
+const applicationPlatform = document.getElementById('application-platform');
 const statusOfApplication = document.getElementById('status');
 const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
@@ -37,12 +37,11 @@ async function addJobApplication() {
             company_name: company_name.value,
             position: position.value,
             status: statusOfApplication.value,
-            date_applied: applicationDate.value,
+            platform_applied: applicationPlatform.value,
             job_posting_url: job_posting_url.value,
             notes: notes.value
         })
     });
-    console.log("RAN add func");
 }
 
 async function loadApplications() {
@@ -65,7 +64,7 @@ async function loadApplications() {
         'ID',
         'Company',
         'Position',
-        'Application Date',
+        'Application Platform',
         'Status',
         'Notes',
         'Job URL',
@@ -90,7 +89,7 @@ async function loadApplications() {
                 application.id,
                 application.company_name,
                 application.position,
-                application.application_date,
+                application.application_platform,
                 application.status,
                 application.notes,
                 application.job_posting_url,
@@ -119,7 +118,6 @@ async function loadApplications() {
 }
 
 addApplication.addEventListener("click", async () => {
-    console.log("Calling add func");
     await addJobApplication();
     await loadApplications();
 });
@@ -130,7 +128,7 @@ editApplication.addEventListener("click", async e => {
     if (company_name.value.trim() !== "") data.company_name = company_name.value;
     if (position.value.trim() !== "") data.position = position.value;
     if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
-    if (applicationDate.value.trim() !== "") data.date_applied = applicationDate.value;
+    if (applicationDate.value.trim() !== "") data.platform_applied = applicationPlatform.value;
     if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
     if (notes.value.trim() !== "") data.notes = notes.value;
     const response = await fetch(`/applications/${applicationId}`, {
