@@ -9,7 +9,7 @@ const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const dashboard = document.getElementById('dashboard');
 
-const addApplication = document.querySelector('.submit-add-applications');
+const addApplication = document.getElementById('add');
 const buttonFeatures = document.getElementById('button-features');
 const editOrDeleteId = document.createElement('input');
 const editApplication = document.createElement('button');
