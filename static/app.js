@@ -92,8 +92,8 @@ async function editJobApplication() {
     const result = await response.json();
 }
 
-async function loadApplications(param) {
-    if (param) {
+async function loadApplications(param = null) {
+    if (param !== null) {
         const applications = await param.json();
     } else {
         const response = await fetch('/applications');
