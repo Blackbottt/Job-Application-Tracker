@@ -40,7 +40,6 @@ async function getSearchRequest(){
 
 }
 
-
 async function addJobApplication() {
     console.log("5 for start add");
     await fetch('/applications', {
@@ -264,6 +263,15 @@ deleteApplication.addEventListener("click", async () => {
     const result = await response.json();
 
     await loadApplications();
+});
+
+applicationSearch.addEventListener("input", async () => {
+    let searchTimeout;
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+        await getSearchRequest();
+        await loadApplications();
+    }, 300); // Debounce delay  
 });
 
 function cancelFormfunc(){
