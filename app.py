@@ -21,14 +21,15 @@ def get_job_applications_route():
 
 @app.route('/applications', methods=["GET"])
 def search_applications_route():
-    data = request.args
+    data = request.args.get("query", "")
     print("dateDATA", data)
     data, status_code = logic.param_validation_function(data, edit=False)
 
     if status_code != 200:
         return data, status_code
 
-    data = data.get("query", "")
+    # data = data.get("query", "")
+    print("dateDATA2", data)
 
     search_results = logic.search_job_applications(data)
     return jsonify(search_results)
