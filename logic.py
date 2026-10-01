@@ -21,6 +21,35 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
+
+def search_job_applications(search_criteria):
+    """function that takes the db and retrieves applications based on search criteria
+    :returns: an object with matching rows
+    """
+    conn = create_connection("job_applications.db")
+
+    if conn is not None:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT * 
+            FROM job_applications 
+            WHERE company_name LIKE ? 
+            OR position LIKE ? 
+            OR status LIKE ?""", (
+                f"%{search_criteria}%",
+                f"%{search_criteria}%", 
+                f"%{search_criteria}%", 
+            ))
+            applications = cursor.fetchall()
+            return [dict(row) for row in applications]
+        except Exception as e:
+            print(f"An error occurred while retrieving the job application: {e}")
+        finally:
+            conn.close()
+    else:
+        print("Error! Cannot create the database connection.")
+
 def add_job_application(job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url):
     """function that takes the db and adds data to it
     :params: job_application_date, company_name, position, status, platform_applied, job_starting_date, notes, job_posting_url
