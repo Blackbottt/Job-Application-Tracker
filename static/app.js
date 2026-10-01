@@ -16,13 +16,6 @@ const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
 const deleteAllApplications = document.querySelector('.submit-delete-applications');
 
-const cancelForm = document.createElement('button');
-const clearForm = document.createElement('button');
-const saveApplication = document.createElement('button');
-const updateApplication = document.createElement('button');
-const editOrDeleteId = document.createElement('input');
-const deleteApplication = document.createElement('button');
-
 async function addJobApplication() {
     console.log("5 for start add");
     await fetch('/applications', {
@@ -151,6 +144,12 @@ async function loadApplications() {
 }
 
 async function addOrEditForm(formType) {    
+    const cancelForm = document.createElement('button');
+    const clearForm = document.createElement('button');
+    const saveApplication = document.createElement('button');
+    const updateApplication = document.createElement('button');
+    const editOrDeleteId = document.createElement('input');
+    const deleteApplication = document.createElement('button');
 
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
@@ -158,10 +157,15 @@ async function addOrEditForm(formType) {
     clearForm.classList.add('form-button');
     saveApplication.classList.add('form-button');
     updateApplication.classList.add('form-button');
+    deleteApplication.classList.add('form-button');
+    editOrDeleteId.classList.add('id-edit-delete');
+    // deleteApplication.classList.add('submit-delete-application');
 
-    cancelForm.textContent = 'cancel Form';
-
-    
+    cancelForm.textContent = 'Cancel';
+    clearForm.textContent = 'Clear Form';
+    saveApplication.textContent = 'Save Application';
+    updateApplication.textContent = 'Update Application';
+    editOrDeleteId.placeholder = 'ID: Edit/Delete';
     // deleteAllApplications.textContent = 'Delete All Applications';
     // deleteAllApplications.classList.add('submit-delete-applications');
     // buttonFeatures.appendChild(editOrDeleteId);
@@ -173,24 +177,13 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(saveApplication);
         await addJobApplication();
-        console.log("HINZUFUGENDE: ");
     } 
     
     if (formType == 'edit') {
-        editOrDeleteId.placeholder = 'ID: Edit/Delete'
-        editApplication.textContent = 'Edit Application';
-        updateApplication.textContent = 'Update Application'
-        deleteApplication.textContent = 'Delete Application';
-
-        editOrDeleteId.classList.add('id-edit-delete');
-        editApplication.classList.add('submit-edit-applications');
-        deleteApplication.classList.add('submit-delete-application');
-
         buttonFeatures.appendChild(deleteApplication);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(updateApplication);
         await editJobApplication();
-
     }
 }
 
