@@ -220,6 +220,13 @@ cancelForm.addEventListener("click", () => {
     buttonFeatures.replaceChildren();
 });
 
+clearForm.addEventListener("click", () => {
+    const formFields = applicationsForm.querySelectorAll('input, textarea, select');
+    formFields.forEach(field => {
+        field.value = "";
+    });
+});
+
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
     const response = await fetch(`/applications/${applicationId}`, {
