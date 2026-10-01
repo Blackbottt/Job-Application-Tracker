@@ -24,15 +24,20 @@ const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
 
 async function getSearchRequest(){
-    const searchResponse = await fetch('/applications', {
-        method: 'POST',
-        headers: {  
+    const searchQuery = applicationSearch.value.trim();
+    if (!searchQuery) {
+        console.error("Search query is empty");
+        return;
+    }
+    const params = new URLSearchParams({ query: searchQuery });
+
+    const searchResponse = await fetch('/applications?' + params.toString(), {
+        method: 'GET',
+        headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            notes: applicationSearch.value
-        })
-    });   
+        }
+    }); 
+
 }
 
 
