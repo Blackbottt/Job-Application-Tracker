@@ -166,6 +166,7 @@ async function addOrEditForm(formType) {
     saveApplication.textContent = 'Save Application';
     updateApplication.textContent = 'Update Application';
     editOrDeleteId.placeholder = 'ID: Edit/Delete';
+    deleteApplication.textContent = 'Delete';
     // deleteAllApplications.textContent = 'Delete All Applications';
     // deleteAllApplications.classList.add('submit-delete-applications');
     // buttonFeatures.appendChild(editOrDeleteId);
@@ -183,6 +184,7 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(deleteApplication);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(updateApplication);
+        applicationsForm.appendChild(editOrDeleteId);
         await editJobApplication();
     }
 }
