@@ -93,11 +93,12 @@ async function editJobApplication() {
 }
 
 async function loadApplications(param = null) {
+    let applications;
     if (param !== null) {
-        const applications = await param.json();
+        applications = await param.json();
     } else {
         const response = await fetch('/applications');
-        const applications = await response.json();
+        applications = await response.json();
     }
 
     const table = document.createElement('table');
