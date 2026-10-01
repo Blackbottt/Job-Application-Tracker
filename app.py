@@ -21,7 +21,7 @@ def get_job_applications_route():
 
 @app.route('/applications', methods=["GET"])
 def search_applications_route():
-    search_results = logic.get_job_applications()
+    search_results = logic.search_job_applications()
     return jsonify(search_results)
 
 @app.route('/applications', methods=["POST"])
