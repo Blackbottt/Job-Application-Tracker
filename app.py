@@ -28,6 +28,8 @@ def search_applications_route():
     if status_code != 200:
         return data, status_code
 
+    data = data.get("query", "")
+
     search_results = logic.search_job_applications(data)
     return jsonify(search_results)
 
