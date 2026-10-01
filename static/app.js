@@ -25,7 +25,6 @@ const deleteApplication = document.createElement('button');
 
 async function addJobApplication() {
     console.log("5 for start add");
-    addApplication.classList.add('input-section-on');
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -155,6 +154,14 @@ async function addOrEditForm(formType) {
 
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
+    cancelForm.classList.add('form-button');
+    clearForm.classList.add('form-button');
+    saveApplication.classList.add('form-button');
+    updateApplication.classList.add('form-button');
+
+    cancelForm.textContent = 'cancel Form';
+
+    
     // deleteAllApplications.textContent = 'Delete All Applications';
     // deleteAllApplications.classList.add('submit-delete-applications');
     // buttonFeatures.appendChild(editOrDeleteId);
@@ -172,6 +179,7 @@ async function addOrEditForm(formType) {
     if (formType == 'edit') {
         editOrDeleteId.placeholder = 'ID: Edit/Delete'
         editApplication.textContent = 'Edit Application';
+        updateApplication.textContent = 'Update Application'
         deleteApplication.textContent = 'Delete Application';
 
         editOrDeleteId.classList.add('id-edit-delete');
