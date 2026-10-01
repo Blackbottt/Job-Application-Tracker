@@ -211,9 +211,7 @@ deleteAllApplications.addEventListener("click", async () => {
 });
 
 cancelForm.addEventListener("click", () => {
-    inputSection.classList.remove('input-section-on');
-    inputSection.classList.add('input-section-off');
-    buttonFeatures.replaceChildren();
+    cancelForm();
 });
 
 clearForm.addEventListener("click", () => {
@@ -248,6 +246,12 @@ deleteApplication.addEventListener("click", async () => {
 
     await loadApplications();
 });
+
+function cancelForm(){
+    inputSection.classList.remove('input-section-on');
+    inputSection.classList.add('input-section-off');
+    buttonFeatures.replaceChildren();    
+}
 
 
 loadApplications();
