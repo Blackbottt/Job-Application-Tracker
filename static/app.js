@@ -10,6 +10,7 @@ const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const buttonFeatures = document.getElementById('button-features');
 const dashboard = document.getElementById('dashboard');
+const applicationSearch = document.getElementById('search-applications');
 
 const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
@@ -117,13 +118,11 @@ async function loadApplications() {
     editOrDeleteId.value = "";
 }
 
-function addOrEditForm(formType) {
+async function addOrEditForm(formType) {
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
-// const statistics = document.createElement('div');
     // deleteAllApplications.textContent = 'Delete All Applications';
-// deleteAllApplications.classList.add('submit-delete-applications');
-// statistics.classList.add('statistics');
+    // deleteAllApplications.classList.add('submit-delete-applications');
     // buttonFeatures.appendChild(editOrDeleteId);
     // buttonFeatures.appendChild(editApplication);
     // buttonFeatures.appendChild(deleteApplication);
@@ -133,6 +132,9 @@ function addOrEditForm(formType) {
         buttonFeatures.appendChild(clearForm);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(saveApplication);
+        await addJobApplication();
+        console.log("HINZUFUGENDE: ");
+        await loadApplications();
     } else {
         const updateApplication = document.createElement('button');
         const editOrDeleteId = document.createElement('input');
@@ -153,10 +155,7 @@ function addOrEditForm(formType) {
 }
 
 addApplication.addEventListener("click", async () => {
-    addOrEditForm('add');
-    await addJobApplication();
-    console.log("HINZUFUGENDE: ");
-    await loadApplications();
+    await addOrEditForm('add');
 });
 
 editApplication.addEventListener("click", async e => {
