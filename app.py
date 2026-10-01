@@ -19,6 +19,11 @@ def get_job_applications_route():
     applications = logic.get_job_applications()
     return jsonify(applications)
 
+@app.route('/applications', methods=["GET"])
+def search_applications_route():
+    search_results = logic.get_job_applications()
+    return jsonify(search_results)
+
 @app.route('/applications', methods=["POST"])
 def add_job_applications_route():
     # Retrieves and validates request data, then adds the application.
