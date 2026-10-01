@@ -23,6 +23,18 @@ const updateApplication = document.createElement('button');
 const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
 
+async function getSearchRequest(){
+    const searchResponse = await fetch('/applications', {
+        method: 'POST',
+        headers: {  
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            notes: applicationSearch.value
+        })
+    });   
+}
+
 
 async function addJobApplication() {
     console.log("5 for start add");
