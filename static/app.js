@@ -23,12 +23,16 @@ const updateApplication = document.createElement('button');
 const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
 
+let searchTimeout;
+
 async function getSearchRequest(){
     const searchQuery = applicationSearch.value.trim();
+
     if (!searchQuery) {
-        console.error("Search query is empty");
+        await loadApplications(); // Load all applications if search query is empty
         return;
     }
+
     const params = new URLSearchParams({ query: searchQuery });
 
     const searchResponse = await fetch('/applications?' + params.toString(), {
@@ -94,13 +98,6 @@ async function editJobApplication() {
 
 async function loadApplications(param = null) {
     let applications;
-    if (param !== null) {
-        applications = await param.json();
-    } else {
-        const response = await fetch('/applications');
-        applications = await response.json();
-    }
-
     const table = document.createElement('table');
     const caption = document.createElement('caption');
     const thead = document.createElement('thead');
@@ -135,6 +132,13 @@ async function loadApplications(param = null) {
     thead.appendChild(tableHeader);
     table.appendChild(caption);
     table.appendChild(thead);
+
+    if (param !== null) {
+        applications = await param.json();
+    } else {
+        const response = await fetch('/applications');
+        applications = await response.json();
+    }
 
     if (applications) {
         applications.forEach(application => {
@@ -273,11 +277,9 @@ deleteApplication.addEventListener("click", async () => {
 });
 
 applicationSearch.addEventListener("input", async () => {
-    let searchTimeout;
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         await getSearchRequest();
-        await loadApplications();
     }, 300); // Debounce delay  
 });
 
