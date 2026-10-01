@@ -160,6 +160,12 @@ body {
     border: 1px solid var(--border);  
 }
 
+.search-applications {
+    /* margin: .5rem; */
+    width: 80%;
+    height: 100%;
+}
+
 .greet-actions {
     display: flex;
     justify-content: space-between;
@@ -167,6 +173,19 @@ body {
 
     width: 100%;
     border: 3px solid var(--border);  
+}
+
+.greet-actions-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.greet-actions-buttons button {
+    height: 3rem;
+    font-size: 1rem;
+    margin: 0.3rem;
+    padding: 0.3rem;
 }
 
 .display-statistics {
@@ -180,11 +199,6 @@ body {
 
 .display-statistics div {
     height: auto;
-}
-
-.submit-add-applications {
-    grid-column: 1/-1;
-    margin-bottom: 10px;
 }
 
 .application-field {
