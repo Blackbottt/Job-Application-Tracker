@@ -92,9 +92,13 @@ async function editJobApplication() {
     const result = await response.json();
 }
 
-async function loadApplications() {
-    const response = await fetch('/applications');
-    const applications = await response.json();
+async function loadApplications(param) {
+    if (param) {
+        const applications = await param.json();
+    } else {
+        const response = await fetch('/applications');
+        const applications = await response.json();
+    }
 
     const table = document.createElement('table');
     const caption = document.createElement('caption');
