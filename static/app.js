@@ -211,7 +211,7 @@ deleteAllApplications.addEventListener("click", async () => {
 });
 
 cancelForm.addEventListener("click", () => {
-    cancelForm();
+    cancelFormfunc();
 });
 
 clearForm.addEventListener("click", () => {
@@ -223,11 +223,13 @@ clearForm.addEventListener("click", () => {
 
 saveApplication.addEventListener("click", async () => {
     await addJobApplication();
+    cancelFormfunc();
     await loadApplications();
 });
 
 updateApplication.addEventListener("click", async () => {
     await editJobApplication();
+    cancelFormfunc();
     await loadApplications();
 });
 
@@ -247,7 +249,7 @@ deleteApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-function cancelForm(){
+function cancelFormfunc(){
     inputSection.classList.remove('input-section-on');
     inputSection.classList.add('input-section-off');
     buttonFeatures.replaceChildren();    
