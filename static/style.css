@@ -98,14 +98,21 @@ body {
 }
 
 .application-shell-right {
+    position: relative;
     width: 100%;
+    height: 100%;
     border: 1px solid var(--border);
     /* padding: 1rem; */
     /* margin-right: 3rem; */
 }
 
-.input-section {
-    width: 100%;
+.input-section-on {
+    position: absolute;
+    inset: 0;
+    /* top: 0; */
+    /* left: 0; */
+    /* right: 0; */
+    /* bottom: 0;    */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,9 +122,12 @@ body {
     padding: 10px;
     margin-bottom: 10px;
     background: var(--bg-secondary);
+    z-index: 9999;
+    width: 100%;
+    /* height: 100%; */
 }
 
-.input-section form {
+.input-section-on form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -129,7 +139,14 @@ body {
 .input-section-off {
     display: none;
 }
+/* 
+.add {
 
+}
+
+.edit {
+    
+} */
 
 .statistics-section {
     border: 1px solid var(--border);
@@ -146,6 +163,8 @@ body {
 .greet-actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     width: 100%;
     border: 3px solid var(--border);  
 }
@@ -157,6 +176,10 @@ body {
     width: 100%;
     height: auto;
     border: 1px solid var(--border);    
+}
+
+.display-statistics div {
+    height: auto;
 }
 
 .submit-add-applications {
