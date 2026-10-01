@@ -38,6 +38,8 @@ async function getSearchRequest(){
         }
     }); 
 
+    loadApplications(searchResponse);
+
 }
 
 async function addJobApplication() {
