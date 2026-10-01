@@ -16,6 +16,14 @@ const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
 const deleteAllApplications = document.querySelector('.submit-delete-applications');
 
+const cancelForm = document.createElement('button');
+const clearForm = document.createElement('button');
+const saveApplication = document.createElement('button');
+const updateApplication = document.createElement('button');
+const editOrDeleteId = document.createElement('input');
+const deleteApplication = document.createElement('button');
+
+
 async function addJobApplication() {
     console.log("5 for start add");
     await fetch('/applications', {
@@ -144,13 +152,6 @@ async function loadApplications() {
 }
 
 async function addOrEditForm(formType) {    
-    const cancelForm = document.createElement('button');
-    const clearForm = document.createElement('button');
-    const saveApplication = document.createElement('button');
-    const updateApplication = document.createElement('button');
-    const editOrDeleteId = document.createElement('input');
-    const deleteApplication = document.createElement('button');
-
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
     cancelForm.classList.add('form-button');
@@ -199,6 +200,26 @@ editApplication.addEventListener("click", async e => {
     await loadApplications();
 });
 
+deleteAllApplications.addEventListener("click", async () => {
+    const response = await fetch('/applications/delete', {
+        method: 'DELETE'
+    });
+
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    await loadApplications();
+});
+
+cancelForm.addEventListener("click", () => {
+    inputSection.classList.remove('input-section-on');
+    inputSection.classList.add('input-section-off');
+    buttonFeatures.replaceChildren();
+});
+
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
     const response = await fetch(`/applications/${applicationId}`, {
@@ -214,18 +235,5 @@ deleteApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-deleteAllApplications.addEventListener("click", async () => {
-    const response = await fetch('/applications/delete', {
-        method: 'DELETE'
-    });
-
-    if (!response.ok) {
-        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
-
-    await loadApplications();
-});
 
 loadApplications();
