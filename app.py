@@ -13,26 +13,21 @@ def home():
 def dashboard ():
     return render_template("dashboard.html")
 
-@app.route('/applications')
-def get_job_applications_route():
-    # Calls function that retrieves all applications in db
-    applications = logic.get_job_applications()
-    return jsonify(applications)
-
 @app.route('/applications', methods=["GET"])
-def search_applications_route():
-    data = request.args.get("query", "")
-    print("dateDATA", data)
-    data, status_code = logic.param_validation_function(data, edit=False)
+def retrieve_applications_route():
+    query = request.args.get("query", "").strip()
+    print("dateDATA", query)
 
-    if status_code != 200:
-        return data, status_code
+    if query:
+        data, status_code = logic.param_validation_function({"query": query}, edit=False)
+        if status_code != 200:
+            return data, status_code
+        applications = logic.search_job_applications(data["query"])
+    else:
+        applications = logic.get_job_applications()
 
-    # data = data.get("query", "")
-    print("dateDATA2", data)
-
-    search_results = logic.search_job_applications(data)
-    return jsonify(search_results)
+    
+    return jsonify({"applications": applications})
 
 @app.route('/applications', methods=["POST"])
 def add_job_applications_route():
