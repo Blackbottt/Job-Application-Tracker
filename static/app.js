@@ -178,7 +178,6 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(clearForm);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(saveApplication);
-        await addJobApplication();
     } 
     
     if (formType == 'edit') {
@@ -186,18 +185,15 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(updateApplication);
         applicationsForm.appendChild(editOrDeleteId);
-        await editJobApplication();
     }
 }
 
 addApplication.addEventListener("click", async () => {
     await addOrEditForm('add');
-    await loadApplications();
 });
 
 editApplication.addEventListener("click", async e => {
     await addOrEditForm('edit');
-    await loadApplications();
 });
 
 deleteAllApplications.addEventListener("click", async () => {
@@ -226,6 +222,17 @@ clearForm.addEventListener("click", () => {
         field.value = "";
     });
 });
+
+saveApplication.addEventListener("click", async () => {
+    await addJobApplication();
+    await loadApplications();
+});
+
+updateApplication.addEventListener("click", async () => {
+    await editJobApplication();
+    await loadApplications();
+});
+
 
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
