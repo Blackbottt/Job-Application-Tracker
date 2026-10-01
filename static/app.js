@@ -16,6 +16,13 @@ const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
 const deleteAllApplications = document.querySelector('.submit-delete-applications');
 
+const cancelForm = document.createElement('button');
+const clearForm = document.createElement('button');
+const saveApplication = document.createElement('button');
+const updateApplication = document.createElement('button');
+const editOrDeleteId = document.createElement('input');
+const deleteApplication = document.createElement('button');
+
 async function addJobApplication() {
     console.log("5 for start add");
     addApplication.classList.add('input-section-on');
@@ -145,8 +152,7 @@ async function loadApplications() {
 }
 
 async function addOrEditForm(formType) {    
-    const cancelForm = document.createElement('button');
-    const clearForm = document.createElement('button');
+
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
     // deleteAllApplications.textContent = 'Delete All Applications';
@@ -156,17 +162,14 @@ async function addOrEditForm(formType) {
     // buttonFeatures.appendChild(deleteApplication);
     // buttonFeatures.appendChild(deleteAllApplications);
     if (formType == 'add') {
-        const saveApplication = document.createElement('button');
         buttonFeatures.appendChild(clearForm);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(saveApplication);
         await addJobApplication();
         console.log("HINZUFUGENDE: ");
-    } elif (formType == 'edit') {
-        const updateApplication = document.createElement('button');
-        const editOrDeleteId = document.createElement('input');
-        const deleteApplication = document.createElement('button');
-
+    } 
+    
+    if (formType == 'edit') {
         editOrDeleteId.placeholder = 'ID: Edit/Delete'
         editApplication.textContent = 'Edit Application';
         deleteApplication.textContent = 'Delete Application';
