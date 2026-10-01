@@ -50,7 +50,7 @@ async function editJobApplication() {
     if (jobStartingDate.value.trim() !== "") data.job_starting_date = jobStartingDate.value;
     if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
     if (notes.value.trim() !== "") data.notes = notes.value;
-    
+
     const response = await fetch(`/applications/${applicationId}`, {
         method: 'PATCH',
         headers: {
@@ -162,8 +162,7 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(saveApplication);
         await addJobApplication();
         console.log("HINZUFUGENDE: ");
-        await loadApplications();
-    } else {
+    } elif (formType == 'edit') {
         const updateApplication = document.createElement('button');
         const editOrDeleteId = document.createElement('input');
         const deleteApplication = document.createElement('button');
@@ -179,15 +178,18 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(deleteApplication);
         buttonFeatures.appendChild(cancelForm);
         buttonFeatures.appendChild(updateApplication);
+        await editJobApplication();
+
     }
 }
 
 addApplication.addEventListener("click", async () => {
     await addOrEditForm('add');
+    await loadApplications();
 });
 
 editApplication.addEventListener("click", async e => {
-
+    await addOrEditForm('edit');
     await loadApplications();
 });
 
