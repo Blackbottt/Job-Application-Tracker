@@ -16,9 +16,6 @@ const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
 const deleteAllApplications = document.querySelector('.submit-delete-applications');
 
-const cancelForm = document.createElement('button');
-const clearForm = document.createElement('button');
-
 async function addJobApplication() {
     console.log("5 for start add");
     addApplication.classList.add('input-section-on');
@@ -39,6 +36,35 @@ async function addJobApplication() {
         })
     });
     console.log("55 for end add");
+}
+
+async function editJobApplication() {
+    const applicationId = editOrDeleteId.value;
+    const data = {};
+
+    if (jobApplicationDate.value.trim() !== "") data.job_application_date = jobApplicationDate.value;
+    if (company_name.value.trim() !== "") data.company_name = company_name.value;
+    if (position.value.trim() !== "") data.position = position.value;
+    if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
+    if (applicationPlatform.value.trim() !== "") data.platform_applied = applicationPlatform.value;
+    if (jobStartingDate.value.trim() !== "") data.job_starting_date = jobStartingDate.value;
+    if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
+    if (notes.value.trim() !== "") data.notes = notes.value;
+    
+    const response = await fetch(`/applications/${applicationId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
 }
 
 async function loadApplications() {
@@ -118,7 +144,9 @@ async function loadApplications() {
     editOrDeleteId.value = "";
 }
 
-async function addOrEditForm(formType) {
+async function addOrEditForm(formType) {    
+    const cancelForm = document.createElement('button');
+    const clearForm = document.createElement('button');
     inputSection.classList.remove('input-section-off');
     inputSection.classList.add('input-section-on');
     // deleteAllApplications.textContent = 'Delete All Applications';
@@ -159,30 +187,6 @@ addApplication.addEventListener("click", async () => {
 });
 
 editApplication.addEventListener("click", async e => {
-    const applicationId = editOrDeleteId.value;
-    const data = {};
-    if (jobApplicationDate.value.trim() !== "") data.job_application_date = jobApplicationDate.value;
-    if (company_name.value.trim() !== "") data.company_name = company_name.value;
-    if (position.value.trim() !== "") data.position = position.value;
-    if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
-    if (applicationPlatform.value.trim() !== "") data.platform_applied = applicationPlatform.value;
-    if (jobStartingDate.value.trim() !== "") data.job_starting_date = jobStartingDate.value;
-    if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
-    if (notes.value.trim() !== "") data.notes = notes.value;
-    const response = await fetch(`/applications/${applicationId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    if (!response.ok) {
-        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
-    }
-
-    const result = await response.json();
 
     await loadApplications();
 });
