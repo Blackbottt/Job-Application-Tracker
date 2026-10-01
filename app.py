@@ -21,6 +21,9 @@ def get_job_applications_route():
 
 @app.route('/applications', methods=["GET"])
 def search_applications_route():
+    data = request.json
+    if not data:
+        return {"error": "Request Body is required"}, 400   
     search_results = logic.search_job_applications()
     return jsonify(search_results)
 
