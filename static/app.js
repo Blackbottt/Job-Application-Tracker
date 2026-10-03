@@ -26,14 +26,17 @@ const deleteApplication = document.createElement('button');
 let searchTimeout;
 
 async function getSearchRequest(){
+    console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim();
 
     if (!searchQuery) {
+        console.log("search query is empty, loading all applications");
         await loadApplications(); // Load all applications if search query is empty
         return;
     }
 
     const params = new URLSearchParams({ query: searchQuery });
+    console.log("fetching for applications");
 
     const searchResponse = await fetch('/applications?' + params.toString(), {
         method: 'GET',
@@ -41,8 +44,12 @@ async function getSearchRequest(){
             'Content-Type': 'application/json'
         }
     }); 
-
-    loadApplications(searchResponse);
+    // console.log("searchResponse", searchResponse.json());
+    const searchResults = await searchResponse.json();
+    // if (!searchResponse.ok) {
+        // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
+    // }
+    loadApplications(searchResults);
 
 }
 
@@ -96,8 +103,18 @@ async function editJobApplication() {
     const result = await response.json();
 }
 
-async function loadApplications(param = null) {
+async function loadApplications(param = false) {
     let applications;
+
+    if (param) {
+        applications = param;
+        console.log("applications from search", applications);
+    } else {
+        const response = await fetch('/applications');
+        applications = await response.json();
+        console.log("applications", applications);
+    }
+    
     const table = document.createElement('table');
     const caption = document.createElement('caption');
     const thead = document.createElement('thead');
@@ -133,14 +150,8 @@ async function loadApplications(param = null) {
     table.appendChild(caption);
     table.appendChild(thead);
 
-    if (param !== null) {
-        applications = await param.json();
-    } else {
-        const response = await fetch('/applications');
-        applications = await response.json();
-    }
-
     if (applications) {
+        console.log("applications length", applications.length);
         applications.forEach(application => {
             const tableRow = document.createElement('tr');
             const values = [
@@ -277,10 +288,12 @@ deleteApplication.addEventListener("click", async () => {
 });
 
 applicationSearch.addEventListener("input", async () => {
+    console.log("input event", Date.now());
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
+        console.log("debounced call", Date.now());
         await getSearchRequest();
-    }, 300); // Debounce delay  
+    }, 800); // Debounce delay  
 });
 
 function cancelFormfunc(){
