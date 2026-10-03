@@ -21,17 +21,13 @@ def retrieve_applications_route():
     print("QUERY:", repr(query))
 
     if query:
-        data, status_code = logic.param_validation_function(
-            {"query": query},
-            edit=False
-        )
+        data, is_valid = logic.string_validation(query)
 
-        if status_code != 200:
-            return data, status_code
+        if not is_valid:
+            return {"error": data}, 400
 
-        print("SEARCH QUERY:", repr(data["query"]))
-
-        applications = logic.search_job_applications(data["query"])
+        print("SEARCH QUERY:", repr(data))
+        applications = logic.search_job_applications(data)
 
     else:
         print("NO QUERY — retrieving all applications")
