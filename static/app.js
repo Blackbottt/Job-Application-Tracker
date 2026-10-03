@@ -134,6 +134,12 @@ async function loadApplications(param = false) {
         applications = applications.applications; // Access the 'applications' property from the response
         console.log("applications", applications);
     }
+
+    const statistics = getStatistics(applications);
+    statisticsTotal.textContent = statistics.total;
+    statisticsApplied.textContent = statistics.applied;
+    statisticsInterviewed.textContent = statistics.interviewed;
+    statisticsOffers.textContent = statistics.offers;
     
     const table = document.createElement('table');
     const caption = document.createElement('caption');
