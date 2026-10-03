@@ -49,7 +49,8 @@ async function getSearchRequest(){
     // if (!searchResponse.ok) {
         // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     // }
-    loadApplications(searchResults);
+    console.log("searchResults", searchResults);
+    loadApplications(searchResults.applications);
 
 }
 
@@ -114,6 +115,7 @@ async function loadApplications(param = false) {
         applications = await response.json();
         console.log("applications", applications);
     }
+        console.log("applications", applications);
     
     const table = document.createElement('table');
     const caption = document.createElement('caption');
@@ -151,7 +153,7 @@ async function loadApplications(param = false) {
     table.appendChild(thead);
 
     if (applications) {
-        console.log("applications length", applications.length);
+        console.log("applications length", typeof applications);
         applications.forEach(application => {
             const tableRow = document.createElement('tr');
             const values = [
@@ -163,8 +165,7 @@ async function loadApplications(param = false) {
                 application.job_starting_date,
                 application.status,
                 application.notes,
-                application.job_posting_url,
-                application.created_at
+                application.job_posting_url
             ];
             values.forEach(value => {
                 const tableRowCell = document.createElement('td');
@@ -301,6 +302,5 @@ function cancelFormfunc(){
     inputSection.classList.add('input-section-off');
     buttonFeatures.replaceChildren();    
 }
-
 
 loadApplications();
