@@ -136,11 +136,12 @@ async function loadApplications(param = false) {
     }
 
     const statistics = getStatistics(applications);
-    statisticsTotal.textContent = statistics.total;
-    statisticsApplied.textContent = statistics.applied;
-    statisticsInterviewed.textContent = statistics.interviewed;
-    statisticsOffers.textContent = statistics.offers;
-    
+    console.log("statistics", statistics);
+    statisticsTotal.textContent = statistics.total === undefined ? 0 : statistics.total;
+    statisticsApplied.textContent = statistics.applied === undefined ? 0 : statistics.applied;
+    statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
+    statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
+
     const table = document.createElement('table');
     const caption = document.createElement('caption');
     const thead = document.createElement('thead');
