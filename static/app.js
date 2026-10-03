@@ -113,9 +113,9 @@ async function loadApplications(param = false) {
     } else {
         const response = await fetch('/applications');
         applications = await response.json();
+        applications = applications.applications; // Access the 'applications' property from the response
         console.log("applications", applications);
     }
-        console.log("applications", applications);
     
     const table = document.createElement('table');
     const caption = document.createElement('caption');
