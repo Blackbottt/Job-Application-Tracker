@@ -15,18 +15,30 @@ def dashboard ():
 
 @app.route('/applications', methods=["GET"])
 def retrieve_applications_route():
+    print("ROUTE HIT: /applications")
+
     query = request.args.get("query", "").strip()
-    print("dateDATA", query)
+    print("QUERY:", repr(query))
 
     if query:
-        data, status_code = logic.param_validation_function({"query": query}, edit=False)
+        data, status_code = logic.param_validation_function(
+            {"query": query},
+            edit=False
+        )
+
         if status_code != 200:
             return data, status_code
+
+        print("SEARCH QUERY:", repr(data["query"]))
+
         applications = logic.search_job_applications(data["query"])
+
     else:
+        print("NO QUERY — retrieving all applications")
         applications = logic.get_job_applications()
 
-    
+    print("APPLICATIONS:", applications)
+
     return jsonify({"applications": applications})
 
 @app.route('/applications', methods=["POST"])
