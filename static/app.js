@@ -15,6 +15,10 @@ const applicationSearch = document.getElementById('search-applications');
 const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
 const deleteAllApplications = document.querySelector('.submit-delete-applications');
+const statisticsTotal = document.querySelector('.total-applications .statistic-total');
+const statisticsApplied = document.querySelector('.applied-applications .statistic-total');
+const statisticsInterviewed = document.querySelector('.interviewed-applications .statistic-total');
+const statisticsOffers = document.querySelector('.offers-applications .statistic-total');
 
 const cancelForm = document.createElement('button');
 const clearForm = document.createElement('button');
@@ -36,7 +40,7 @@ async function getSearchRequest(){
     }
 
     const params = new URLSearchParams({ query: searchQuery });
-    console.log("fetching for applications");
+    console.log("fetching for applications: ", params);
 
     const searchResponse = await fetch('/applications?' + params.toString(), {
         method: 'GET',
@@ -52,6 +56,20 @@ async function getSearchRequest(){
     console.log("searchResults", searchResults);
     loadApplications(searchResults.applications);
 
+}
+
+function getStatistics(applications) {
+    const totalApplications = applications.length;
+    const appliedApplications = applications.filter(app => app.status === 'Applied').length;
+    const interviewedApplications = applications.filter(app => app.status === 'Interviewed').length;
+    const offersApplications = applications.filter(app => app.status === 'Offer').length;
+
+    return {
+        total: totalApplications,
+        applied: appliedApplications,
+        interviewed: interviewedApplications,
+        offers: offersApplications
+    };
 }
 
 async function addJobApplication() {
@@ -271,7 +289,6 @@ updateApplication.addEventListener("click", async () => {
     cancelFormfunc();
     await loadApplications();
 });
-
 
 deleteApplication.addEventListener("click", async () => {
     const applicationId = editOrDeleteId.value;
