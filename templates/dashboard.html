@@ -10,22 +10,22 @@
 </head>
 <body>
     <section class="application-shell">
-            <aside class="sidebar">
-                <div class="sidebar-divider-top">
-                    <h2><i class="fa fa-briefcase"></i>Job Track</h2>
-                    <button><i class="fa fa-tachometer"></i> Dashboard</button>
-                    <button><i class="fa fa-file-text"></i> Applications</button>
-                    <button><i class="fa fa-plus-circle"></i> Add Applications</button>
-                    <button><i class="fa fa-bar-chart"></i> Statistics</button>
-                    <button><i class="fa fa-cog"></i> Settings</button>
-                </div>
-                <div class="sidebar-divider-bottom">
+        <aside class="sidebar">
+            <div class="sidebar-divider-top">
+                <h2><i class="fa fa-briefcase"></i>Job Track</h2>
+                <button><i class="fa fa-tachometer"></i> Dashboard</button>
+                <button><i class="fa fa-file-text"></i> Applications</button>
+                <button><i class="fa fa-plus-circle"></i> Add Applications</button>
+                <button><i class="fa fa-bar-chart"></i> Statistics</button>
+                <button><i class="fa fa-cog"></i> Settings</button>
+            </div>
+            <div class="sidebar-divider-bottom">
                     <button><i class="fa fa-user"></i> Profile</button>
                     <button><i class="fa fa-sign-out"></i> Logout</button>
-                </div>
-            </aside>
-            <div class="application-shell-right">
-                <section id="input-section" class="input-section-off">
+            </div>
+        </aside>
+        <div class="application-shell-right">
+            <section id="input-section" class="input-section-off">
                     <form id="applications-form">
                         <div class="application-field">
                             <label for="date-applied">Date Applied:</label>
@@ -116,9 +116,9 @@
                         </div>
                     </form>
                     <div id="button-features" class="button-features"></div>
-                </section>
-                <section class="statistics-section">
-                    <div class="taskbar">
+            </section>
+            <section class="statistics-section">
+                <div class="taskbar">
                         <input 
                             type="search" 
                             name="search-applications" 
@@ -126,8 +126,8 @@
                             class="search-applications"
                             placeholder="Search applications..."
                         >
-                    </div>
-                    <div class="greet-actions">
+                </div>
+                <div class="greet-actions">
                         <div>
                             <h3>Good Afternoon, Vhusa</h3>
                             <h6>Here is an overview of your job applications. Keep going!</h6>
@@ -137,8 +137,8 @@
                             <button type="submit" class="submit-edit-applications">Edit Application</button>
                             <button type="submit" class="submit-delete-applications">Delete Applications</button>
                         </div>
-                    </div>
-                    <div class="display-statistics">
+                </div>
+                <div class="display-statistics">
                         <div class="total-applications">
                             <div class="statistic-icon">
                                 <i class="fa fa-file-text"></i>
@@ -179,34 +179,34 @@
                                 <h6 class="statistic-frequency">0 this month</h6>
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section id="dashboard" class="dashboard">
-                </section>
-            </div>
-        </section>
-                            </div>
-                            <div class="statistics">
-                                <h3 class="statistic-total"></h3>
-                                <p class="statistic-category">Interviewed</p>
-                                <h6 class="statistic-frequency">0 this month</h6>
-                            </div>
-                        </div>
-                        <div class="offers-applications">
-                            <div class="statistic-icon">
-                                
-                            </div>
-                            <div class="statistics">
-                                <h3 class="statistic-total"></h3>
-                                <p class="statistic-category">Offers</p>
-                                <h6 class="statistic-frequency">0 this month</h6>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section id="dashboard" class="dashboard">
-                </section>
-            </div>
-        </section>
+                </div>
+            </section>
+            <section id="dashboard" class="dashboard">
+                <div class="dashboard-filtering">
+                    <input 
+                        type="search" 
+                        name="search-applications" 
+                        id="search-applications" 
+                        class="search-applications"
+                        placeholder="Search company, position or platform..."
+                    >
+                    <select 
+                        name="dashboard-status" 
+                        id="dashboard-status" 
+                        class="input-field" 
+                        placeholder="All Statuses"
+                    >
+                        <option value="Wishlist">Wishlist</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Withdrawn">Withdrawn</option>
+                    </select>
+                </div>
+            </section>
+        </div>
+    </section>
 </body>
 </html>
