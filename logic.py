@@ -21,7 +21,6 @@ def get_job_applications():
     else:
         print("Error! Cannot create the database connection.")
 
-
 def search_job_applications(search_criteria):
     """function that takes the db and retrieves applications based on search criteria
     :returns: an object with matching rows
@@ -30,6 +29,7 @@ def search_job_applications(search_criteria):
 
     if conn is not None:
         try:
+            print(f"Searching for job applications with criteria: {search_criteria}")
             cursor = conn.cursor()
             cursor.execute("""
             SELECT * 
