@@ -126,32 +126,21 @@ async function editJobApplication() {
     const result = await response.json();
 }
 
-async function loadApplications(param = false) {
-    let applications;
-
-    if (param) {
-        applications = param;
-        console.log("applications from search", applications);
-    } else {
-        const response = await fetch('/applications');
-        applications = await response.json();
-        applications = applications.applications; // Access the 'applications' property from the response
-        console.log("applications", applications);
-    }
-
-    const statistics = getStatistics(applications);
-    console.log("statistics", statistics);
-    statisticsTotal.textContent = statistics.total === undefined ? 0 : statistics.total;
-    statisticsApplied.textContent = statistics.applied === undefined ? 0 : statistics.applied;
-    statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
-    statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
-
+function loadDashboard(applications){
     const table = document.createElement('table');
     const caption = document.createElement('caption');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
     const tableHeader = document.createElement('tr');
+    const dashboardFilters = document.createElement('div');
+    const applicationSearch2 = document.createElement('input');
 
+    applicationSearch2.type = 'search';
+    applicationSearch2.name = 'search-applications';
+    applicationSearch2.id = 'search-application';
+    applicationSearch2.classList.add('search-applications');
+    applicationSearch2.placeholder = 'Search company, position or platform...';
+    dashboardFilters.classList.add('dashboard-filtering');
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
     thead.classList.add('applications-thead');
@@ -205,9 +194,36 @@ async function loadApplications(param = false) {
         });
     }
 
+
+    dashboardFilters.appendChild(applicationSearch2);
+    dashboard.appendChild(dashboardFilters);
     table.appendChild(tbody);
     dashboard.innerHTML = '';
     dashboard.appendChild(table);
+}
+
+async function loadApplications(param = false) {
+    let applications;
+
+    if (param) {
+        applications = param;
+        console.log("applications from search", applications);
+    } else {
+        const response = await fetch('/applications');
+        applications = await response.json();
+        applications = applications.applications; // Access the 'applications' property from the response
+        console.log("applications", applications);
+    }
+
+    const statistics = getStatistics(applications);
+    console.log("statistics", statistics);
+    statisticsTotal.textContent = statistics.total === undefined ? 0 : statistics.total;
+    statisticsApplied.textContent = statistics.applied === undefined ? 0 : statistics.applied;
+    statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
+    statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
+
+    loadDashboard(applications);
+    
     jobApplicationDate.value = "";
     company_name.value = "";
     position.value = "";
