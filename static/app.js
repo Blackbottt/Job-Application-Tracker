@@ -58,6 +58,10 @@ async function getSearchRequest(){
 
 }
 
+function getFilteredResults(filter) {
+    
+}
+
 function getStatistics(applications) {
     const totalApplications = applications.length;
     const appliedApplications = applications.filter(app => app.status === 'Applied').length;
