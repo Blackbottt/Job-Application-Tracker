@@ -50,22 +50,27 @@ const state = {
 };
 
 async function loadApplication(param = false) {
-    let applications;
-
     if (param) {
-        applications = param;
+        state.applications = param;
         // console.log("applications from search", applications);
     } else {
         const response = await fetch('/applications');
-        applications = await response.json();
-        applications = applications.applications; // Access the 'applications' property from the response
-        // console.log("applications", applications);
+        state.applications = await response.json();
+        state.applications = state.applications.applications; // Access the 'applications' property from the response
+         // console.log("applications", state.applications);
     } 
 
-    state.applications = applications; // Update the state with the loaded applications
+    getStatistics(state.applications);
+    loadDashboard(state.applications);
+}
 
-    getStatistics(applications);
-    loadDashboard(applications);
+function getProcessedApplications() {
+    let processedApplications = [...state.applications];
+    processedApplications = searchApplications(processedApplications, state.search);
+    processedApplications = filterApplications(processedApplications, state.filter);
+    processedApplications = sortApplications(processedApplications, state.sort);
+
+    return processedApplications;
 }
 
 async function getSearchRequest(){
