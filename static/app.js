@@ -71,18 +71,13 @@ async function getSearchRequest(){
 }
 
 function sortApplications(applications, sortBy) {
-    return applications.sort((a, b) => {
+    let sortedApplications = [...applications]; // Create a copy of the applications array
+    return sortedApplications.sort((a, b) => {
         if (sortBy === 'date') {    
             return new Date(b.job_application_date) - new Date(a.job_application_date);
         }
         return 0;
     });
-}
-
-function filterApplications(applications, filterBy) {
-    if (!filterBy) {
-        return applications;
-    }   
 }
 
 function getStatistics(applications) {
@@ -273,6 +268,8 @@ async function loadApplications(param = false) {
     statisticsApplied.textContent = statistics.applied === undefined ? 0 : statistics.applied;
     statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
     statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
+
+    applications = sortApplications(applications, 'date');
 
     loadDashboard(applications);
     
