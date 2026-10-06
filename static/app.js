@@ -77,38 +77,31 @@ function getStatistics(applications) {
 }
 
 function loadDashboard(applications){
-    
     const dashboardFilters = document.createElement('div');
 
+    applicationSearch2.placeholder = 'Search company, position or platform...';
     applicationSearch2.type = 'search';
     applicationSearch2.name = 'search-applications';
-    applicationSearch2.id = 'search-application';
-    applicationSearch2.classList.add('search-applications');
-    applicationSearch2.placeholder = 'Search company, position or platform...';
-
     sortBySelect.name = 'sort-by';
-    sortBySelect.id = 'sort-by';
-    sortBySelect.classList.add('input-field');
-    
     selectFilter.name = 'dashboard-status';
-    selectFilter.id = 'dashboard-status';
-    selectFilter.classList.add('input-field');
-  
-    sortBySelect.appendChild(sortByDateOption);
-    sortBySelect.appendChild(sortByCompanyOption);
-    sortBySelect.appendChild(sortByPositionOption);
-
-    dashboardFilters.classList.add('dashboard-filtering');
     
+    applicationSearch2.id = 'search-application';
+    sortBySelect.id = 'sort-by';
+    selectFilter.id = 'dashboard-status';
+    
+    applicationSearch2.classList.add('search-applications');
+    sortBySelect.classList.add('input-field');
+    selectFilter.classList.add('input-field');
+    dashboardFilters.classList.add('dashboard-filtering');
 
     configurator();
-    
     
     dashboardFilters.appendChild(applicationSearch2);
     dashboardFilters.appendChild(sortBySelect);
     dashboardFilters.appendChild(selectFilter);
     dashboard.innerHTML = '';
     dashboard.appendChild(dashboardFilters);
+    // applications = getProcessedApplications();
     renderTable(applications);
 }
 
@@ -219,16 +212,16 @@ function configurator() {
 }
 
 
-function getProcessedApplications() {
+async function getProcessedApplications() {
     let processedApplications = [...state.applications];
-    // processedApplications = searchApplications(processedApplications, state.search);
+    processedApplications = await searchApplications(processedApplications, state.search);
     // processedApplications = filterApplications(processedApplications, state.filter);
-    // processedApplications = sortApplications(processedApplications, state.sort);
+    processedApplications = sortApplications(processedApplications, state.sort);
 
     return processedApplications;
 }
 
-async function getSearchRequest(){
+async function searchApplications(){
     // console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
@@ -252,7 +245,8 @@ async function getSearchRequest(){
         // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     // }
     // console.log("searchResults", searchResults);
-    await loadApplication(searchResults.applications);
+    // await loadApplication(searchResults.applications);
+    return searchResults.applications;
 }
 
 function sortApplications(applications, sortBy) {
@@ -316,9 +310,6 @@ async function editJobApplication() {
 
     const result = await response.json();
 }
-
-
-
 
 async function addOrEditForm(formType) {    
     inputSection.classList.remove('input-section-off');
@@ -435,7 +426,7 @@ function handleSearch(event) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         console.log("debounced call", Date.now());
-        await getSearchRequest();
+        await getProcessedApplications();
     }, 800); // Debounce delay  
 }
 
@@ -454,4 +445,4 @@ function cancelFormfunc(){
     buttonFeatures.replaceChildren();    
 }
 
-loadApplication();
+loadApplication(); 
