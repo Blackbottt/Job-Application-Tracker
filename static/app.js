@@ -49,13 +49,32 @@ const state = {
     sort: "date-desc"
 };
 
+async function loadApplication(param = false) {
+    let applications;
+
+    if (param) {
+        applications = param;
+        // console.log("applications from search", applications);
+    } else {
+        const response = await fetch('/applications');
+        applications = await response.json();
+        applications = applications.applications; // Access the 'applications' property from the response
+        // console.log("applications", applications);
+    } 
+
+    state.applications = applications; // Update the state with the loaded applications
+
+    getStatistics(applications);
+    loadDashboard(applications);
+}
+
 async function getSearchRequest(){
     // console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
         // console.log("search query is empty, loading all applications");
-        await loadApplications(); // Load all applications if search query is empty
+        await loadApplication(); // Load all applications if search query is empty
         return;
     }
 
@@ -73,7 +92,7 @@ async function getSearchRequest(){
         // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     // }
     // console.log("searchResults", searchResults);
-    loadApplications(searchResults.applications);
+    await loadApplication(searchResults.applications);
 }
 
 function sortApplications(applications, sortBy) {
@@ -267,22 +286,6 @@ function loadDashboard(applications){
     dashboard.appendChild(table);
 }
 
-async function loadApplication(param = false) {
-    let applications;
-
-    if (param) {
-        applications = param;
-        // console.log("applications from search", applications);
-    } else {
-        const response = await fetch('/applications');
-        applications = await response.json();
-        applications = applications.applications; // Access the 'applications' property from the response
-        // console.log("applications", applications);
-    } 
-
-    getStatistics(applications);
-    loadDashboard(applications);
-}
 
 async function addOrEditForm(formType) {    
     inputSection.classList.remove('input-section-off');
@@ -349,7 +352,7 @@ deleteAllApplications.addEventListener("click", async () => {
 
     const result = await response.json();
 
-    await loadApplications();
+    await loadApplication();
 });
 
 cancelForm.addEventListener("click", () => {
@@ -409,7 +412,7 @@ sortBySelect.addEventListener("change", async () => {
     let applications = await response.json();
     applications = applications.applications;
     applications = sortApplications(applications, sortBy);
-    loadApplications(applications);
+    loadApplication(applications);
 });
 
 function cancelFormfunc(){
