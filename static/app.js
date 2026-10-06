@@ -44,6 +44,13 @@ const selectFilterWithdrawn = document.createElement('option');
 
 let searchTimeout;
 
+const state = {
+    applications: [],
+    search: "",
+    filter: "all",
+    sort: "date-desc"
+};
+
 async function getSearchRequest(){
     console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim() || 
@@ -288,7 +295,6 @@ async function loadApplications(param = false) {
     statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
     statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
 
-    applications = sortApplications(applications, 'date');
 
     loadDashboard(applications);
     
