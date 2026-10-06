@@ -82,6 +82,7 @@ function loadDashboard(applications){
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
     const tableHeader = document.createElement('tr');
+
     const dashboardFilters = document.createElement('div');
     // const applicationSearch2 = document.createElement('input');
     // const selectFilter = document.createElement('select');
@@ -90,45 +91,20 @@ function loadDashboard(applications){
     applicationSearch2.id = 'search-application';
     applicationSearch2.classList.add('search-applications');
     applicationSearch2.placeholder = 'Search company, position or platform...';
+
     sortBySelect.name = 'sort-by';
     sortBySelect.id = 'sort-by';
     sortBySelect.classList.add('input-field');
-    sortByDateOption.value = 'date';
-    sortByDateOption.textContent = 'Sort by Date';
-    sortByCompanyOption.value = 'company';
-    sortByCompanyOption.textContent = 'Sort by Company';
-    sortByPositionOption.value = 'position';
-    sortByPositionOption.textContent = 'Sort by Position';
+   
     
     selectFilter.name = 'dashboard-status';
     selectFilter.id = 'dashboard-status';
     selectFilter.classList.add('input-field');
-    // selectFilter.placeholder = 'All Statuses';
-    // selectFilterWishlist.value = 'Wishlist';
-    // selectFilterWishlist.textContent = 'Wishlist';
-    // selectFilterApplied.value = 'Applied';
-    // selectFilterApplied.textContent = 'Applied';
-    // selectFilterInterview.value = 'Interview';
-    // selectFilterInterview.textContent = 'Interview';
-    // selectFilterOffer.value = 'Offer';
-    // selectFilterOffer.textContent = 'Offer';
-    // selectFilterAccepted.value = 'Accepted';
-    // selectFilterAccepted.textContent = 'Accepted';
-    // selectFilterRejected.value = 'Rejected';
-    // selectFilterRejected.textContent = 'Rejected';
-    // selectFilterWithdrawn.value = 'Withdrawn';
-    // selectFilterWithdrawn.textContent = 'Withdrawn';
-
+  
     sortBySelect.appendChild(sortByDateOption);
     sortBySelect.appendChild(sortByCompanyOption);
     sortBySelect.appendChild(sortByPositionOption);
-    // selectFilter.appendChild(selectFilterWishlist);
-    // selectFilter.appendChild(selectFilterApplied);
-    // selectFilter.appendChild(selectFilterInterview);
-    // selectFilter.appendChild(selectFilterOffer);
-    // selectFilter.appendChild(selectFilterAccepted);
-    // selectFilter.appendChild(selectFilterRejected);
-    // selectFilter.appendChild(selectFilterWithdrawn);
+    
 
     dashboardFilters.classList.add('dashboard-filtering');
     table.classList.add('applications-table');
@@ -139,7 +115,24 @@ function loadDashboard(applications){
 
     
     configurator();
-    
+
+    const columns = [
+        { key: "id", label: "ID" },
+        { key: "job_application_date", label: "Date Applied" },
+        { key: "company_name", label: "Company" },
+        { key: "position", label: "Position" },
+        { key: "application_platform", label: "Application Platform" },
+        { key: "job_starting_date", label: "Start Date" },
+        { key: "status", label: "Status" },
+        { key: "notes", label: "Notes" },
+        { key: "job_posting_url", label: "Job URL" }
+    ];
+    columns.forEach(column => {
+        const tableHeading = document.createElement('th');
+        tableHeading.textContent = column.label;
+        tableHeading.classList.add('table-header');
+        tableHeader.appendChild(tableHeading);
+    });
     thead.appendChild(tableHeader);
     table.appendChild(caption);
     table.appendChild(thead);
@@ -148,20 +141,9 @@ function loadDashboard(applications){
         console.log("applications length", typeof applications);
         applications.forEach(application => {
             const tableRow = document.createElement('tr');
-            const values = [
-                application.id,
-                application.job_application_date,
-                application.company_name,
-                application.position,
-                application.application_platform,
-                application.job_starting_date,
-                application.status,
-                application.notes,
-                application.job_posting_url
-            ];
-            values.forEach(value => {
+            columns.forEach(column => {
                 const tableRowCell = document.createElement('td');
-                tableRowCell.textContent = value;
+                tableRowCell.textContent = application[column.key] ?? "";
                 tableRow.appendChild(tableRowCell);
             });
             tbody.appendChild(tableRow);
@@ -176,6 +158,7 @@ function loadDashboard(applications){
     dashboard.appendChild(dashboardFilters);
     dashboard.appendChild(table);
 }
+
 
 function configurator() {
     const config = {
@@ -200,17 +183,6 @@ function configurator() {
             'rejected', 
             'withdrawn'
         ],
-        headers: [
-            'ID',
-            'Date Applied',
-            'Company',
-            'Position',
-            'Application Platform',
-            'Start Date',
-            'Status',
-            'Notes',
-            'Job URL'
-        ]
     };
 
     config.statuses.forEach(status => {
@@ -239,15 +211,6 @@ function configurator() {
 
         selectFilter.appendChild(option);
     });
-
-    config.headers.forEach(header => {
-        const tableHeading = document.createElement('th');
-        tableHeading.textContent = header;
-        tableHeading.classList.add('table-header');
-        tableHeader.appendChild(tableHeading);
-    });
-
-
 }
 
 
