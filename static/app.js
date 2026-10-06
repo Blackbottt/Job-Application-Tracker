@@ -53,9 +53,7 @@ const state = {
 
 async function getSearchRequest(){
     console.log("searching for applications");
-    const searchQuery = applicationSearch.value.trim() || 
-    applicationSearch2.value.trim() || 
-    selectFilter.value.trim();
+    const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
         console.log("search query is empty, loading all applications");
