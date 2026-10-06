@@ -29,6 +29,11 @@ const deleteApplication = document.createElement('button');
 
 const applicationSearch2 = document.createElement('input');
 const selectFilter = document.createElement('select');
+const sortBySelect = document.createElement('select');
+const sortByDateOption = document.createElement('option');
+const sortByCompanyOption = document.createElement('option'); 
+const sortByPositionOption = document.createElement('option');
+
 const selectFilterWishlist = document.createElement('option');
 const selectFilterApplied = document.createElement('option');
 const selectFilterInterview = document.createElement('option');
@@ -393,6 +398,14 @@ function handleSearch(event) {
         await getSearchRequest();
     }, 800); // Debounce delay  
 }
+
+sortBySelect.addEventListener("change", async () => {
+    const sortBy = sortBySelect.value;
+    const response = await fetch('/applications');
+    let applications = await response.json();
+    applications = applications.applications;
+    applications = sortApplications(applications, sortBy);
+});
 
 function cancelFormfunc(){
     inputSection.classList.remove('input-section-on');
