@@ -419,6 +419,7 @@ sortBySelect.addEventListener("change", async () => {
     let applications = await response.json();
     applications = applications.applications;
     applications = sortApplications(applications, sortBy);
+    loadApplications(applications);
 });
 
 function cancelFormfunc(){
