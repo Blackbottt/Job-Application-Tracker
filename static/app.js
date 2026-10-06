@@ -1,3 +1,4 @@
+const applicationSearch = document.getElementById('search-applications');
 const inputSection = document.getElementById('input-section');
 const applicationsForm = document.getElementById('applications-form');
 const jobApplicationDate = document.getElementById('date-applied');
@@ -10,7 +11,6 @@ const job_posting_url = document.getElementById('job-url');
 const notes = document.getElementById('notes');
 const buttonFeatures = document.getElementById('button-features');
 const dashboard = document.getElementById('dashboard');
-const applicationSearch = document.getElementById('search-applications');
 
 const addApplication = document.querySelector('.submit-add-applications');
 const editApplication = document.querySelector('.submit-edit-applications');
@@ -26,14 +26,12 @@ const saveApplication = document.createElement('button');
 const updateApplication = document.createElement('button');
 const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
-
 const applicationSearch2 = document.createElement('input');
 const selectFilter = document.createElement('select');
 const sortBySelect = document.createElement('select');
 const sortByDateOption = document.createElement('option');
 const sortByCompanyOption = document.createElement('option'); 
 const sortByPositionOption = document.createElement('option');
-
 const selectFilterWishlist = document.createElement('option');
 const selectFilterApplied = document.createElement('option');
 const selectFilterInterview = document.createElement('option');
@@ -52,18 +50,17 @@ const state = {
 };
 
 async function getSearchRequest(){
-    console.log("searching for applications");
+    // console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
-        console.log("search query is empty, loading all applications");
+        // console.log("search query is empty, loading all applications");
         await loadApplications(); // Load all applications if search query is empty
         return;
     }
 
     const params = new URLSearchParams({ query: searchQuery });
-    console.log("fetching for applications: ", params);
-
+    // console.log("fetching for applications: ", params);
     const searchResponse = await fetch('/applications?' + params.toString(), {
         method: 'GET',
         headers: {
@@ -75,9 +72,8 @@ async function getSearchRequest(){
     // if (!searchResponse.ok) {
         // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     // }
-    console.log("searchResults", searchResults);
+    // console.log("searchResults", searchResults);
     loadApplications(searchResults.applications);
-
 }
 
 function sortApplications(applications, sortBy) {
@@ -93,15 +89,13 @@ function sortApplications(applications, sortBy) {
 function getStatistics(applications) {
     const totalApplications = applications.length;
     const appliedApplications = applications.filter(app => app.status === 'Applied').length;
-    const interviewedApplications = applications.filter(app => app.status === 'Interviewed').length;
+    const interviewedApplications = applications.filter(app => app.status === 'Interview').length;
     const offersApplications = applications.filter(app => app.status === 'Offer').length;
 
-    return {
-        total: totalApplications,
-        applied: appliedApplications,
-        interviewed: interviewedApplications,
-        offers: offersApplications
-    };
+    statisticsTotal.textContent = totalApplications === undefined ? 0 : totalApplications;
+    statisticsApplied.textContent = appliedApplications === undefined ? 0 : appliedApplications;
+    statisticsInterviewed.textContent = interviewedApplications === undefined ? 0 : interviewedApplications;
+    statisticsOffers.textContent = offersApplications === undefined ? 0 : offersApplications;
 }
 
 async function addJobApplication() {
@@ -278,20 +272,17 @@ async function loadApplications(param = false) {
 
     if (param) {
         applications = param;
-        console.log("applications from search", applications);
+        // console.log("applications from search", applications);
     } else {
         const response = await fetch('/applications');
         applications = await response.json();
         applications = applications.applications; // Access the 'applications' property from the response
-        console.log("applications", applications);
-    }
+        // console.log("applications", applications);
+    } 
 
-    const statistics = getStatistics(applications);
-    console.log("statistics", statistics);
-    statisticsTotal.textContent = statistics.total === undefined ? 0 : statistics.total;
-    statisticsApplied.textContent = statistics.applied === undefined ? 0 : statistics.applied;
-    statisticsInterviewed.textContent = statistics.interviewed === undefined ? 0 : statistics.interviewed;
-    statisticsOffers.textContent = statistics.offers === undefined ? 0 : statistics.offers;
+    getStatistics(applications);
+    // console.log("statistics", statistics);
+   
 
 
     loadDashboard(applications);
