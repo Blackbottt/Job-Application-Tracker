@@ -27,11 +27,14 @@ const updateApplication = document.createElement('button');
 const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
 
+const applicationSearch2 = document.createElement('input');
+
+
 let searchTimeout;
 
 async function getSearchRequest(){
     console.log("searching for applications");
-    const searchQuery = applicationSearch.value.trim();
+    const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
         console.log("search query is empty, loading all applications");
@@ -133,7 +136,7 @@ function loadDashboard(applications){
     const tbody = document.createElement('tbody');
     const tableHeader = document.createElement('tr');
     const dashboardFilters = document.createElement('div');
-    const applicationSearch2 = document.createElement('input');
+    // const applicationSearch2 = document.createElement('input');
     const selectFilter = document.createElement('select');
     const selectFilterWishlist = document.createElement('option');
     const selectFilterApplied = document.createElement('option');
@@ -367,10 +370,10 @@ deleteApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-applicationSearch.addEventListener("input", handleSearch)
-applicationSearch2.addEventListener("input", handleSearch)
+applicationSearch.addEventListener("input", handleSearch);
+applicationSearch2.addEventListener("input", handleSearch);
 
-async function handleSearch(event) {    
+function handleSearch(event) {    
     console.log("input event", Date.now());
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
