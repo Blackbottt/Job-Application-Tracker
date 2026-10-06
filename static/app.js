@@ -134,12 +134,47 @@ function loadDashboard(applications){
     const tableHeader = document.createElement('tr');
     const dashboardFilters = document.createElement('div');
     const applicationSearch2 = document.createElement('input');
+    const selectFilter = document.createElement('select');
+    const selectFilterWishlist = document.createElement('option');
+    const selectFilterApplied = document.createElement('option');
+    const selectFilterInterview = document.createElement('option');
+    const selectFilterOffer = document.createElement('option');
+    const selectFilterAccepted = document.createElement('option');
+    const selectFilterRejected = document.createElement('option');
+    const selectFilterWithdrawn = document.createElement('option');
 
     applicationSearch2.type = 'search';
     applicationSearch2.name = 'search-applications';
     applicationSearch2.id = 'search-application';
     applicationSearch2.classList.add('search-applications');
     applicationSearch2.placeholder = 'Search company, position or platform...';
+    selectFilter.name = 'dashboard-status';
+    selectFilter.id = 'dashboard-status';
+    selectFilter.classList.add('input-field');
+    selectFilter.placeholder = 'All Statuses';
+    selectFilterWishlist.value = 'Wishlist';
+    selectFilterWishlist.textContent = 'Wishlist';
+    selectFilterApplied.value = 'Applied';
+    selectFilterApplied.textContent = 'Applied';
+    selectFilterInterview.value = 'Interview';
+    selectFilterInterview.textContent = 'Interview';
+    selectFilterOffer.value = 'Offer';
+    selectFilterOffer.textContent = 'Offer';
+    selectFilterAccepted.value = 'Accepted';
+    selectFilterAccepted.textContent = 'Accepted';
+    selectFilterRejected.value = 'Rejected';
+    selectFilterRejected.textContent = 'Rejected';
+    selectFilterWithdrawn.value = 'Withdrawn';
+    selectFilterWithdrawn.textContent = 'Withdrawn';
+
+    selectFilter.appendChild(selectFilterWishlist);
+    selectFilter.appendChild(selectFilterApplied);
+    selectFilter.appendChild(selectFilterInterview);
+    selectFilter.appendChild(selectFilterOffer);
+    selectFilter.appendChild(selectFilterAccepted);
+    selectFilter.appendChild(selectFilterRejected);
+    selectFilter.appendChild(selectFilterWithdrawn);
+
     dashboardFilters.classList.add('dashboard-filtering');
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
@@ -194,11 +229,11 @@ function loadDashboard(applications){
         });
     }
 
-
     dashboardFilters.appendChild(applicationSearch2);
-    dashboard.appendChild(dashboardFilters);
+    dashboardFilters.appendChild(selectFilter);
     table.appendChild(tbody);
     dashboard.innerHTML = '';
+    dashboard.appendChild(dashboardFilters);
     dashboard.appendChild(table);
 }
 
