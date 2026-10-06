@@ -70,8 +70,19 @@ async function getSearchRequest(){
 
 }
 
-function getFilteredResults(filter) {
-    
+function sortApplications(applications, sortBy) {
+    return applications.sort((a, b) => {
+        if (sortBy === 'date') {    
+            return new Date(b.job_application_date) - new Date(a.job_application_date);
+        }
+        return 0;
+    });
+}
+
+function filterApplications(applications, filterBy) {
+    if (!filterBy) {
+        return applications;
+    }   
 }
 
 function getStatistics(applications) {
