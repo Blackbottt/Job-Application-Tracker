@@ -77,15 +77,9 @@ function getStatistics(applications) {
 }
 
 function loadDashboard(applications){
-    const table = document.createElement('table');
-    const caption = document.createElement('caption');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-    const tableHeader = document.createElement('tr');
-
+    
     const dashboardFilters = document.createElement('div');
-    // const applicationSearch2 = document.createElement('input');
-    // const selectFilter = document.createElement('select');
+
     applicationSearch2.type = 'search';
     applicationSearch2.name = 'search-applications';
     applicationSearch2.id = 'search-application';
@@ -95,7 +89,6 @@ function loadDashboard(applications){
     sortBySelect.name = 'sort-by';
     sortBySelect.id = 'sort-by';
     sortBySelect.classList.add('input-field');
-   
     
     selectFilter.name = 'dashboard-status';
     selectFilter.id = 'dashboard-status';
@@ -104,18 +97,34 @@ function loadDashboard(applications){
     sortBySelect.appendChild(sortByDateOption);
     sortBySelect.appendChild(sortByCompanyOption);
     sortBySelect.appendChild(sortByPositionOption);
-    
 
     dashboardFilters.classList.add('dashboard-filtering');
+    
+
+    configurator();
+    
+    
+    dashboardFilters.appendChild(applicationSearch2);
+    dashboardFilters.appendChild(sortBySelect);
+    dashboardFilters.appendChild(selectFilter);
+    dashboard.innerHTML = '';
+    dashboard.appendChild(dashboardFilters);
+    renderTable(applications);
+}
+
+function renderTable(applications) {
+    const table = document.createElement('table');
+    const caption = document.createElement('caption');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const tableHeader = document.createElement('tr');
+    
     table.classList.add('applications-table');
     caption.classList.add('applications-caption');
     thead.classList.add('applications-thead');
     tbody.classList.add('applications-tbody');
     caption.textContent = 'Job Applications';
-
     
-    configurator();
-
     const columns = [
         { key: "id", label: "ID" },
         { key: "job_application_date", label: "Date Applied" },
@@ -127,12 +136,14 @@ function loadDashboard(applications){
         { key: "notes", label: "Notes" },
         { key: "job_posting_url", label: "Job URL" }
     ];
+
     columns.forEach(column => {
         const tableHeading = document.createElement('th');
         tableHeading.textContent = column.label;
         tableHeading.classList.add('table-header');
         tableHeader.appendChild(tableHeading);
     });
+
     thead.appendChild(tableHeader);
     table.appendChild(caption);
     table.appendChild(thead);
@@ -150,15 +161,9 @@ function loadDashboard(applications){
         });
     }
 
-    dashboardFilters.appendChild(applicationSearch2);
-    dashboardFilters.appendChild(sortBySelect);
-    dashboardFilters.appendChild(selectFilter);
     table.appendChild(tbody);
-    dashboard.innerHTML = '';
-    dashboard.appendChild(dashboardFilters);
     dashboard.appendChild(table);
 }
-
 
 function configurator() {
     const config = {
