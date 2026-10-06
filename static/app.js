@@ -367,14 +367,17 @@ deleteApplication.addEventListener("click", async () => {
     await loadApplications();
 });
 
-applicationSearch.addEventListener("input", async () => {
+applicationSearch.addEventListener("input", handleSearch)
+applicationSearch2.addEventListener("input", handleSearch)
+
+async function handleSearch(event) {    
     console.log("input event", Date.now());
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         console.log("debounced call", Date.now());
         await getSearchRequest();
     }, 800); // Debounce delay  
-});
+}
 
 function cancelFormfunc(){
     inputSection.classList.remove('input-section-on');
