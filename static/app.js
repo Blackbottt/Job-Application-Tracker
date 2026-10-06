@@ -267,7 +267,7 @@ function loadDashboard(applications){
     dashboard.appendChild(table);
 }
 
-async function loadApplications(param = false) {
+async function loadApplication(param = false) {
     let applications;
 
     if (param) {
@@ -418,4 +418,4 @@ function cancelFormfunc(){
     buttonFeatures.replaceChildren();    
 }
 
-loadApplications();
+loadApplication();
