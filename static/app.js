@@ -28,13 +28,16 @@ const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
 
 const applicationSearch2 = document.createElement('input');
+const selectFilter = document.createElement('select');
 
 
 let searchTimeout;
 
 async function getSearchRequest(){
     console.log("searching for applications");
-    const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
+    const searchQuery = applicationSearch.value.trim() || 
+    applicationSearch2.value.trim() || 
+    selectFilter.value.trim();
 
     if (!searchQuery) {
         console.log("search query is empty, loading all applications");
@@ -137,7 +140,7 @@ function loadDashboard(applications){
     const tableHeader = document.createElement('tr');
     const dashboardFilters = document.createElement('div');
     // const applicationSearch2 = document.createElement('input');
-    const selectFilter = document.createElement('select');
+    // const selectFilter = document.createElement('select');
     const selectFilterWishlist = document.createElement('option');
     const selectFilterApplied = document.createElement('option');
     const selectFilterInterview = document.createElement('option');
@@ -372,6 +375,7 @@ deleteApplication.addEventListener("click", async () => {
 
 applicationSearch.addEventListener("input", handleSearch);
 applicationSearch2.addEventListener("input", handleSearch);
+selectFilter.addEventListener("change", handleSearch);
 
 function handleSearch(event) {    
     console.log("input event", Date.now());
