@@ -214,6 +214,7 @@ function configurator() {
 
 async function getProcessedApplications() {
     let processedApplications = [...state.applications];
+    console.log("state.search", state.search);
     processedApplications = await searchApplications(processedApplications, state.search);
     // processedApplications = filterApplications(processedApplications, state.filter);
     processedApplications = sortApplications(processedApplications, state.sort);
@@ -426,6 +427,7 @@ function handleSearch(event) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         console.log("debounced call", Date.now());
+        state.search = event.target.value.trim();
         await getProcessedApplications();
     }, 800); // Debounce delay  
 }
