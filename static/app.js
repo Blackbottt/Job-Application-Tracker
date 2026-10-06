@@ -281,21 +281,7 @@ async function loadApplications(param = false) {
     } 
 
     getStatistics(applications);
-    // console.log("statistics", statistics);
-   
-
-
     loadDashboard(applications);
-    
-    jobApplicationDate.value = "";
-    company_name.value = "";
-    position.value = "";
-    applicationPlatform.value = "";
-    jobStartingDate.value = "";
-    statusOfApplication.value = "";
-    job_posting_url.value = "";
-    notes.value = "";
-    editOrDeleteId.value = "";
 }
 
 async function addOrEditForm(formType) {    
@@ -333,6 +319,15 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(updateApplication);
         applicationsForm.appendChild(editOrDeleteId);
     }
+    jobApplicationDate.value = "";
+    company_name.value = "";
+    position.value = "";
+    applicationPlatform.value = "";
+    jobStartingDate.value = "";
+    statusOfApplication.value = "";
+    job_posting_url.value = "";
+    notes.value = "";
+    editOrDeleteId.value = "";
 }
 
 addApplication.addEventListener("click", async () => {
