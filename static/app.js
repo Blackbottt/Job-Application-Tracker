@@ -165,6 +165,16 @@ function loadDashboard(applications){
     applicationSearch2.id = 'search-application';
     applicationSearch2.classList.add('search-applications');
     applicationSearch2.placeholder = 'Search company, position or platform...';
+    sortBySelect.name = 'sort-by';
+    sortBySelect.id = 'sort-by';
+    sortBySelect.classList.add('input-field');
+    sortByDateOption.value = 'date';
+    sortByDateOption.textContent = 'Sort by Date';
+    sortByCompanyOption.value = 'company';
+    sortByCompanyOption.textContent = 'Sort by Company';
+    sortByPositionOption.value = 'position';
+    sortByPositionOption.textContent = 'Sort by Position';
+    
     selectFilter.name = 'dashboard-status';
     selectFilter.id = 'dashboard-status';
     selectFilter.classList.add('input-field');
@@ -184,6 +194,9 @@ function loadDashboard(applications){
     selectFilterWithdrawn.value = 'Withdrawn';
     selectFilterWithdrawn.textContent = 'Withdrawn';
 
+    sortBySelect.appendChild(sortByDateOption);
+    sortBySelect.appendChild(sortByCompanyOption);
+    sortBySelect.appendChild(sortByPositionOption);
     selectFilter.appendChild(selectFilterWishlist);
     selectFilter.appendChild(selectFilterApplied);
     selectFilter.appendChild(selectFilterInterview);
@@ -247,6 +260,7 @@ function loadDashboard(applications){
     }
 
     dashboardFilters.appendChild(applicationSearch2);
+    dashboardFilters.appendChild(sortBySelect);
     dashboardFilters.appendChild(selectFilter);
     table.appendChild(tbody);
     dashboard.innerHTML = '';
