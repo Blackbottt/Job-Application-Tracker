@@ -41,20 +41,20 @@ const state = {
     sort: "date-desc"
 };
 
-async function loadApplication(param = false) {
-    if (param) {
-        state.applications = param;
-        // console.log("applications from search", applications);
-    } else {
+async function renderApplication(param = false) {
+    if (!param) {
         const response = await fetch('/applications');
         state.applications = await response.json();
         state.applications = state.applications.applications; // Access the 'applications' property from the response
          // console.log("applications", state.applications);
     } 
-         console.log("applications", state.applications);
 
-    getStatistics(state.applications);
-    loadDashboard(state.applications);
+    let applicationsToRender = param || state.applications;
+     console.log("applications", state.applications);
+     console.log("applications2", param);
+
+    getStatistics(applicationsToRender);
+    loadDashboard(applicationsToRender);
 }
 
 function getStatistics(applications) {
@@ -231,7 +231,7 @@ async function getProcessedApplications(processType = "all") {
         console.log("App123", processedApplications);
     }
     console.log("processedApplications", processedApplications);
-    loadApplication(processedApplications);
+    renderApplication(processedApplications);
     return processedApplications;
 }
 
@@ -241,7 +241,7 @@ async function searchApplications(){
 
     if (!searchQuery) {
         // console.log("search query is empty, loading all applications");
-        await loadApplication(); // Load all applications if search query is empty
+        await renderApplication(); // Load all applications if search query is empty
         return;
     }
 
@@ -259,8 +259,8 @@ async function searchApplications(){
         // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     // }
     // console.log("searchResults", searchResults);
-    // await loadApplication(searchResults.applications);
-    return searchResults.applications;
+    // await renderApplication(searchResults.applications);
+    return searchResults.applications; 
 }
 
 function sortApplications(applications, sortBy) {
@@ -407,7 +407,7 @@ deleteAllApplications.addEventListener("click", async () => {
 
     const result = await response.json();
 
-    await loadApplication();
+    await renderApplication();
 });
 
 cancelForm.addEventListener("click", () => {
@@ -445,7 +445,7 @@ deleteApplication.addEventListener("click", async () => {
     
     const result = await response.json();
 
-    await loadApplication();
+    await renderApplication();
 });
 
 applicationSearch.addEventListener("input", handleSearch);
@@ -480,4 +480,4 @@ function cancelFormfunc(){
     buttonFeatures.replaceChildren();    
 }
 
-loadApplication(); 
+renderApplication(); 
