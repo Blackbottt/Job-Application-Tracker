@@ -91,7 +91,6 @@ function loadDashboard(applications){
     dashboardFilters.appendChild(selectFilter);
     dashboard.innerHTML = '';
     dashboard.appendChild(dashboardFilters);
-    applications = getProcessedApplications();
     renderTable(applications);
 }
 
@@ -208,7 +207,8 @@ async function getProcessedApplications() {
     processedApplications = await searchApplications(processedApplications, state.search);
     // processedApplications = filterApplications(processedApplications, state.filter);
     processedApplications = sortApplications(processedApplications, state.sort);
-
+    console.log("processedApplications", processedApplications);
+    loadApplication(processedApplications);
     return processedApplications;
 }
 
