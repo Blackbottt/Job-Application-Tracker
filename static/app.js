@@ -203,13 +203,19 @@ function renderTable(applications) {
     dashboard.appendChild(table);
 }
 
-async function getProcessedApplications() {
+async function getProcessedApplications(processType = "all") {
     let processedApplications = [...state.applications];
     
     console.log("state.search", state.search);
-    processedApplications = await searchApplications(processedApplications, state.search);
-    // processedApplications = filterApplications(processedApplications, state.filter);
-    processedApplications = sortApplications(processedApplications, state.sort);
+    if (processType === "search" && state.search.trim() !== "") {
+        processedApplications = await searchApplications();
+        state.search = "";
+    // } else if (processType === "filter" && state.filter !== "all") {
+        // processedApplications = filterApplications(processedApplications, state.filter);
+    } else if (processType === "sort" && state.sort) {
+        processedApplications = sortApplications(processedApplications, state.sort);
+        state.sort = "date-desc";
+    }
     console.log("processedApplications", processedApplications);
     loadApplication(processedApplications);
     return processedApplications;
@@ -422,14 +428,14 @@ function handleSearch(event) {
     searchTimeout = setTimeout(async () => {
         console.log("debounced call", Date.now());
         state.search = event.target.value.trim();
-        await getProcessedApplications();
+        await getProcessedApplications("search");
     }, 800); // Debounce delay  
 }
 
 sortBySelect.addEventListener("change", async () => {
     const sortBy = sortBySelect.value;
     state.sort = sortBy;
-    await getProcessedApplications();
+    await getProcessedApplications("sort");
 });
 
 function cancelFormfunc(){
