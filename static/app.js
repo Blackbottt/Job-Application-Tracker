@@ -106,14 +106,14 @@ function configurator() {
     };
     console.log("config", sortBySelect.length);
     if (sortBySelect.length === 0 && selectFilter.length === 0) {
-        config.statuses.forEach(status => {
-            const option = document.createElement("option");
+        // config.statuses.forEach(status => {
+        //     const option = document.createElement("option");
 
-            option.value = status;
-            option.textContent = status;
+        //     option.value = status;
+        //     option.textContent = status;
 
-            selectFilter.appendChild(option);
-        });
+        //     selectFilter.appendChild(option);
+        // });
 
         config.sortOptions.forEach(sortOption => {
             const option = document.createElement("option");
@@ -218,8 +218,8 @@ async function getProcessedApplications(processType = "all") {
     if (processType === "search" && state.search.trim() !== "") {
         processedApplications = await searchApplications();
         state.search = "";
-    // } else if (processType === "filter" && state.filter !== "all") {
-        // processedApplications = filterApplications(processedApplications, state.filter);
+    } else if (processType === "filter" && state.filter !== "all") {
+        processedApplications = filterApplications(processedApplications, state.filter);
     } else if (processType === "sort" && state.sort) {
         processedApplications = sortApplications(processedApplications, state.sort);
         state.sort = "date-desc";
@@ -266,6 +266,16 @@ function sortApplications(applications, sortBy) {
     };
     const sortFunction = sortFunctions[sortBy] || ((a, b) => 0);
     return sortedApplications.sort(sortFunction);
+}
+
+function filterApplications(applications, status) {
+    if (!status || status === "all") {
+        return applications;
+    }
+
+    return applications.filter(
+        application => application.status === status
+    );
 }
 
 async function addJobApplication() {
@@ -442,6 +452,12 @@ sortBySelect.addEventListener("change", async () => {
     const sortBy = sortBySelect.value;
     state.sort = sortBy;
     await getProcessedApplications("sort");
+});
+
+selectFilter.addEventListener("change", async () => {
+    const filterBy = selectFilter.value;
+    state.filter = filterBy;
+    await getProcessedApplications("filter");
 });
 
 function cancelFormfunc(){
