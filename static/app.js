@@ -94,6 +94,62 @@ function loadDashboard(applications){
     renderTable(applications);
 }
 
+function configurator() {
+    const config = {
+        statuses: [
+            'Wishlist', 
+            'Applied', 
+            'Interview', 
+            'Offer', 
+            'Accepted', 
+            'Rejected', 
+            'Withdrawn'
+        ],
+        sortOptions: [
+            'date', 
+            'company', 
+            'position'
+        ],
+        filterOptions: [
+            'all', 
+            'wishlist', 
+            'applied', 
+            'interview', 
+            'offer', 
+            'accepted', 
+            'rejected', 
+            'withdrawn'
+        ]
+    };
+
+    config.statuses.forEach(status => {
+        const option = document.createElement("option");
+
+        option.value = status;
+        option.textContent = status;
+
+        selectFilter.appendChild(option);
+    });
+
+    config.sortOptions.forEach(sortOption => {
+        const option = document.createElement("option");
+
+        option.value = sortOption;
+        option.textContent = sortOption;
+
+        sortBySelect.appendChild(option);
+    });
+
+    config.filterOptions.forEach(filterOption => {
+        const option = document.createElement("option");
+
+        option.value = filterOption;
+        option.textContent = filterOption;
+
+        selectFilter.appendChild(option);
+    });
+}
+
 function renderTable(applications) {
     const table = document.createElement('table');
     const caption = document.createElement('caption');
@@ -147,62 +203,9 @@ function renderTable(applications) {
     dashboard.appendChild(table);
 }
 
-function configurator() {
-    const config = {
-        statuses: ['Wishlist', 
-            'Applied', 
-            'Interview', 
-            'Offer', 
-            'Accepted', 
-            'Rejected', 
-            'Withdrawn'
-        ],
-        sortOptions: ['date', 
-            'company', 
-            'position'
-        ],
-        filterOptions: ['all', 
-            'wishlist', 
-            'applied', 
-            'interview', 
-            'offer', 
-            'accepted', 
-            'rejected', 
-            'withdrawn'
-        ],
-    };
-
-    config.statuses.forEach(status => {
-        const option = document.createElement("option");
-
-        option.value = status;
-        option.textContent = status;
-
-        selectFilter.appendChild(option);
-    });
-
-    config.sortOptions.forEach(sortOption => {
-        const option = document.createElement("option");
-
-        option.value = sortOption;
-        option.textContent = sortOption;
-
-        sortBySelect.appendChild(option);
-    });
-
-    config.filterOptions.forEach(filterOption => {
-        const option = document.createElement("option");
-
-        option.value = filterOption;
-        option.textContent = filterOption;
-
-        selectFilter.appendChild(option);
-    });
-}
-
-
 async function getProcessedApplications() {
     let processedApplications = [...state.applications];
+    
     console.log("state.search", state.search);
     processedApplications = await searchApplications(processedApplications, state.search);
     // processedApplications = filterApplications(processedApplications, state.filter);
@@ -242,12 +245,13 @@ async function searchApplications(){
 
 function sortApplications(applications, sortBy) {
     let sortedApplications = [...applications]; // Create a copy of the applications array
-    return sortedApplications.sort((a, b) => {
-        if (sortBy === 'date') {    
-            return new Date(b.job_application_date) - new Date(a.job_application_date);
-        }
-        return 0;
-    });
+    const sortFunctions = {
+        'date': (a, b) => new Date(b.job_application_date) - new Date(a.job_application_date),
+        'company': (a, b) => a.company_name.localeCompare(b.company_name),
+        'position': (a, b) => a.position.localeCompare(b.position)
+    };
+    const sortFunction = sortFunctions[sortBy] || ((a, b) => 0);
+    return sortedApplications.sort(sortFunction);
 }
 
 
@@ -424,11 +428,8 @@ function handleSearch(event) {
 
 sortBySelect.addEventListener("change", async () => {
     const sortBy = sortBySelect.value;
-    const response = await fetch('/applications');
-    let applications = await response.json();
-    applications = applications.applications;
-    applications = sortApplications(applications, sortBy);
-    loadApplication(applications);
+    state.sort = sortBy;
+    await getProcessedApplications();
 });
 
 function cancelFormfunc(){
