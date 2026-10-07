@@ -43,14 +43,11 @@ const state = {
 async function renderApplication(param = false) {
     if (!param) {
         const response = await fetch('/applications');
-        state.applications = await response.json();
-        state.applications = state.applications.applications; // Access the 'applications' property from the response
+        data = await response.json();
     } 
+    state.applications = data.applications; // Access the 'applications' property from the response
 
-    let applicationsToRender = param || state.applications;
-
-    getStatistics(applicationsToRender);
-    loadDashboard(applicationsToRender);
+    updateDashboard();
 }
 
 function updateDashboard() {
