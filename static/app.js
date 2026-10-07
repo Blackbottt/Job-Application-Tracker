@@ -31,7 +31,6 @@ const applicationSearch2 = document.createElement('input');
 const selectFilter = document.createElement('select');
 const sortBySelect = document.createElement('select');
 
-
 let searchTimeout;
 
 const state = {
@@ -46,12 +45,9 @@ async function renderApplication(param = false) {
         const response = await fetch('/applications');
         state.applications = await response.json();
         state.applications = state.applications.applications; // Access the 'applications' property from the response
-         // console.log("applications", state.applications);
     } 
 
     let applicationsToRender = param || state.applications;
-     console.log("applications", state.applications);
-     console.log("applications2", param);
 
     getStatistics(applicationsToRender);
     loadDashboard(applicationsToRender);
@@ -72,9 +68,7 @@ function getStatistics(applications) {
 function loadDashboard(applications){
     dashboard.innerHTML = '';
     renderDashboardFilters();
-    
     configurator();
-
     renderTable(applications);
 }
 
@@ -105,17 +99,8 @@ function configurator() {
             'withdrawn'
         ]
     };
-    console.log("config", sortBySelect.length);
+
     if (sortBySelect.length === 0 && selectFilter.length === 0) {
-        // config.statuses.forEach(status => {
-        //     const option = document.createElement("option");
-
-        //     option.value = status;
-        //     option.textContent = status;
-
-        //     selectFilter.appendChild(option);
-        // });
-
         config.sortOptions.forEach(sortOption => {
             const option = document.createElement("option");
 
@@ -196,7 +181,6 @@ function renderTable(applications) {
     table.appendChild(thead);
 
     if (applications) {
-        console.log("applications length", typeof applications);
         applications.forEach(application => {
             const tableRow = document.createElement('tr');
             columns.forEach(column => {
@@ -215,51 +199,37 @@ function renderTable(applications) {
 async function getProcessedApplications(processType = "all") {
     let processedApplications = [...state.applications];
     
-    console.log("state.search", state.search);
-    console.log("App", processedApplications);
     if (processType === "search" && state.search.trim() !== "") {
         processedApplications = await searchApplications();
-        state.search = "";
-        console.log("App1", processedApplications);
     } else if (processType === "filter" && state.filter) {
-        console.log("filtering applications by status:", state.filter);
         processedApplications = filterApplications(processedApplications, state.filter);
-        console.log("App12", processedApplications);
     } else if (processType === "sort" && state.sort) {
         processedApplications = sortApplications(processedApplications, state.sort);
-        state.sort = "date-desc";
-        console.log("App123", processedApplications);
     }
-    console.log("processedApplications", processedApplications);
+
     renderApplication(processedApplications);
     return processedApplications;
 }
 
 async function searchApplications(){
-    // console.log("searching for applications");
     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
-        // console.log("search query is empty, loading all applications");
         await renderApplication(); // Load all applications if search query is empty
         return;
     }
 
     const params = new URLSearchParams({ query: searchQuery });
-    // console.log("fetching for applications: ", params);
     const searchResponse = await fetch('/applications?' + params.toString(), {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     }); 
-    // console.log("searchResponse", searchResponse.json());
     const searchResults = await searchResponse.json();
-    // if (!searchResponse.ok) {
-        // throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
-    // }
-    // console.log("searchResults", searchResults);
-    // await renderApplication(searchResults.applications);
+    if (!searchResponse.ok) {
+        throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
+    }
     return searchResults.applications; 
 }
 
@@ -275,25 +245,18 @@ function sortApplications(applications, sortBy) {
 }
 
 function filterApplications(applications, status) {
-    console.log("filtering applications by statusFunc:", status);
-    console.log("filtering applications by statusApps:", applications);
     let filteredApplications = [...applications]; // Create a copy of the applications array
 
     if (!status || status === "all") {
         return applications;
     }
-    console.log("filtered:", typeof filteredApplications);
-    console.log("filtered applications by status:", filteredApplications);
 
     return filteredApplications.filter(
         application => application.status.toLowerCase() === status.toLowerCase()
     );
-    // console.log("filtered applications:", filtered);
-    // return filtered
 }
 
 async function addJobApplication() {
-    console.log("5 for start add");
     await fetch('/applications', {
         method: 'POST',
         headers: {  
@@ -310,7 +273,6 @@ async function addJobApplication() {
             notes: notes.value
         })
     });
-    console.log("55 for end add");
 }
 
 async function editJobApplication() {
@@ -351,7 +313,6 @@ async function addOrEditForm(formType) {
     updateApplication.classList.add('form-button');
     deleteApplication.classList.add('form-button');
     editOrDeleteId.classList.add('id-edit-delete');
-    // deleteApplication.classList.add('submit-delete-application');
 
     cancelForm.textContent = 'Cancel';
     clearForm.textContent = 'Clear Form';
@@ -359,12 +320,7 @@ async function addOrEditForm(formType) {
     updateApplication.textContent = 'Update Application';
     editOrDeleteId.placeholder = 'ID: Edit/Delete';
     deleteApplication.textContent = 'Delete';
-    // deleteAllApplications.textContent = 'Delete All Applications';
-    // deleteAllApplications.classList.add('submit-delete-applications');
-    // buttonFeatures.appendChild(editOrDeleteId);
-    // buttonFeatures.appendChild(editApplication);
-    // buttonFeatures.appendChild(deleteApplication);
-    // buttonFeatures.appendChild(deleteAllApplications);
+
     if (formType == 'add') {
         buttonFeatures.appendChild(clearForm);
         buttonFeatures.appendChild(cancelForm);
@@ -377,6 +333,7 @@ async function addOrEditForm(formType) {
         buttonFeatures.appendChild(updateApplication);
         applicationsForm.appendChild(editOrDeleteId);
     }
+
     jobApplicationDate.value = "";
     company_name.value = "";
     position.value = "";
@@ -424,13 +381,13 @@ clearForm.addEventListener("click", () => {
 saveApplication.addEventListener("click", async () => {
     await addJobApplication();
     cancelFormfunc();
-    await loadApplication();
+    await renderApplication();
 });
 
 updateApplication.addEventListener("click", async () => {
     await editJobApplication();
     cancelFormfunc();
-    await loadApplication();
+    await renderApplication();
 });
 
 deleteApplication.addEventListener("click", async () => {
@@ -450,13 +407,10 @@ deleteApplication.addEventListener("click", async () => {
 
 applicationSearch.addEventListener("input", handleSearch);
 applicationSearch2.addEventListener("input", handleSearch);
-// selectFilter.addEventListener("change", handleSearch);
 
 function handleSearch(event) {    
-    console.log("input event", Date.now());
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
-        console.log("debounced call", Date.now());
         state.search = event.target.value.trim();
         await getProcessedApplications("search");
     }, 800); // Debounce delay  
