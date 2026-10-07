@@ -51,6 +51,7 @@ async function loadApplication(param = false) {
         state.applications = state.applications.applications; // Access the 'applications' property from the response
          // console.log("applications", state.applications);
     } 
+         console.log("applications", state.applications);
 
     getStatistics(state.applications);
     loadDashboard(state.applications);
@@ -215,14 +216,19 @@ async function getProcessedApplications(processType = "all") {
     let processedApplications = [...state.applications];
     
     console.log("state.search", state.search);
+    console.log("App", processedApplications);
     if (processType === "search" && state.search.trim() !== "") {
         processedApplications = await searchApplications();
         state.search = "";
-    } else if (processType === "filter" && state.filter !== "all") {
+        console.log("App1", processedApplications);
+    } else if (processType === "filter" && state.filter) {
+        console.log("filtering applications by status:", state.filter);
         processedApplications = filterApplications(processedApplications, state.filter);
+        console.log("App12", processedApplications);
     } else if (processType === "sort" && state.sort) {
         processedApplications = sortApplications(processedApplications, state.sort);
         state.sort = "date-desc";
+        console.log("App123", processedApplications);
     }
     console.log("processedApplications", processedApplications);
     loadApplication(processedApplications);
@@ -269,13 +275,21 @@ function sortApplications(applications, sortBy) {
 }
 
 function filterApplications(applications, status) {
+    console.log("filtering applications by statusFunc:", status);
+    console.log("filtering applications by statusApps:", applications);
+    let filteredApplications = [...applications]; // Create a copy of the applications array
+
     if (!status || status === "all") {
         return applications;
     }
+    console.log("filtered:", typeof filteredApplications);
+    console.log("filtered applications by status:", filteredApplications);
 
-    return applications.filter(
-        application => application.status === status
+    return filteredApplications.filter(
+        application => application.status.toLowerCase() === status.toLowerCase()
     );
+    // console.log("filtered applications:", filtered);
+    // return filtered
 }
 
 async function addJobApplication() {
