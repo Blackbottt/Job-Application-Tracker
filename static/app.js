@@ -53,16 +53,31 @@ async function renderApplication(param = false) {
     loadDashboard(applicationsToRender);
 }
 
+function updateDashboard() {
+    const applications = [...state.applications];
+
+    const statistics = getStatistics(applications);
+
+    statisticsTotal.textContent = statistics.total;
+    statisticsApplied.textContent = statistics.applied;
+    statisticsInterviewed.textContent = statistics.interviewed;
+    statisticsOffers.textContent = statistics.offers;
+
+    loadDashboard(applications);
+}
+
 function getStatistics(applications) {
     const totalApplications = applications.length;
     const appliedApplications = applications.filter(app => app.status === 'Applied').length;
     const interviewedApplications = applications.filter(app => app.status === 'Interview').length;
     const offersApplications = applications.filter(app => app.status === 'Offer').length;
 
-    statisticsTotal.textContent = totalApplications === undefined ? 0 : totalApplications;
-    statisticsApplied.textContent = appliedApplications === undefined ? 0 : appliedApplications;
-    statisticsInterviewed.textContent = interviewedApplications === undefined ? 0 : interviewedApplications;
-    statisticsOffers.textContent = offersApplications === undefined ? 0 : offersApplications;
+    return {
+        total: totalApplications,
+        applied: appliedApplications,
+        interviewed: interviewedApplications,
+        offers: offersApplications
+    };
 }
 
 function loadDashboard(applications){
@@ -208,7 +223,7 @@ async function getProcessedApplications(processType = "all") {
     }
 
     renderApplication(processedApplications);
-    return processedApplications;
+    // return processedApplications;
 }
 
 async function searchApplications(){
