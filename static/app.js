@@ -99,6 +99,7 @@ function renderDashboardFilters() {
     sortBySelect.id = 'sort-by';
     selectFilter.id = 'dashboard-status';
     
+    dashboardCaption.classList.add('dashboardCaption');
     dashboardHeader.classList.add('dashboardHeader');
     dashboardHeaderCount.classList.add('dashboardHeaderCount');
     applicationSearch2.classList.add('search-applications');
