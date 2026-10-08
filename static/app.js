@@ -317,8 +317,7 @@ async function getProcessedApplications(applications) {
     processedApplications = filterApplications(processedApplications, state.filter);
     processedApplications = sortApplications(processedApplications, state.sort);
 
-    renderApplication(processedApplications);
-    // return processedApplications;
+    return processedApplications;
 }
 
 async function searchApplications(){
