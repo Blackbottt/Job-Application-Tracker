@@ -15,26 +15,7 @@ def dashboard ():
 
 @app.route('/applications', methods=["GET"])
 def retrieve_applications_route():
-    print("ROUTE HIT: /applications")
-
-    query = request.args.get("query", "").strip()
-    print("QUERY:", repr(query))
-
-    if query:
-        data, is_valid = logic.string_validation(query)
-
-        if not is_valid:
-            return {"error": data}, 400
-
-        print("SEARCH QUERY:", repr(data))
-        applications = logic.search_job_applications(data)
-
-    else:
-        print("NO QUERY — retrieving all applications")
-        applications = logic.get_job_applications()
-
-    print("APPLICATIONS:", applications)
-
+    applications = logic.get_job_applications()
     return jsonify({"applications": applications})
 
 @app.route('/applications', methods=["POST"])
