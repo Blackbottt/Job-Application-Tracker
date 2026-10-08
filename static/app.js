@@ -46,10 +46,10 @@ async function renderApplication() {
 
     state.applications = data.applications; // Access the 'applications' property from the response
 
-    await updateDashboard();
+    updateDashboard();
 }
 
-async function updateDashboard() {
+function updateDashboard() {
     let applications = [...state.applications];
     const statistics = getStatistics(applications);
 
@@ -440,15 +440,13 @@ applicationSearch.addEventListener("input", handleSearch);
 applicationSearch2.addEventListener("input", handleSearch);
 
 sortBySelect.addEventListener("change", async () => {
-    const sortBy = sortBySelect.value;
-    state.sort = sortBy;
-    await renderApplication();
+    state.sort = sortBySelect.value;
+    updateDashboard();
 });
 
 selectFilter.addEventListener("change", async () => {
-    const filterBy = selectFilter.value;
-    state.filter = filterBy;
-    await renderApplication();
+    state.filter = selectFilter.value;
+    updateDashboard();
 });
 
 renderApplication(); 
