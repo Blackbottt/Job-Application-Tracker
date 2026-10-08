@@ -208,6 +208,100 @@ function renderTable(applications) {
     dashboard.appendChild(table);
 }
 
+async function addOrEditForm(formType) {    
+    inputSection.classList.remove('input-section-off');
+    inputSection.classList.add('input-section-on');
+    cancelForm.classList.add('form-button');
+    clearForm.classList.add('form-button');
+    saveApplication.classList.add('form-button');
+    updateApplication.classList.add('form-button');
+    deleteApplication.classList.add('form-button');
+    editOrDeleteId.classList.add('id-edit-delete');
+
+    cancelForm.textContent = 'Cancel';
+    clearForm.textContent = 'Clear Form';
+    saveApplication.textContent = 'Save Application';
+    updateApplication.textContent = 'Update Application';
+    editOrDeleteId.placeholder = 'ID: Edit/Delete';
+    deleteApplication.textContent = 'Delete';
+
+    if (formType == 'add') {
+        buttonFeatures.appendChild(clearForm);
+        buttonFeatures.appendChild(cancelForm);
+        buttonFeatures.appendChild(saveApplication);
+    } 
+    
+    if (formType == 'edit') {
+        buttonFeatures.appendChild(deleteApplication);
+        buttonFeatures.appendChild(cancelForm);
+        buttonFeatures.appendChild(updateApplication);
+        applicationsForm.appendChild(editOrDeleteId);
+    }
+
+    jobApplicationDate.value = "";
+    company_name.value = "";
+    position.value = "";
+    applicationPlatform.value = "";
+    jobStartingDate.value = "";
+    statusOfApplication.value = "";
+    job_posting_url.value = "";
+    notes.value = "";
+    editOrDeleteId.value = "";
+}
+
+function cancelFormfunc(){
+    inputSection.classList.remove('input-section-on');
+    inputSection.classList.add('input-section-off');
+    buttonFeatures.replaceChildren();    
+}
+
+async function addJobApplication() {
+    await fetch('/applications', {
+        method: 'POST',
+        headers: {  
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            job_application_date: jobApplicationDate.value,
+            company_name: company_name.value,
+            position: position.value,
+            status: statusOfApplication.value,
+            platform_applied: applicationPlatform.value,
+            job_starting_date: jobStartingDate.value,
+            job_posting_url: job_posting_url.value,
+            notes: notes.value
+        })
+    });
+}
+
+async function editJobApplication() {
+    const applicationId = editOrDeleteId.value;
+    const data = {};
+
+    if (jobApplicationDate.value.trim() !== "") data.job_application_date = jobApplicationDate.value;
+    if (company_name.value.trim() !== "") data.company_name = company_name.value;
+    if (position.value.trim() !== "") data.position = position.value;
+    if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
+    if (applicationPlatform.value.trim() !== "") data.platform_applied = applicationPlatform.value;
+    if (jobStartingDate.value.trim() !== "") data.job_starting_date = jobStartingDate.value;
+    if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
+    if (notes.value.trim() !== "") data.notes = notes.value;
+
+    const response = await fetch(`/applications/${applicationId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
+
+}
+
 async function getProcessedApplications(processType = "all") {
     let processedApplications = [...state.applications];
     
@@ -264,94 +358,11 @@ function filterApplications(applications, status) {
     );
 }
 
-async function addJobApplication() {
-    await fetch('/applications', {
-        method: 'POST',
-        headers: {  
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            job_application_date: jobApplicationDate.value,
-            company_name: company_name.value,
-            position: position.value,
-            status: statusOfApplication.value,
-            platform_applied: applicationPlatform.value,
-            job_starting_date: jobStartingDate.value,
-            job_posting_url: job_posting_url.value,
-            notes: notes.value
-        })
-    });
-}
 
-async function editJobApplication() {
-    const applicationId = editOrDeleteId.value;
-    const data = {};
 
-    if (jobApplicationDate.value.trim() !== "") data.job_application_date = jobApplicationDate.value;
-    if (company_name.value.trim() !== "") data.company_name = company_name.value;
-    if (position.value.trim() !== "") data.position = position.value;
-    if (statusOfApplication.value.trim() !== "") data.status = statusOfApplication.value;
-    if (applicationPlatform.value.trim() !== "") data.platform_applied = applicationPlatform.value;
-    if (jobStartingDate.value.trim() !== "") data.job_starting_date = jobStartingDate.value;
-    if (job_posting_url.value.trim() !== "") data.job_posting_url = job_posting_url.value;
-    if (notes.value.trim() !== "") data.notes = notes.value;
 
-    const response = await fetch(`/applications/${applicationId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
 
-    if (!response.ok) {
-        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
-    }
 
-    const result = await response.json();
-}
-
-async function addOrEditForm(formType) {    
-    inputSection.classList.remove('input-section-off');
-    inputSection.classList.add('input-section-on');
-    cancelForm.classList.add('form-button');
-    clearForm.classList.add('form-button');
-    saveApplication.classList.add('form-button');
-    updateApplication.classList.add('form-button');
-    deleteApplication.classList.add('form-button');
-    editOrDeleteId.classList.add('id-edit-delete');
-
-    cancelForm.textContent = 'Cancel';
-    clearForm.textContent = 'Clear Form';
-    saveApplication.textContent = 'Save Application';
-    updateApplication.textContent = 'Update Application';
-    editOrDeleteId.placeholder = 'ID: Edit/Delete';
-    deleteApplication.textContent = 'Delete';
-
-    if (formType == 'add') {
-        buttonFeatures.appendChild(clearForm);
-        buttonFeatures.appendChild(cancelForm);
-        buttonFeatures.appendChild(saveApplication);
-    } 
-    
-    if (formType == 'edit') {
-        buttonFeatures.appendChild(deleteApplication);
-        buttonFeatures.appendChild(cancelForm);
-        buttonFeatures.appendChild(updateApplication);
-        applicationsForm.appendChild(editOrDeleteId);
-    }
-
-    jobApplicationDate.value = "";
-    company_name.value = "";
-    position.value = "";
-    applicationPlatform.value = "";
-    jobStartingDate.value = "";
-    statusOfApplication.value = "";
-    job_posting_url.value = "";
-    notes.value = "";
-    editOrDeleteId.value = "";
-}
 
 function handleSearch(event) {    
     clearTimeout(searchTimeout);
@@ -361,11 +372,7 @@ function handleSearch(event) {
     }, 800); // Debounce delay  
 }
 
-function cancelFormfunc(){
-    inputSection.classList.remove('input-section-on');
-    inputSection.classList.add('input-section-off');
-    buttonFeatures.replaceChildren();    
-}
+
 
 
 addApplication.addEventListener("click", async () => {
@@ -401,15 +408,15 @@ deleteApplication.addEventListener("click", async () => {
     await renderApplication();
 });
 
-cancelForm.addEventListener("click", () => {
-    cancelFormfunc();
-});
-
 clearForm.addEventListener("click", () => {
     const formFields = applicationsForm.querySelectorAll('input, textarea, select');
     formFields.forEach(field => {
         field.value = "";
     });
+});
+
+cancelForm.addEventListener("click", () => {
+    cancelFormfunc();
 });
 
 saveApplication.addEventListener("click", async () => {
