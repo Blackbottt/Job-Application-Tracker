@@ -40,11 +40,9 @@ const state = {
     sort: "date-desc"
 };
 
-async function renderApplication(param = false) {
-    if (!param) {
-        const response = await fetch('/applications');
-        data = await response.json();
-    } 
+async function renderApplication() {
+    const response = await fetch('/applications');
+    data = await response.json();
 
     state.applications = data.applications; // Access the 'applications' property from the response
 
