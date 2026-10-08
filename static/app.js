@@ -58,7 +58,7 @@ async function updateDashboard() {
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
 
-    applications = await getProcessedApplications(applications);
+    applications = getProcessedApplications(applications);
     loadDashboard(applications);
 }
 
@@ -305,12 +305,12 @@ function handleSearch(event) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         state.search = event.target.value.trim();
-        await getProcessedApplications();
+        getProcessedApplications();
     }, 800); // Debounce delay  
     renderApplication();
 }
 
-async function getProcessedApplications(applications) {
+function getProcessedApplications(applications) {
     let processedApplications = [...state.applications];
     
     processedApplications = searchApplications(processedApplications, state.search);
