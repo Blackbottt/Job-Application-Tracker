@@ -157,16 +157,16 @@ function configurator() {
 
 function renderTable(applications) {
     const table = document.createElement('table');
-    const caption = document.createElement('caption');
+    // const caption = document.createElement('caption');
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
     const tableHeader = document.createElement('tr');
     
     table.classList.add('applications-table');
-    caption.classList.add('applications-caption');
+    // caption.classList.add('applications-caption');
     thead.classList.add('applications-thead');
     tbody.classList.add('applications-tbody');
-    caption.textContent = 'Job Applications';
+    // caption.textContent = 'Job Applications';
     
     const columns = [
         { key: "id", label: "ID" },
@@ -188,7 +188,7 @@ function renderTable(applications) {
     });
 
     thead.appendChild(tableHeader);
-    table.appendChild(caption);
+    // table.appendChild(caption);
     table.appendChild(thead);
 
     if (applications) {
