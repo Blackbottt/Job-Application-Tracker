@@ -50,7 +50,7 @@ async function renderApplication() {
 }
 
 function updateDashboard() {
-    const applications = [...state.applications];
+    let applications = [...state.applications];
     const statistics = getStatistics(applications);
 
     statisticsTotal.textContent = statistics.total;
