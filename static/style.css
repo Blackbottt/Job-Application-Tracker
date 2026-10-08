@@ -460,7 +460,7 @@ button {
     height: 70%;
     width: 100%;
     background: var(--bg-card);
-    border-radius: .5rem;
+    border-radius: .2rem;
     border-collapse: collapse;
     /* border: 3px solid var(--border); */
     border-spacing: 0;

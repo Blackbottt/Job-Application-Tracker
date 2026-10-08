@@ -8,12 +8,23 @@ Job Applications Tracker is a web application for storing and managing job appli
 
 Users can:
 
-- Add a job application
+## Version 1
+- Add applications
 - Edit an existing application by ID
 - Delete an application by ID
 - Delete all applications
 - Validate application input
 - Validate application status and job posting URLs
+
+## Version 2
+- Dashboard
+- Statistics cards
+- Search
+- Filtering
+- Sorting
+- Improved UI
+<!-- - Empty, loading, and error states -->
+
 
 ## Technologies
 
@@ -84,16 +95,6 @@ Job Applications Tracker/
 ```
 
 ## Future Improvements
-
-### v2.0
-
-- Dashboard improvements
-- Application statistics
-- Search
-- Filtering
-- Sorting
-- Improved UI
-- Empty, loading, and error states
 
 ### v3.0
 
