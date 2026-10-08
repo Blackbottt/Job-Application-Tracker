@@ -307,7 +307,7 @@ function handleSearch(event) {
         state.search = event.target.value.trim();
         getProcessedApplications();
     }, 800); // Debounce delay  
-    renderApplication();
+    updateDashboard();
 }
 
 function getProcessedApplications(applications) {
