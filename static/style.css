@@ -393,7 +393,6 @@ button {
 .dashboard {
     border: 3px solid var(--border);
     border-radius: 6px;
-    background: var(--bg-card);
     /* height: 50vh; */
     overflow-y: auto;
     /* margin-top: 10px; */
@@ -422,6 +421,7 @@ button {
 .applications-table {
     width: 100%;
     border-collapse: collapse;
+    background: var(--bg-card);
 }
 
 .table-header {
