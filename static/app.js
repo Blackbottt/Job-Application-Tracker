@@ -434,4 +434,4 @@ selectFilter.addEventListener("change", async () => {
     await renderApplication();
 });
 
-renderApplication(); 
+await renderApplication(); 
