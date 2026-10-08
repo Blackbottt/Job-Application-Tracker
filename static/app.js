@@ -45,6 +45,7 @@ async function renderApplication(param = false) {
         const response = await fetch('/applications');
         data = await response.json();
     } 
+
     state.applications = data.applications; // Access the 'applications' property from the response
 
     updateDashboard();
@@ -79,7 +80,6 @@ function getStatistics(applications) {
 function loadDashboard(applications){
     dashboard.innerHTML = '';
     renderDashboardFilters();
-    // configurator();
     renderTable(applications);
 }
 
@@ -353,6 +353,21 @@ async function addOrEditForm(formType) {
     editOrDeleteId.value = "";
 }
 
+function handleSearch(event) {    
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+        state.search = event.target.value.trim();
+        await getProcessedApplications("search");
+    }, 800); // Debounce delay  
+}
+
+function cancelFormfunc(){
+    inputSection.classList.remove('input-section-on');
+    inputSection.classList.add('input-section-off');
+    buttonFeatures.replaceChildren();    
+}
+
+
 addApplication.addEventListener("click", async () => {
     await addOrEditForm('add');
 });
@@ -370,7 +385,18 @@ deleteAllApplications.addEventListener("click", async () => {
         throw new Error(`Server responded with ${response.status} ${response.statusText}`);
     }
 
-    const result = await response.json();
+    await renderApplication();
+});
+
+deleteApplication.addEventListener("click", async () => {
+    const applicationId = editOrDeleteId.value;
+    const response = await fetch(`/applications/${applicationId}`, {
+        method: 'DELETE'
+    });
+
+    if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
+    }
 
     await renderApplication();
 });
@@ -398,31 +424,10 @@ updateApplication.addEventListener("click", async () => {
     await renderApplication();
 });
 
-deleteApplication.addEventListener("click", async () => {
-    const applicationId = editOrDeleteId.value;
-    const response = await fetch(`/applications/${applicationId}`, {
-        method: 'DELETE'
-    });
 
-    if (!response.ok) {
-        throw new Error(`Server responded with ${response.status} ${response.statusText}`);
-    }
-    
-    const result = await response.json();
-
-    await renderApplication();
-});
 
 applicationSearch.addEventListener("input", handleSearch);
 applicationSearch2.addEventListener("input", handleSearch);
-
-function handleSearch(event) {    
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(async () => {
-        state.search = event.target.value.trim();
-        await getProcessedApplications("search");
-    }, 800); // Debounce delay  
-}
 
 sortBySelect.addEventListener("change", async () => {
     const sortBy = sortBySelect.value;
@@ -435,11 +440,5 @@ selectFilter.addEventListener("change", async () => {
     state.filter = filterBy;
     await getProcessedApplications("filter");
 });
-
-function cancelFormfunc(){
-    inputSection.classList.remove('input-section-on');
-    inputSection.classList.add('input-section-off');
-    buttonFeatures.replaceChildren();    
-}
 
 renderApplication(); 
