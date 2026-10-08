@@ -35,6 +35,7 @@ const selectFilter = document.createElement('select');
 const sortBySelect = document.createElement('select');
 
 let searchTimeout;
+let dashboardHeadCountTotal;
 
 const state = {
     applications: [],
@@ -56,6 +57,7 @@ function updateDashboard() {
     let applications = [...state.applications];
     const statistics = getStatistics(applications);
 
+    dashboardHeadCountTotal = statistics.total;
     statisticsTotal.textContent = statistics.total;
     statisticsApplied.textContent = statistics.applied;
     statisticsInterviewed.textContent = statistics.interviewed;
@@ -87,7 +89,7 @@ function loadDashboard(applications){
 
 function renderDashboardFilters() {
     dashboardHeader.textContent = 'Applications';
-    dashboardHeaderCount.textContent = `\${} applications`;
+    dashboardHeaderCount.textContent = `${dashboardHeadCountTotal} applications`;
     applicationSearch2.placeholder = 'Search company, position or platform...';
     applicationSearch2.type = 'search';
     applicationSearch2.name = 'search-applications2';
