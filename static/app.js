@@ -325,8 +325,7 @@ async function searchApplications(){
     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
 
     if (!searchQuery) {
-        await renderApplication(); // Load all applications if search query is empty
-        return;
+        return [...state.applications]; // Load all applications if search query is empty
     }
 
     const params = new URLSearchParams({ query: searchQuery });
