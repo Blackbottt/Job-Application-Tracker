@@ -58,9 +58,7 @@ async function updateDashboard() {
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
 
-    console.log("Apps B4 Dash: ", applications)
     applications = await getProcessedApplications(applications);
-    console.log("Apps to Dash: ", applications)
     loadDashboard(applications);
 }
 
@@ -307,42 +305,57 @@ function handleSearch(event) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         state.search = event.target.value.trim();
-        await getProcessedApplications("search");
+        await getProcessedApplications();
     }, 800); // Debounce delay  
+    renderApplication();
 }
 
 async function getProcessedApplications(applications) {
     let processedApplications = [...state.applications];
     
-    processedApplications = await searchApplications();
+    processedApplications = searchApplications(processedApplications, state.search);
     processedApplications = filterApplications(processedApplications, state.filter);
     processedApplications = sortApplications(processedApplications, state.sort);
 
     return processedApplications;
 }
 
-async function searchApplications(){
-    const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
-
-    if (!searchQuery) {
-        return [...state.applications]; // Load all applications if search query is empty
+function searchApplications(applications, searchTerm) {
+    if (!searchTerm) {
+        return applications;
     }
 
-    const params = new URLSearchParams({ query: searchQuery });
-    const searchResponse = await fetch('/applications?' + params.toString(), {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }); 
-    const searchResults = await searchResponse.json();
-    if (!searchResponse.ok) {
-        throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
-    }
+    const query = searchTerm.toLowerCase();
 
-    console.log("SEARCH: ", searchResults.applications);
-    return searchResults.applications; 
+    return applications.filter(application =>
+        application.company_name.toLowerCase().includes(query) ||
+        application.position.toLowerCase().includes(query) ||
+        application.application_platform.toLowerCase().includes(query)
+    );
 }
+
+// async function searchApplications(){
+//     const searchQuery = applicationSearch.value.trim() || applicationSearch2.value.trim();
+
+//     if (!searchQuery) {
+//         return [...state.applications]; // Load all applications if search query is empty
+//     }
+
+//     const params = new URLSearchParams({ query: searchQuery });
+//     const searchResponse = await fetch('/applications?' + params.toString(), {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }); 
+//     const searchResults = await searchResponse.json();
+//     if (!searchResponse.ok) {
+//         throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
+//     }
+
+//     console.log("SEARCH: ", searchResults.applications);
+//     return searchResults.applications; 
+// }
 
 function sortApplications(applications, sortBy) {
     let sortedApplications = [...applications]; // Create a copy of the applications array
