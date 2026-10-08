@@ -133,6 +133,7 @@ body {
     border: 1px solid var(--border);
     min-width: 0;
     min-height: 100vh;
+    padding: 1rem;
 }
 
 .input-section-on {
@@ -179,10 +180,10 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    border: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     width: 100%;
     height: auto;
-    padding: .5rem;
+    padding: 1rem;
 }
 
 /* .statistics-section * {
@@ -197,10 +198,12 @@ body {
 
 .search-applications {
     /* margin: .5rem; */
+    padding-left: 1rem;
     width: 80%;
     height: 100%;
     background-color: var(--bg-card);
-    border: var(--border);
+    border: 1px solid var(--border);
+    border-radius: .5rem;
 }
 
 .greet-actions {
@@ -218,10 +221,11 @@ body {
 }
 
 .greet-actions-buttons button {
-    height: 3rem;
-    font-size: 1rem;
+    height: auto;
+    font-size: .8rem;
+    color: var(--text-primary);
     margin: 0.3rem;
-    padding: 0.3rem;
+    padding: 0.5rem;
 }
 
 .display-statistics {
@@ -237,24 +241,33 @@ body {
     /* border-radius: 10px; */
 }
 
-.display-statistics .statistics {
-    height: auto;
-    margin: 0 1rem;
-    padding: 0.1rem 1rem;
-    /* border: 1px solid var(--border); */
-    /* border-radius: 1rem; */
-}
-
 .total-applications, .applied-applications, .interviewed-applications, .offers-applications {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    border: 1px solid var(--border);
     border-radius: 1rem;
-    width: 20%;
-    margin: 0 1rem;
-    padding: 0.5rem 1rem;
-    max-height: 80%;
+    width: fit-content;
+    height: 100%;
+    padding: 1rem;
+}
+
+.total-applications {
+    border: 1px solid var(--accent);
+    background-color: RGBA(110, 154, 175, .2);
+}
+
+.applied-applications {
+    border: 1px solid var(--success);
+    background-color: RGBA(111, 168, 155, .2);
+}
+
+.interviewed-applications {
+    border: 1px solid var(--warning);
+    background-color: RGBA(194, 163, 107, .2);
+}
+
+.offers-applications {
+    border: 1px solid var(--danger);
+    background-color: RGBA(185, 120, 120, .2);
 }
 
 .total-applications .statistic-icon {
@@ -275,6 +288,30 @@ body {
 .offers-applications .statistic-icon {
     color: var(--danger);
     font-size: 3rem;
+}
+
+.display-statistics .statistics {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    /* flex-shrink: 0; */
+    height: 100%;
+    width: fit-content;
+    max-width: 150px;
+    min-width: 0;
+    /* border: 1px solid var(--border); */
+    padding: .5rem 0;
+    /* white-space: break-word; */
+    /* border-radius: 1rem; */
+}
+
+.statistics > * {
+    margin: 0 1rem;
+    /* white-space: nowrap; */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal; 
 }
 
 .application-field {
@@ -314,22 +351,22 @@ button {
 }
 
 .submit-add-applications {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background: var(--success);
 }
 
 .submit-edit-applications {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background: var(--accent);
 }
 
 .submit-delete-application {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background: var(--warning);
 }
 
 .submit-delete-applications {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     background: var(--danger);
 }
 
