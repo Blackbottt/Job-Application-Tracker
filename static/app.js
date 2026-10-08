@@ -46,10 +46,10 @@ async function renderApplication() {
 
     state.applications = data.applications; // Access the 'applications' property from the response
 
-    updateDashboard();
+    await updateDashboard();
 }
 
-function updateDashboard() {
+async function updateDashboard() {
     let applications = [...state.applications];
     const statistics = getStatistics(applications);
 
@@ -58,7 +58,8 @@ function updateDashboard() {
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
 
-    applications = getProcessedApplications(applications);
+    console.log("Apps B4 Dash: ", applications)
+    applications = await getProcessedApplications(applications);
     console.log("Apps to Dash: ", applications)
     loadDashboard(applications);
 }
@@ -339,6 +340,8 @@ async function searchApplications(){
     if (!searchResponse.ok) {
         throw new Error(`Server responded with ${searchResponse.status} ${searchResponse.statusText}`);
     }
+
+    console.log("SEARCH: ", searchResults.applications);
     return searchResults.applications; 
 }
 
