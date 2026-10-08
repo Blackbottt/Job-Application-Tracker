@@ -59,7 +59,7 @@ function updateDashboard() {
     statisticsApplied.textContent = statistics.applied;
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
-
+    getProcessedApplications(applications);
     loadDashboard(applications);
 }
 
@@ -302,7 +302,15 @@ async function editJobApplication() {
 
 }
 
-async function getProcessedApplications(processType = "all") {
+function handleSearch(event) {    
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+        state.search = event.target.value.trim();
+        await getProcessedApplications("search");
+    }, 800); // Debounce delay  
+}
+
+async function getProcessedApplications(applications) {
     let processedApplications = [...state.applications];
     
     processedApplications = await searchApplications();
@@ -357,23 +365,6 @@ function filterApplications(applications, status) {
         application => application.status.toLowerCase() === status.toLowerCase()
     );
 }
-
-
-
-
-
-
-
-function handleSearch(event) {    
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(async () => {
-        state.search = event.target.value.trim();
-        await getProcessedApplications("search");
-    }, 800); // Debounce delay  
-}
-
-
-
 
 addApplication.addEventListener("click", async () => {
     await addOrEditForm('add');
@@ -430,8 +421,6 @@ updateApplication.addEventListener("click", async () => {
     cancelFormfunc();
     await renderApplication();
 });
-
-
 
 applicationSearch.addEventListener("input", handleSearch);
 applicationSearch2.addEventListener("input", handleSearch);
