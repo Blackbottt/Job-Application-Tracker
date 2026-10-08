@@ -305,7 +305,6 @@ function handleSearch(event) {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         state.search = event.target.value.trim();
-        getProcessedApplications();
     }, 800); // Debounce delay  
     updateDashboard();
 }
