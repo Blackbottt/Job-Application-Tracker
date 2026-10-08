@@ -26,6 +26,9 @@ const saveApplication = document.createElement('button');
 const updateApplication = document.createElement('button');
 const editOrDeleteId = document.createElement('input');
 const deleteApplication = document.createElement('button');
+const dashboardCaption = document.createElement('div');
+const dashboardHeader = document.createElement('h3');
+const dashboardHeaderCount = document.createElement('h6');
 const dashboardFilters = document.createElement('div');
 const applicationSearch2 = document.createElement('input');
 const selectFilter = document.createElement('select');
@@ -83,16 +86,21 @@ function loadDashboard(applications){
 }
 
 function renderDashboardFilters() {
+    dashboardHeader.textContent = 'Applications';
+    dashboardHeaderCount.textContent = `\${} applications`;
     applicationSearch2.placeholder = 'Search company, position or platform...';
     applicationSearch2.type = 'search';
     applicationSearch2.name = 'search-applications';
     sortBySelect.name = 'sort-by';
     selectFilter.name = 'dashboard-status';
     
+    dashboardHeaderCount.id = 'dashboardHeaderCount';
     applicationSearch2.id = 'search-application';
     sortBySelect.id = 'sort-by';
     selectFilter.id = 'dashboard-status';
     
+    dashboardHeader.classList.add('dashboardHeader');
+    dashboardHeaderCount.classList.add('dashboardHeaderCount');
     applicationSearch2.classList.add('search-applications');
     sortBySelect.classList.add('input-field');
     selectFilter.classList.add('input-field');
@@ -100,10 +108,14 @@ function renderDashboardFilters() {
 
     configurator();
 
+    dashboardCaption.appendChild(dashboardHeader);
+    dashboardCaption.appendChild(dashboardHeaderCount);
     dashboardFilters.appendChild(applicationSearch2);
     dashboardFilters.appendChild(sortBySelect);
     dashboardFilters.appendChild(selectFilter);
+    dashboard.appendChild(dashboardCaption);
     dashboard.appendChild(dashboardFilters);
+
 }
 
 function configurator() {
