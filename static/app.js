@@ -59,7 +59,7 @@ function updateDashboard() {
     statisticsApplied.textContent = statistics.applied;
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
-    getProcessedApplications(applications);
+    applications = getProcessedApplications(applications);
     loadDashboard(applications);
 }
 
