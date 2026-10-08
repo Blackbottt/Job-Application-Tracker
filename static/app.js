@@ -42,7 +42,7 @@ const state = {
 
 async function renderApplication() {
     const response = await fetch('/applications');
-    data = await response.json();
+    const data = await response.json();
 
     state.applications = data.applications; // Access the 'applications' property from the response
 
