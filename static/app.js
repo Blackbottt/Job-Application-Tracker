@@ -57,7 +57,9 @@ function updateDashboard() {
     statisticsApplied.textContent = statistics.applied;
     statisticsInterviewed.textContent = statistics.interviewed;
     statisticsOffers.textContent = statistics.offers;
+
     applications = getProcessedApplications(applications);
+    console.log("Apps to Dash: ", applications)
     loadDashboard(applications);
 }
 
@@ -434,4 +436,4 @@ selectFilter.addEventListener("change", async () => {
     await renderApplication();
 });
 
-await renderApplication(); 
+renderApplication(); 
