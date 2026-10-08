@@ -196,7 +196,7 @@ function renderTable(applications) {
     columns.forEach(column => {
         const tableHeading = document.createElement('th');
         tableHeading.textContent = column.label;
-        tableHeading.classList.add('table-header');
+        tableHeading.classList.add('table-head');
         tableHeader.appendChild(tableHeading);
     });
 
@@ -209,6 +209,7 @@ function renderTable(applications) {
             const tableRow = document.createElement('tr');
             columns.forEach(column => {
                 const tableRowCell = document.createElement('td');
+                tableRowCell.classList.add('table-cell')
                 tableRowCell.textContent = application[column.key] ?? "";
                 tableRow.appendChild(tableRowCell);
             });
