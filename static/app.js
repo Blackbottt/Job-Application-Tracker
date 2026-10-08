@@ -428,13 +428,13 @@ applicationSearch2.addEventListener("input", handleSearch);
 sortBySelect.addEventListener("change", async () => {
     const sortBy = sortBySelect.value;
     state.sort = sortBy;
-    await getProcessedApplications("sort");
+    await renderApplication();
 });
 
 selectFilter.addEventListener("change", async () => {
     const filterBy = selectFilter.value;
     state.filter = filterBy;
-    await getProcessedApplications("filter");
+    await renderApplication();
 });
 
 renderApplication(); 
