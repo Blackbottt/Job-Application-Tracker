@@ -52,7 +52,6 @@ async function renderApplication(param = false) {
 
 function updateDashboard() {
     const applications = [...state.applications];
-
     const statistics = getStatistics(applications);
 
     statisticsTotal.textContent = statistics.total;
@@ -80,8 +79,32 @@ function getStatistics(applications) {
 function loadDashboard(applications){
     dashboard.innerHTML = '';
     renderDashboardFilters();
-    configurator();
+    // configurator();
     renderTable(applications);
+}
+
+function renderDashboardFilters() {
+    applicationSearch2.placeholder = 'Search company, position or platform...';
+    applicationSearch2.type = 'search';
+    applicationSearch2.name = 'search-applications';
+    sortBySelect.name = 'sort-by';
+    selectFilter.name = 'dashboard-status';
+    
+    applicationSearch2.id = 'search-application';
+    sortBySelect.id = 'sort-by';
+    selectFilter.id = 'dashboard-status';
+    
+    applicationSearch2.classList.add('search-applications');
+    sortBySelect.classList.add('input-field');
+    selectFilter.classList.add('input-field');
+    dashboardFilters.classList.add('dashboard-filtering');
+
+    configurator();
+
+    dashboardFilters.appendChild(applicationSearch2);
+    dashboardFilters.appendChild(sortBySelect);
+    dashboardFilters.appendChild(selectFilter);
+    dashboard.appendChild(dashboardFilters);
 }
 
 function configurator() {
@@ -121,7 +144,6 @@ function configurator() {
 
             sortBySelect.appendChild(option);
         });
-        console.log("config2", sortBySelect.length);
 
         config.filterOptions.forEach(filterOption => {
             const option = document.createElement("option");
@@ -132,28 +154,6 @@ function configurator() {
             selectFilter.appendChild(option);
         });
     }
-}
-
-function renderDashboardFilters() {
-    applicationSearch2.placeholder = 'Search company, position or platform...';
-    applicationSearch2.type = 'search';
-    applicationSearch2.name = 'search-applications';
-    sortBySelect.name = 'sort-by';
-    selectFilter.name = 'dashboard-status';
-    
-    applicationSearch2.id = 'search-application';
-    sortBySelect.id = 'sort-by';
-    selectFilter.id = 'dashboard-status';
-    
-    applicationSearch2.classList.add('search-applications');
-    sortBySelect.classList.add('input-field');
-    selectFilter.classList.add('input-field');
-    dashboardFilters.classList.add('dashboard-filtering');
-
-    dashboardFilters.appendChild(applicationSearch2);
-    dashboardFilters.appendChild(sortBySelect);
-    dashboardFilters.appendChild(selectFilter);
-    dashboard.appendChild(dashboardFilters);
 }
 
 function renderTable(applications) {
@@ -211,13 +211,9 @@ function renderTable(applications) {
 async function getProcessedApplications(processType = "all") {
     let processedApplications = [...state.applications];
     
-    if (processType === "search" && state.search.trim() !== "") {
-        processedApplications = await searchApplications();
-    } else if (processType === "filter" && state.filter) {
-        processedApplications = filterApplications(processedApplications, state.filter);
-    } else if (processType === "sort" && state.sort) {
-        processedApplications = sortApplications(processedApplications, state.sort);
-    }
+    processedApplications = await searchApplications();
+    processedApplications = filterApplications(processedApplications, state.filter);
+    processedApplications = sortApplications(processedApplications, state.sort);
 
     renderApplication(processedApplications);
     // return processedApplications;
