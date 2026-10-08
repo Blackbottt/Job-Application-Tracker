@@ -90,19 +90,19 @@ function renderDashboardFilters() {
     dashboardHeaderCount.textContent = `\${} applications`;
     applicationSearch2.placeholder = 'Search company, position or platform...';
     applicationSearch2.type = 'search';
-    applicationSearch2.name = 'search-applications';
+    applicationSearch2.name = 'search-applications2';
     sortBySelect.name = 'sort-by';
     selectFilter.name = 'dashboard-status';
     
     dashboardHeaderCount.id = 'dashboardHeaderCount';
-    applicationSearch2.id = 'search-application';
+    applicationSearch2.id = 'search-application2';
     sortBySelect.id = 'sort-by';
     selectFilter.id = 'dashboard-status';
     
     dashboardCaption.classList.add('dashboardCaption');
     dashboardHeader.classList.add('dashboardHeader');
     dashboardHeaderCount.classList.add('dashboardHeaderCount');
-    applicationSearch2.classList.add('search-applications');
+    applicationSearch2.classList.add('search-applications2');
     sortBySelect.classList.add('input-field');
     selectFilter.classList.add('input-field');
     dashboardFilters.classList.add('dashboard-filtering');
