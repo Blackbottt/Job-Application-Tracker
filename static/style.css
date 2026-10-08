@@ -402,6 +402,13 @@ button {
     flex: 1;
 }
 
+.dashboardCaption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .dashboard-filtering {
     display: flex;
     justify-content: space-between;
